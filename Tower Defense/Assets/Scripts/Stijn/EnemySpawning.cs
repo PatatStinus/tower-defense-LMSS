@@ -12,7 +12,7 @@ public class EnemySpawning : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            g_Enemy.transform.position = t_SpawnPoint.position;
+            g_Enemy.transform.position = new Vector3(t_SpawnPoint.position.x, g_Enemy.transform.localScale.y / 2f, t_SpawnPoint.position.z);
             Instantiate(g_Enemy, t_EnemyParent);
         }
     }
