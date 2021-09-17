@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Range(0f, 50f)][SerializeField] private float f_Speed = 10f;
+    [Range(0f, 50f)] [SerializeField] private float f_Speed = 10f;
+    [Range(0f, 2f)] [SerializeField] private float f_RotateSpeed = 10f;
 
     private Transform t_Target;
     private Quaternion q_LookAngle;
@@ -27,6 +28,7 @@ public class EnemyMovement : MonoBehaviour
             if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1)
             {
                 Destroy(gameObject); //Enemy reached the end
+                ManaManager.GetMana(10);
                 return;
             }
 
@@ -40,7 +42,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (f_TimeForRot < 1)
         {
-            f_TimeForRot += Time.deltaTime * f_Speed / 10f; //Dit werkt :))))))))))))
+            f_TimeForRot += Time.deltaTime * f_RotateSpeed; //Dit werkt :))))))))))))
             transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot);
         }
     }
