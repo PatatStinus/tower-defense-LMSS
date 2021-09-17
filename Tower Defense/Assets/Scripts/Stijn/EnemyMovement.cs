@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     [Range(0f, 50f)] [SerializeField] private float f_Speed = 10f;
     [Range(0f, 2f)] [SerializeField] private float f_RotateSpeed = 10f;
+    [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
     private Transform t_Target;
     private Quaternion q_LookAngle;
@@ -27,8 +28,8 @@ public class EnemyMovement : MonoBehaviour
         {
             if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1)
             {
+                ManaManager.GetMana(i_ManaWhenKilled);
                 Destroy(gameObject); //Enemy reached the end
-                ManaManager.GetMana(10);
                 return;
             }
 
