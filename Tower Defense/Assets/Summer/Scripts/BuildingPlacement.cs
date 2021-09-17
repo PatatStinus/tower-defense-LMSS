@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class BuildingPlacement : MonoBehaviour
 {
-    public Transform selectedObject = null;
+    [SerializeField] Transform selectedObject = null;
+
+    const string placedString = "Placed";
+    const int placedInt = 12;
 
     RaycastHit hit;
 
-    public LayerMask selectableLayer;
-    public LayerMask terrainLayer;
+    [SerializeField] Material green;
+    [SerializeField] Material red;
 
-    public bool placedObject = false;
-    public bool canPlace;
+    [SerializeField] LayerMask selectableLayer;
+    [SerializeField] LayerMask terrainLayer;
 
-    //public GameObject prefab;
+    [SerializeField] bool placedObject = false;
+    [SerializeField] bool canPlace;
 
-    //public GameObject Trigger;
+    [SerializeField] GameObject Trigger;
 
     private void Start()
     {
-        //TriggerG.SetActive(true);
-        //Trigger.SetActive(false);
-
+        Trigger.SetActive(true);
         canPlace = true;
     }
 
@@ -30,18 +32,16 @@ public class BuildingPlacement : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //Debug.Log($"selected object:{selectedObject}");
         if (selectedObject != null && !placedObject)
         {
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, terrainLayer))
             {
-                //Debug.Log("Moving");
                 selectedObject.position = new Vector3(hit.point.x, selectedObject.position.y, hit.point.z);
             }
             if (Input.GetMouseButton(0) && canPlace == true)
             {
                 //Instantiate(prefab, transform.position, transform.rotation);
-                Destroy(gameObject);
+                Trigger.SetActive(false);
                 placedObject = true;
             }
         }
@@ -54,35 +54,35 @@ public class BuildingPlacement : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0) && selectedObject != null)
+        if (Input.GetMouseButtonDown(0) && selectedObject != null && canPlace)
         {
+            selectedObject.gameObject.tag = placedString;
+            selectedObject.gameObject.layer = placedInt;
             selectedObject = null;
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Placed" || other.gameObject.tag == "NPC")
-    //    {
-    //        canPlace = false;
-    //        Trigger.SetActive(true);
-    //        //TriggerG.SetActive(false);
-    //    }
-    //    else
-    //    {
-    //        canPlace = true;
-    //        Trigger.SetActive(false);
-    //        //TriggerG.SetActive(true);
-    //    }
-    //}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Placed")
+        {
+            Debug.Log("Triggered");
+            canPlace = false;
+            Trigger.GetComponent<Renderer>().material = red;
+        }
+        else
+        {
+            canPlace = true;
+            Trigger.GetComponent<Renderer>().material = green;
+        }
+    }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Placed" || other.gameObject.tag == "NPC")
-    //    {
-    //        canPlace = true;
-    //        Trigger.SetActive(false);
-    //        //TriggerG.SetActive(true);
-    //    }
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Placed")
+        {
+            canPlace = true;
+            Trigger.GetComponent<Renderer>().material = green;
+        }
+    }
 }
