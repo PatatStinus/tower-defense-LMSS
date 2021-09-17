@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_Speed: 50
-  f_RotateSpeed: 2
-  i_ManaWhenKilled: 500
+  f_Speed: 5
+  f_RotateSpeed: 0.5
+  i_ManaWhenKilled: 10
 --- !u!1 &8631666173895733493
 GameObject:
   m_ObjectHideFlags: 0

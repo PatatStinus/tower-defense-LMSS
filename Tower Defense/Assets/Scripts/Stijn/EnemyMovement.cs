@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1)
             {
-                ManaManager.GetMana(i_ManaWhenKilled);
+                ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
                 Destroy(gameObject); //Enemy reached the end
                 return;
             }
@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (f_TimeForRot < 1)
         {
-            f_TimeForRot += Time.deltaTime * f_RotateSpeed; //Dit werkt :))))))))))))
+            f_TimeForRot += Time.deltaTime * f_RotateSpeed;
             transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot);
         }
     }

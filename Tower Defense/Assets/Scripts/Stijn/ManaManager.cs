@@ -4,7 +4,8 @@ using TMPro;
 public class ManaManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI manaText;
-    private static int mana;
+    private static int mana = 1000;
+    private static bool lost = false;
 
     //List of mana things that still needs to be added
     //Mana after completing round (When wave system is made)
@@ -18,11 +19,19 @@ public class ManaManager : MonoBehaviour
 
     public static void LoseMana(int removeMana)
     {
-        mana -= removeMana;
+        if (mana - removeMana >= 0)
+            mana -= removeMana;
+        else
+            lost = true;
     }
 
     private void Update()
     {
         manaText.text = mana.ToString();
+
+        if(lost)
+        {
+            //DEFEAT
+        }
     } 
 }
