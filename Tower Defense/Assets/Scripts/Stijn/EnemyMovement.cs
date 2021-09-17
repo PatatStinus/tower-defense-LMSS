@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float f_Health = 100f;
     [Range(0f, 50f)][SerializeField] private float f_Speed = 10f;
 
     private Transform t_Target;
-    //private Quaternion q_LookAngle;
+    private Quaternion q_LookAngle;
     private int i_waypoitIndex = 0;
-    //private float f_TimeForRot = 1;
+    private float f_TimeForRot = 1;
 
     void OnEnable()
     {
@@ -27,23 +26,22 @@ public class EnemyMovement : MonoBehaviour
         {
             if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1)
             {
-                Destroy(gameObject);
+                Destroy(gameObject); //Enemy reached the end
                 return;
             }
 
             i_waypoitIndex++;
             t_Target = EnemyPathMaking.t_Points[i_waypoitIndex];
 
-            transform.LookAt(t_Target);
-
-            /*f_TimeForRot = 0;
-            q_LookAngle = Quaternion.LookRotation(t_Target.position, transform.position);*/
+            f_TimeForRot = 0;
+            Vector3 lookDir = t_Target.position - transform.position;
+            q_LookAngle = Quaternion.LookRotation(lookDir, transform.up);
         }
 
-        /*if (f_TimeForRot < 1)
+        if (f_TimeForRot < 1)
         {
+            f_TimeForRot += Time.deltaTime * f_Speed / 10f; //Dit werkt :))))))))))))
             transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot);
-            f_TimeForRot += Time.deltaTime * 3; //Dit werkt niet :(
-        } */
+        }
     }
 }
