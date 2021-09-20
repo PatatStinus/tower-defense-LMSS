@@ -1,0 +1,83 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TowerShooting : MonoBehaviour
+{
+    [SerializeField] GameObject tower;
+
+    [SerializeField] float fireRate = 1f;
+
+    GameObject[] GO_enemies;
+    [SerializeField] Transform[] enemies;
+
+    [SerializeField] Transform closestEnemy;
+    [SerializeField] Transform turret;
+    [SerializeField] GameObject bullet;
+
+    [SerializeField] float rotationStrength = 2f;
+
+    void Update()
+    {
+        GO_enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (tower.tag == "Placed")
+        {
+            AssignTarget();
+        }
+    }
+
+    private void AssignTarget()
+    {
+        enemies = new Transform[GO_enemies.Length];
+
+        if (enemies.Length == 0)
+            return;
+
+        for (int i = 0; i < GO_enemies.Length; i++)
+        {
+            enemies[i] = GO_enemies[i].transform;
+        }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (closestEnemy == null)
+            {
+                closestEnemy = enemies[i];
+                return;
+            }
+
+            if (Vector3.Distance(transform.position, enemies[i].position) < Vector3.Distance(transform.position, closestEnemy.position))
+            {
+                closestEnemy = enemies[i];
+            }
+        }
+
+        RotateToTarget(closestEnemy);
+    }
+
+    private void RotateToTarget(Transform target)
+    {
+        Vector3 dirAtoB = (target.position - transform.position).normalized;
+        float dot = Vector3.Dot(dirAtoB, transform.forward);
+
+        if (dot < 0.99)
+        {
+            var str = Mathf.Min(rotationStrength * Time.deltaTime, 1);
+            var targetRotation = Quaternion.LookRotation(new Vector3(target.position.x, target.position.y, target.position.z) - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, str);
+        }
+        else if (dot > 0.99)
+        {
+            StartCoroutine("ShootAtTarget");
+        }
+    }
+
+    IEnumerator ShootAtTarget()
+    {
+        bullet.GetComponent<Projectile_Script>().Target = closestEnemy;
+        Instantiate(bullet, turret.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(fireRate);
+    }
+}

@@ -40,7 +40,6 @@ public class BuildingPlacement : MonoBehaviour
             }
             if (Input.GetMouseButton(0) && canPlace == true)
             {
-                //Instantiate(prefab, transform.position, transform.rotation);
                 Trigger.SetActive(false);
                 placedObject = true;
             }
@@ -64,9 +63,8 @@ public class BuildingPlacement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Placed")
+        if (other.gameObject.tag == placedString)
         {
-            Debug.Log("Triggered");
             canPlace = false;
             Trigger.GetComponent<Renderer>().material = red;
         }
@@ -79,7 +77,7 @@ public class BuildingPlacement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Placed")
+        if (other.gameObject.tag == placedString)
         {
             canPlace = true;
             Trigger.GetComponent<Renderer>().material = green;
