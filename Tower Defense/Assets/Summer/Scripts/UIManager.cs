@@ -16,14 +16,9 @@ public class UIManager : MonoBehaviour
         towerSpawner.onClick.AddListener(towerSpawner_OnClick);
     }
 
-    public Button GetSpawnButton()
-    {
-        return towerSpawner;
-    }
-
     void towerSpawner_OnClick()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray.origin, ray.direction, out hit, 1000);
 
         Instantiate(tower, hit.point, Quaternion.identity);
