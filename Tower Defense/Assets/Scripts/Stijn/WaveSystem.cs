@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
 {
-    public List<TypeOfEnemy> waves; //huilen
+    [SerializeField] private List<TypeOfEnemy> waves;
 }
 
+[System.Serializable]
 public class TypeOfEnemy
 {
     public GameObject enemy { get; set; }
