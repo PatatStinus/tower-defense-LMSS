@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <Author>
@@ -9,20 +10,22 @@ public class MainMenu : MonoBehaviour
 {
     [Header("Size-in Settings")]
     public GameObject titleGameObject;
-    [SerializeField] private float timeBeforeSizeInTitle = 1f;
-    public GameObject buttonGameObject;
-    [SerializeField] private float timeBeforeSizeInButton = 2f;
+    [SerializeField] private float timeBeforeSizeInTitle = 0.5f;
 
-    [SerializeField] private float timeBeforeSizeIn = 2f;
+    public GameObject[] buttons;
+    [SerializeField] private float timeBeforeSizeInButton = 1f;
 
     // Start is called before the first frame update
     void Start()
     {
         titleGameObject.transform.localScale = Vector2.zero; // Set the size of the main menu to zero before it sizes in
-        buttonGameObject.transform.localScale = Vector2.zero; // Set the size of the main menu to zero before it sizes in
-
         StartCoroutine(SizeIn(titleGameObject, timeBeforeSizeInTitle));
-        StartCoroutine(SizeIn(buttonGameObject, timeBeforeSizeInButton));
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].transform.localScale = Vector2.zero;
+            StartCoroutine(SizeIn(buttons[i], timeBeforeSizeInButton + i));
+        }
     }
 
     private IEnumerator SizeIn(GameObject go, float time)
