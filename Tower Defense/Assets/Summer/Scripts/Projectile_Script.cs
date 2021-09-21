@@ -15,4 +15,12 @@ public class Projectile_Script : MonoBehaviour
         Vector3 direction = Target.position - transform.position;
         transform.Translate(direction.normalized * 0.02f, Space.World);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
