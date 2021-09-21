@@ -6,7 +6,7 @@ public class TowerShooting : MonoBehaviour
 {
     [SerializeField] GameObject tower;
 
-    [SerializeField] float fireRate = 1f;
+    [SerializeField] float fireRate = 2f;
 
     GameObject[] GO_enemies;
     [SerializeField] Transform[] enemies;
@@ -16,6 +16,15 @@ public class TowerShooting : MonoBehaviour
     [SerializeField] GameObject bullet;
 
     [SerializeField] float rotationStrength = 2f;
+
+    [SerializeField] float detectionRange = 5f;
+
+    float timer;
+
+    private void Start()
+    {
+        timer = 0;
+    }
 
     void Update()
     {
@@ -29,6 +38,7 @@ public class TowerShooting : MonoBehaviour
 
     private void AssignTarget()
     {
+        timer -= Time.deltaTime;
         enemies = new Transform[GO_enemies.Length];
 
         if (enemies.Length == 0)
@@ -53,7 +63,11 @@ public class TowerShooting : MonoBehaviour
             }
         }
 
-        RotateToTarget(closestEnemy);
+        if (Vector3.Distance(transform.position, closestEnemy.position) <= detectionRange)
+        {
+            RotateToTarget(closestEnemy);
+        }
+
     }
 
     private void RotateToTarget(Transform target)
@@ -69,15 +83,17 @@ public class TowerShooting : MonoBehaviour
         }
         else if (dot > 0.99)
         {
-            StartCoroutine("ShootAtTarget");
+            ShootAtTarget();
         }
     }
 
-    IEnumerator ShootAtTarget()
-    {
-        bullet.GetComponent<Projectile_Script>().Target = closestEnemy;
-        Instantiate(bullet, turret.position, Quaternion.identity);
-
-        yield return new WaitForSeconds(fireRate);
+    private void ShootAtTarget()
+    {      
+        if (timer <= 0)
+        {
+            bullet.GetComponent<Projectile_Script>().Target = closestEnemy;
+            Instantiate(bullet, turret.position, Quaternion.identity);
+            timer = fireRate;
+        }
     }
 }
