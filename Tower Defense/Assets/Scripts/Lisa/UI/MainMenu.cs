@@ -15,7 +15,6 @@ public class MainMenu : MonoBehaviour
     public GameObject[] buttons;
     [SerializeField] private float timeBeforeSizeInButton = 1f;
 
-    // Start is called before the first frame update
     void Start()
     {
         titleGameObject.transform.localScale = Vector2.zero; // Set the size of the main menu to zero before it sizes in

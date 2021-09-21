@@ -17,7 +17,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] float minZoomHeightY = 1f; //this value is currently just for testing, will set them as constants once we have a map
     [SerializeField] float maxZoomHeightY = 10f; //this value is currently just for testing, will set them as constants once we have a map
     [SerializeField] float scroll;
-
+    private float scrollClampMin = -0.2f;
+    private float scrollClampMax = 0.2f;
 
     void Update()
     {
@@ -28,16 +29,15 @@ public class CameraMovement : MonoBehaviour
             cameraPosition.x -= Input.GetAxis("Mouse X") * cameraPanSpeed * Time.deltaTime;
             cameraPosition.z -= Input.GetAxis("Mouse Y") * cameraPanSpeed * Time.deltaTime;
         }
-        
+
         scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (cameraPosition.y < maxZoomHeightY && scroll < 0 || cameraPosition.y > minZoomHeightY && scroll > 0)
+        if (cameraPosition.y < maxZoomHeightY && scroll < 0 && scroll > scrollClampMin ||
+            cameraPosition.y > minZoomHeightY && scroll > 0 && scroll < scrollClampMax)
         {
-            cameraPosition += transform.forward * scroll * cameraScrollSpeed * scrollSpeedMultiplier * Time.deltaTime;
-        }
-        else
-        {
-            scroll = 0f;
+            cameraPosition += transform.forward * scroll * cameraScrollSpeed * scrollSpeedMultiplier;
+            Debug.Log($"step: {transform.forward * scroll * cameraScrollSpeed * scrollSpeedMultiplier}");
+            Debug.Log($"cameraPosition.y + scroll: {cameraPosition.y + scroll}");
         }
 
         // UNCOMMENT ONCE THE MAP SIZE IS KNOWN
