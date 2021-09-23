@@ -19,11 +19,14 @@ public class TowerShooting : MonoBehaviour
 
     [SerializeField] float detectionRange = 5f;
 
+    private Quaternion startRot;
+
     float timer;
 
     private void Start()
     {
         timer = 0;
+        startRot = transform.rotation;
     }
 
     void Update()
@@ -67,6 +70,10 @@ public class TowerShooting : MonoBehaviour
         {
             RotateToTarget(closestEnemy);
         }
+        else
+        {
+            transform.rotation = startRot;
+        }
 
     }
 
@@ -91,6 +98,7 @@ public class TowerShooting : MonoBehaviour
     {      
         if (timer <= 0)
         {
+            bullet.GetComponent<Projectile_Script>().turret = turret;
             bullet.GetComponent<Projectile_Script>().Target = closestEnemy;
             Instantiate(bullet, turret.position, Quaternion.identity);
             timer = fireRate;

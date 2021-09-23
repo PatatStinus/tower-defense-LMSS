@@ -110,3 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  turret: {fileID: 0}
+  paintList:
+  - {fileID: 4621193455228899430, guid: a4eee697fa111474c9c53b44d7b68db8, type: 3}
+  - {fileID: 4894149335102317831, guid: 56bfed90db7818046928df29c2ef0821, type: 3}
+  - {fileID: 7931823912171759133, guid: 08b80e5183ad39c46b87e9df9ca2dd8b, type: 3}
+  - {fileID: 3842602849602586623, guid: 31ddb8e70e23c3f4ca521508ae5dba04, type: 3}
+  - {fileID: 11465569265245799, guid: 463a33b71ddcd994d900efdb581f1723, type: 3}
