@@ -25,6 +25,11 @@ public class ManaManager : MonoBehaviour
             lost = true;
     }
 
+    private void Start()
+    {
+        mana = 1000;
+    }
+
     private void Update()
     {
         manaText.text = mana.ToString();
