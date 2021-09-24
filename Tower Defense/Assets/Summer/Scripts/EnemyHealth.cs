@@ -5,11 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     //Basic version for now
-    float hp;
-    void Start()
-    {
-        hp = 4f;
-    }
+    public float hp;
 
     private void Update()
     {

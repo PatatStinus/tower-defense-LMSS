@@ -19,14 +19,11 @@ public class TowerShooting : MonoBehaviour
 
     [SerializeField] float detectionRange = 5f;
 
-    private Quaternion startRot;
-
     float timer;
 
     private void Start()
     {
         timer = 0;
-        startRot = transform.rotation;
     }
 
     void Update()
@@ -69,11 +66,7 @@ public class TowerShooting : MonoBehaviour
         if (Vector3.Distance(transform.position, closestEnemy.position) <= detectionRange)
         {
             RotateToTarget(closestEnemy);
-        }
-        else
-        {
-            transform.rotation = startRot;
-        }
+        }      
 
     }
 

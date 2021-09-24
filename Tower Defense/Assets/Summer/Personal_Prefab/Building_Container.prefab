@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5289587117745953194}
   - component: {fileID: 7505054317316762889}
   - component: {fileID: 3676672433338941892}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret_Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 50413090206782622}
   - component: {fileID: 8168101724230679623}
   - component: {fileID: 8826662665466743768}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -269,6 +269,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7753494062853015940}
     m_Modifications:
+    - target: {fileID: 233515676511899661, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 233515676511899661, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
       propertyPath: m_TagString
       value: Untagged
