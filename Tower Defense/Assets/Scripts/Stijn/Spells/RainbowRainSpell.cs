@@ -5,6 +5,7 @@ using UnityEngine;
 public class RainbowRainSpell : MonoBehaviour
 {
     public float f_RRSize;
+    [SerializeField] private int rainDamage = 3;
     [SerializeField] private int i_RRCost = 100;
     [SerializeField] private float timeRaining = 3f;
     [SerializeField] private ParticleSystem rainbowRain;
@@ -39,7 +40,10 @@ public class RainbowRainSpell : MonoBehaviour
 
         if (timeRaining > 0)
         {
-            //Attack
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].GetComponent<EnemyHealth>().hp -= rainDamage;
+            }
             Invoke("RainbowRaining", .5f);
         }
         else
@@ -54,11 +58,5 @@ public class RainbowRainSpell : MonoBehaviour
     {
         if (b_RainbowRaining)
             timeRaining -= Time.deltaTime;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(rainPos, f_RRSize);
     }
 }

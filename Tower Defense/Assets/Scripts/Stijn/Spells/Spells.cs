@@ -6,15 +6,25 @@ using UnityEngine.Rendering.HighDefinition;
 public class Spells : MonoBehaviour
 {
     #region Spells
-    [SerializeField] private RainbowRainSpell rainbowSpell;
+    private RainbowRainSpell rainbowSpell;
+    private FreezeSpell freezeSpell;
+    private ConfusionSpell confuseSpell;
     #endregion
 
+    [SerializeField] private GameObject allSpells;
     [SerializeField] private DecalProjector rangeProjector;
     private DecalProjector usedProjector;
     private Vector3 lastProjectorPos;
     private bool projecting;
     private float projectingRange;
     private int spawnSpellCode;
+
+    private void Start()
+    {
+        rainbowSpell = allSpells.GetComponent<RainbowRainSpell>();
+        freezeSpell = allSpells.GetComponent<FreezeSpell>();
+        confuseSpell = allSpells.GetComponent<ConfusionSpell>();
+    }
 
     private void Update()
     {
@@ -24,7 +34,6 @@ public class Spells : MonoBehaviour
         if(projecting && Input.GetMouseButtonDown(0))
             StartSpell();
     }
-
 
     private void SpawnProjector()
     {
@@ -54,6 +63,12 @@ public class Spells : MonoBehaviour
             case 1:
                 rainbowSpell.SpawnRainbow(lastProjectorPos);
                 break;
+            case 2:
+                freezeSpell.SpawnFreeze(lastProjectorPos);
+                break;
+            case 3:
+                confuseSpell.SpawnConfuse(lastProjectorPos);
+                break;
         }
     }
     public void RainbowRain()
@@ -61,5 +76,19 @@ public class Spells : MonoBehaviour
         SpawnProjector();
         projectingRange = rainbowSpell.f_RRSize;
         spawnSpellCode = 1;
+    }
+
+    public void FreezeStop()
+    {
+        SpawnProjector();
+        projectingRange = freezeSpell.f_FSSize;
+        spawnSpellCode = 2;
+    }
+
+    public void ConfusionSpell()
+    {
+        SpawnProjector();
+        projectingRange = confuseSpell.f_CSSize;
+        spawnSpellCode = 3;
     }
 }

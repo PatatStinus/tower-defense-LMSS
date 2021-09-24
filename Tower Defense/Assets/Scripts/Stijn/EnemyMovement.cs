@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [Range(0f, 2f)] [SerializeField] private float f_RotateSpeed = 10f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
+    [HideInInspector] public bool isConfused;
     private Transform t_Target;
     private Quaternion q_LookAngle;
     private int i_waypoitIndex = 0;
@@ -33,7 +34,26 @@ public class EnemyMovement : MonoBehaviour
                 return;
             }
 
-            i_waypoitIndex++;
+            if (!isConfused)
+                i_waypoitIndex++;
+            else
+            {
+                if(Random.Range(1, 3) == 1)
+                {
+                    if (i_waypoitIndex != 0)
+                        i_waypoitIndex--;
+                    else
+                        i_waypoitIndex++;
+                }
+                else
+                {
+                    if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 2)
+                        i_waypoitIndex--;
+                    else
+                        i_waypoitIndex++;
+                }
+            }
+
             t_Target = EnemyPathMaking.t_Points[i_waypoitIndex];
 
             f_TimeForRot = 0;
