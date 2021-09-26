@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RandomRainColor : MonoBehaviour
 {
-    public bool startRaining = false;
+    [HideInInspector] public bool startRaining = false;
     private Color newColor;
     private Color orgColor;
     private float time = 1;
@@ -12,13 +12,15 @@ public class RandomRainColor : MonoBehaviour
 
     private void Update()
     {
-        if(startRaining)
+        if (startRaining)
         {
             time += Time.deltaTime * 2.3f;
             GetComponent<Renderer>().material.SetColor("_BaseColor", Color.Lerp(orgColor, newColor, time));
-            if(time >= 1)
+            if (time >= 1)
                 GetNewColor();
         }
+        else
+            Invoke("DestroyParticle", 3f);
     }
 
     private void GetNewColor()
@@ -54,5 +56,10 @@ public class RandomRainColor : MonoBehaviour
         {
             rainbow = 1;
         }
+    }
+
+    private void DestroyParticle()
+    {
+        Destroy(this.gameObject);
     }
 }

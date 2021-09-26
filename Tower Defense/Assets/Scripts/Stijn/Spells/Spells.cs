@@ -7,8 +7,15 @@ public class Spells : MonoBehaviour
 {
     #region Spells
     private RainbowRainSpell rainbowSpell;
+    private GameObject rainbowGameObject;
     private FreezeSpell freezeSpell;
+    private GameObject freezeGameObject;
     private ConfusionSpell confuseSpell;
+    private GameObject confuseGameObject;
+    private PoisonLakeSpell poisonSpell;
+    private GameObject poisonGameObject;
+    private ZapSpell zapSpell;
+    private GameObject zapGameObject;
     #endregion
 
     [SerializeField] private GameObject allSpells;
@@ -24,6 +31,8 @@ public class Spells : MonoBehaviour
         rainbowSpell = allSpells.GetComponent<RainbowRainSpell>();
         freezeSpell = allSpells.GetComponent<FreezeSpell>();
         confuseSpell = allSpells.GetComponent<ConfusionSpell>();
+        poisonSpell = allSpells.GetComponent<PoisonLakeSpell>();
+        zapSpell = allSpells.GetComponent<ZapSpell>();
     }
 
     private void Update()
@@ -31,8 +40,11 @@ public class Spells : MonoBehaviour
         if (projecting)
             ProjectDecal(projectingRange);
 
-        if(projecting && Input.GetMouseButtonDown(0))
+        if (projecting && Input.GetMouseButtonDown(0))
             StartSpell();
+
+        if (projecting && Input.GetMouseButtonDown(1))
+            StopSpell();
     }
 
     private void SpawnProjector()
@@ -61,34 +73,66 @@ public class Spells : MonoBehaviour
         switch (spawnSpellCode)
         {
             case 1:
-                rainbowSpell.SpawnRainbow(lastProjectorPos);
+                rainbowGameObject = Instantiate(rainbowSpell.gameObject);
+                rainbowGameObject.GetComponent<RainbowRainSpell>().SpawnRainbow(lastProjectorPos);
                 break;
             case 2:
-                freezeSpell.SpawnFreeze(lastProjectorPos);
+                freezeGameObject = Instantiate(freezeSpell.gameObject);
+                freezeGameObject.GetComponent<FreezeSpell>().SpawnFreeze(lastProjectorPos);
                 break;
             case 3:
-                confuseSpell.SpawnConfuse(lastProjectorPos);
+                confuseGameObject = Instantiate(confuseSpell.gameObject);
+                confuseGameObject.GetComponent<ConfusionSpell>().SpawnConfuse(lastProjectorPos);
+                break;
+            case 4:
+                poisonGameObject = Instantiate(poisonSpell.gameObject);
+                poisonGameObject.GetComponent<PoisonLakeSpell>().SpawnLake(lastProjectorPos);
+                break;
+            case 5:
+                zapGameObject = Instantiate(zapSpell.gameObject);
+                zapGameObject.GetComponent<ZapSpell>().SpawnZap(lastProjectorPos);
                 break;
         }
     }
+
+    private void StopSpell()
+    {
+        projecting = false;
+        Destroy(usedProjector.gameObject);
+    }
+
     public void RainbowRain()
     {
         SpawnProjector();
-        projectingRange = rainbowSpell.f_RRSize;
+        projectingRange = rainbowSpell.size;
         spawnSpellCode = 1;
     }
 
     public void FreezeStop()
     {
         SpawnProjector();
-        projectingRange = freezeSpell.f_FSSize;
+        projectingRange = freezeSpell.size;
         spawnSpellCode = 2;
     }
 
     public void ConfusionSpell()
     {
         SpawnProjector();
-        projectingRange = confuseSpell.f_CSSize;
+        projectingRange = confuseSpell.size;
         spawnSpellCode = 3;
+    }
+
+    public void PoisonSpell()
+    {
+        SpawnProjector();
+        projectingRange = poisonSpell.size;
+        spawnSpellCode = 4;
+    }
+
+    public void ZapSpell()
+    {
+        SpawnProjector();
+        projectingRange = zapSpell.size;
+        spawnSpellCode = 5;
     }
 }

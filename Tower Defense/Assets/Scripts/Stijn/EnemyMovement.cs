@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Range(0f, 50f)] [SerializeField] private float f_Speed = 10f;
-    [Range(0f, 2f)] [SerializeField] private float f_RotateSpeed = 10f;
+    [Range(0f, 50f)] public float f_Speed = 10f;
+    [Range(0f, 2f)] public float f_RotateSpeed = 10f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
     [HideInInspector] public bool isConfused;
+    [HideInInspector] public float divideSpeed = 1;
     private Transform t_Target;
     private Quaternion q_LookAngle;
     private int i_waypoitIndex = 0;
@@ -23,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         Vector3 dir = t_Target.position - transform.position;
-        transform.Translate(dir.normalized * f_Speed * Time.deltaTime, Space.World);
+        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World);
 
         if (Vector3.Distance(transform.position, t_Target.position) <= .5f)
         {
