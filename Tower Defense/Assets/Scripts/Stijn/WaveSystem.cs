@@ -19,13 +19,13 @@ public class WaveSystem : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if(totalEnemiesInWave > spawnedEnemies)
+        if(totalEnemiesInWave > spawnedEnemies) //If an enemy still needs to be spawned
         {
-            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies);
-            Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn);
+            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies); //Spawn Enemy
+            Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn); //Get new enemy after time
             spawnedEnemies++;
         }
-        else
+        else //If all enemies have spawned
         {
             finishedWave = true;
         }
@@ -33,7 +33,7 @@ public class WaveSystem : MonoBehaviour
 
     public void StartWaveButton()
     {
-        if(finishedWave && currentWave < totalWaves - 1)
+        if(finishedWave && currentWave < totalWaves - 1) //Start Wave
         {
             finishedWave = false;
             currentWave++;

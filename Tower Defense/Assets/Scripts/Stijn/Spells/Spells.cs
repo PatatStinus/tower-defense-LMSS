@@ -26,7 +26,7 @@ public class Spells : MonoBehaviour
     private float projectingRange;
     private int spawnSpellCode;
 
-    private void Start()
+    private void Start() //Get all spells
     {
         rainbowSpell = allSpells.GetComponent<RainbowRainSpell>();
         freezeSpell = allSpells.GetComponent<FreezeSpell>();
@@ -37,13 +37,13 @@ public class Spells : MonoBehaviour
 
     private void Update()
     {
-        if (projecting)
+        if (projecting) //Project indicator
             ProjectDecal(projectingRange);
 
-        if (projecting && Input.GetMouseButtonDown(0))
+        if (projecting && Input.GetMouseButtonDown(0)) //Activate spell
             StartSpell();
 
-        if (projecting && Input.GetMouseButtonDown(1))
+        if (projecting && Input.GetMouseButtonDown(1)) //Deactive spell
             StopSpell();
     }
 
@@ -65,12 +65,12 @@ public class Spells : MonoBehaviour
         }
     }
 
-    private void StartSpell()
+    private void StartSpell() //Spawn and activate spell
     {
         projecting = false;
         lastProjectorPos = usedProjector.transform.position;
         Destroy(usedProjector.gameObject);
-        switch (spawnSpellCode)
+        switch (spawnSpellCode) //Index of spell
         {
             case 1:
                 rainbowGameObject = Instantiate(rainbowSpell.gameObject);
@@ -103,7 +103,7 @@ public class Spells : MonoBehaviour
 
     public void RainbowRain()
     {
-        SpawnProjector();
+        SpawnProjector(); //Set size and index of spell
         projectingRange = rainbowSpell.size;
         spawnSpellCode = 1;
     }
