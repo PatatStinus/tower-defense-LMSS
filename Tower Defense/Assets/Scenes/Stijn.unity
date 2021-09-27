@@ -2260,6 +2260,7 @@ MonoBehaviour:
   size: 4
   cost: 30
   durationSpell: 7
+  spellEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
 --- !u!114 &1045807844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,7 +2294,7 @@ MonoBehaviour:
   size: 1
   damage: 20
   cost: 50
-  durationSpell: 1
+  durationSpell: 0.5
   distanceFromEnemy: 3
   allEnemies: {fileID: 954197136}
 --- !u!1 &1221242119

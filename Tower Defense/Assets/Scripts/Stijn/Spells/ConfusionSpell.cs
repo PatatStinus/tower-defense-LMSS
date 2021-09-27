@@ -8,7 +8,9 @@ public class ConfusionSpell : MonoBehaviour
     public float size;
     [SerializeField] private int cost = 100;
     [SerializeField] private float durationSpell = 3f;
+    [SerializeField] private GameObject spellEffect;
     private Collider[] collisionsInSpell;
+    private List<GameObject> allConfused = new List<GameObject>();
     private List<GameObject> enemies = new List<GameObject>();
     private Vector3 spellPos;
     private float orgTime = -1;
@@ -32,7 +34,11 @@ public class ConfusionSpell : MonoBehaviour
         }
 
         for (int i = 0; i < enemies.Count; i++)
+        {
             enemies[i].GetComponent<EnemyMovement>().isConfused = true;
+            allConfused.Add(Instantiate(spellEffect, enemies[i].transform));
+            allConfused[i].transform.position = new Vector3(enemies[i].transform.position.x, enemies[i].transform.position.y + 2, enemies[i].transform.position.z);
+        }
 
         orgTime = durationSpell;
     }
@@ -47,6 +53,8 @@ public class ConfusionSpell : MonoBehaviour
             {
                 if(enemies[i] != null)
                     enemies[i].GetComponent<EnemyMovement>().isConfused = false;
+
+                Destroy(allConfused[i]);
             }
             Destroy(this.gameObject);
         }

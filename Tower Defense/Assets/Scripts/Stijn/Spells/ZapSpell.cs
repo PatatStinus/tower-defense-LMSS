@@ -11,7 +11,6 @@ public class ZapSpell : MonoBehaviour
     [SerializeField] private float distanceFromEnemy = 5;
     [SerializeField] private GameObject allEnemies;
     private List<GameObject> enemies = new List<GameObject>();
-    private List<GameObject> zappedEnemies = new List<GameObject>();
     private GameObject closestEnemy;
     private Collider[] collisionsInSpell;
     private GameObject enemy;
@@ -40,7 +39,7 @@ public class ZapSpell : MonoBehaviour
         {
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
-            zappedEnemies.Add(enemy);
+            enemy.GetComponent<EnemyConditions>().isZapped = true;
         }
         else
             Destroy(this.gameObject);
@@ -58,24 +57,19 @@ public class ZapSpell : MonoBehaviour
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            if(Vector3.Distance(enemy.transform.position, enemies[i].transform.position) < distanceFromEnemy)
-            {
-                for (int k = 0; k < zappedEnemies.Count; k++)
-                {
-                    if(zappedEnemies[k] == enemies[i])
-                    {
-                        
-                        break;
-                    }
-                    else 
-                    {
-                        if(closestEnemy == null)
-                            closestEnemy = enemies[i];
+            if(enemies[i].GetComponent<EnemyConditions>().isZapped)
+                continue;
 
-                        if(closestEnemy != enemies[i] && Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position))
-                            closestEnemy = enemies[i];
-                    }
+            if (Vector3.Distance(enemy.transform.position, enemies[i].transform.position) < distanceFromEnemy)
+            {
+                if(closestEnemy == null)
+                {
+                    closestEnemy = enemies[i];
+                    continue;
                 }
+
+                if(Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position))
+                    closestEnemy = enemies[i];
             }
         }
 
@@ -86,10 +80,15 @@ public class ZapSpell : MonoBehaviour
             enemy = closestEnemy;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
-            zappedEnemies.Add(enemy);
+            enemy.GetComponent<EnemyConditions>().isZapped = true;
         }
         else
+        {
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].GetComponent<EnemyConditions>().isZapped = false;
+
             Destroy(this.gameObject);
+        }
 
         orgTime = durationSpell;
     }

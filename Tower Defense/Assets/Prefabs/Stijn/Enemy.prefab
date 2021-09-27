@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4502566559840250454}
   - component: {fileID: -3785315856006638848}
   - component: {fileID: 5534874686728437096}
+  - component: {fileID: 3664400719981967577}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,6 +115,8 @@ MonoBehaviour:
   f_Speed: 5
   f_RotateSpeed: 0.5
   i_ManaWhenKilled: 10
+  isConfused: 0
+  divideSpeed: 1
 --- !u!114 &5534874686728437096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +129,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startHealth: 100
   hp: 100
+--- !u!114 &3664400719981967577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4502566559840250453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e1f489bc36f214fb9dcbfc884a99bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isZapped: 0
 --- !u!1 &8631666173895733493
 GameObject:
   m_ObjectHideFlags: 0
