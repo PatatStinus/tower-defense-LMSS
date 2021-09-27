@@ -1,11 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class EnemyHealth : MonoBehaviour
 {
     //Basic version for now
-    public float hp;
+    public int startHealth = 4;
+    public int hp;
+
+    //[SerializeField] private List<GameObject> decals;
+    //[SerializeField] private Color[] colours;
+
+    //GameObject currentDecal;
+
+    private void Start()
+    {
+        //decal.GetComponent<DecalProjector>().material.color;
+        hp = startHealth;
+       
+    }
 
     private void Update()
     {
@@ -19,7 +33,12 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.gameObject.tag == "Projectile")
         {
-            hp -= 1;
+            TakeDamage(1);
         }
+    }
+
+    public void TakeDamage(int dam)
+    {
+        hp -= dam;
     }
 }
