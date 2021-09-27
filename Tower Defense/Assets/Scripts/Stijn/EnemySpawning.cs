@@ -9,10 +9,11 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] private float f_FloorY;
     private Renderer rend;
 
-    public void SpawnEnemy(GameObject enemy)
+    public void SpawnEnemy(GameObject enemy, int indexEnemy)
     {
         rend = enemy.GetComponent<Renderer>();
         enemy.transform.position = new Vector3(t_SpawnPoint.position.x, rend.bounds.extents.y + f_FloorY, t_SpawnPoint.position.z);
-        Instantiate(enemy, t_EnemyParent);
+        GameObject spawnedEnemy = Instantiate(enemy, t_EnemyParent);
+        spawnedEnemy.name = $"Enemy ({indexEnemy})";
     }
 }

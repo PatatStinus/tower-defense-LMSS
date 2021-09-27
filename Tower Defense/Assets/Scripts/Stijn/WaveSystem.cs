@@ -21,7 +21,7 @@ public class WaveSystem : MonoBehaviour
     {
         if(totalEnemiesInWave > spawnedEnemies)
         {
-            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy);
+            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies);
             Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn);
             spawnedEnemies++;
         }

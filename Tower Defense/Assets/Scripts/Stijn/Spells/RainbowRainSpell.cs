@@ -1,64 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RainbowRainSpell : MonoBehaviour
 {
-    public float f_RRSize;
-    [SerializeField] private int i_RRCost = 100;
-    [SerializeField] private float timeRaining = 3f;
+    public float size;
+    [SerializeField] private int damage = 3;
+    [SerializeField] private int cost = 100;
+    [SerializeField] private float durationSpell = 3f;
     [SerializeField] private ParticleSystem rainbowRain;
-    private Collider[] collisionsInRain;
+    private GameObject rainbowParticle;
+    private Collider[] collisionsInSpell;
     private List<GameObject> enemies = new List<GameObject>();
-    private Vector3 rainPos;
-    private bool b_RainbowRaining;
-    private float f_orgTime;
+    private Vector3 spellPos;
+    private bool spellActive;
+    private float orgTime = -1;
 
-    public void SpawnRainbow(Vector3 rainPos)
+    public void SpawnRainbow(Vector3 spellPos)
     {
-        this.rainPos = rainPos;
-        b_RainbowRaining = true;
+        this.spellPos = spellPos;
+        spellActive = true;
         RainbowRaining();
-        f_orgTime = timeRaining;
-        rainbowRain.transform.position = new Vector3(rainPos.x, rainbowRain.transform.position.y, rainPos.z);
-        rainbowRain.Play();
-        rainbowRain.GetComponent<RandomRainColor>().startRaining = true;
-        ManaManager.LoseMana(i_RRCost);
+        orgTime = durationSpell;
+        rainbowParticle = Instantiate(rainbowRain.gameObject);
+        rainbowParticle.transform.position = new Vector3(spellPos.x, rainbowParticle.transform.position.y, spellPos.z);
+        rainbowParticle.GetComponent<ParticleSystem>().Play();
+        rainbowParticle.GetComponent<RandomRainColor>().startRaining = true;
+        ManaManager.LoseMana(cost);
     }
 
     private void RainbowRaining()
     {
         enemies.Clear();
-        collisionsInRain = Physics.OverlapSphere(rainPos, f_RRSize);
-        foreach (var obj in collisionsInRain)
+        collisionsInSpell = Physics.OverlapSphere(spellPos, size);
+        foreach (var obj in collisionsInSpell)
         {
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
             if (enemy != null)
                 enemies.Add(obj.gameObject);
         }
 
-        if (timeRaining > 0)
+        if (durationSpell > 0)
         {
-            //Attack
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].GetComponent<EnemyHealth>().hp -= damage;
             Invoke("RainbowRaining", .5f);
         }
         else
         {
-            rainbowRain.GetComponent<RandomRainColor>().startRaining = false;
-            b_RainbowRaining = false;
-            timeRaining = f_orgTime;
+            rainbowParticle.GetComponent<RandomRainColor>().startRaining = false;
+            spellActive = false;
+            durationSpell = orgTime;
+            Destroy(this.gameObject);
         }
     }
 
     private void Update()
     {
-        if (b_RainbowRaining)
-            timeRaining -= Time.deltaTime;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(rainPos, f_RRSize);
+        if (spellActive)
+            durationSpell -= Time.deltaTime;
     }
 }
