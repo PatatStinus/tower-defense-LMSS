@@ -62,15 +62,17 @@ public class ZapSpell : MonoBehaviour
             {
                 for (int k = 0; k < zappedEnemies.Count; k++)
                 {
-                    if (zappedEnemies[k].name != enemies[i].name)
+                    if(zappedEnemies[k] == enemies[i])
+                    {
+                        
+                        break;
+                    }
+                    else 
                     {
                         if(closestEnemy == null)
-                        {
                             closestEnemy = enemies[i];
-                            continue;
-                        }
 
-                        if(Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position))
+                        if(closestEnemy != enemies[i] && Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position))
                             closestEnemy = enemies[i];
                     }
                 }

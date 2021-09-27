@@ -17,25 +17,25 @@ public class EnemyMovement : MonoBehaviour
 
     void OnEnable()
     {
-        t_Target = EnemyPathMaking.t_Points[i_waypoitIndex];
+        t_Target = EnemyPathMaking.t_Points[i_waypoitIndex]; 
         transform.LookAt(t_Target);
     }
 
     void Update()
     {
         Vector3 dir = t_Target.position - transform.position;
-        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World);
+        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
 
-        if (Vector3.Distance(transform.position, t_Target.position) <= .5f)
+        if (Vector3.Distance(transform.position, t_Target.position) <= .5f) //If enemy reached target
         {
-            if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1)
+            if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1) //Get new target
             {
                 ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
                 Destroy(gameObject); //Enemy reached the end
                 return;
             }
 
-            if (!isConfused)
+            if (!isConfused) //If confused spell is active, give the enemy a random target
                 i_waypoitIndex++;
             else
             {
@@ -59,13 +59,13 @@ public class EnemyMovement : MonoBehaviour
 
             f_TimeForRot = 0;
             Vector3 lookDir = t_Target.position - transform.position;
-            q_LookAngle = Quaternion.LookRotation(lookDir, transform.up);
+            q_LookAngle = Quaternion.LookRotation(lookDir, transform.up); //Get enemy to target rotation
         }
 
         if (f_TimeForRot < 1)
         {
             f_TimeForRot += Time.deltaTime * f_RotateSpeed;
-            transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot); //Rotate enemy to target
         }
     }
 }

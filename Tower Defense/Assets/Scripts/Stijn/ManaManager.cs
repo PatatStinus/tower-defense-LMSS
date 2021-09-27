@@ -12,12 +12,12 @@ public class ManaManager : MonoBehaviour
     //Mana used as ammunition for the towers (When towers are finished)
     //Mana used as currency for spells/towers etc. (When said things are finished)
 
-    public static void GetMana(int giveMana)
+    public static void GetMana(int giveMana) //Call ManaManager.GetMana(number) to give mana to player
     {
         mana += giveMana;
     }
 
-    public static void LoseMana(int removeMana)
+    public static void LoseMana(int removeMana) //Call ManaManager.RemoveMana(number) to remove mana from player
     {
         if (mana - removeMana >= 0)
             mana -= removeMana;
