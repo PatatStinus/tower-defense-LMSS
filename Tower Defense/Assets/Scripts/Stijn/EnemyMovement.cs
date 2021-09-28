@@ -10,6 +10,8 @@ public class EnemyMovement : MonoBehaviour
 
     [HideInInspector] public bool isConfused;
     [HideInInspector] public float divideSpeed = 1;
+    [HideInInspector] public bool isZapped = false;
+    [HideInInspector] public int pathIndex;
     private Transform t_Target;
     private Quaternion q_LookAngle;
     private int i_waypoitIndex = 0;
@@ -17,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnEnable()
     {
-        t_Target = EnemyPathMaking.t_Points[i_waypoitIndex]; 
+        t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex]; 
         transform.LookAt(t_Target);
     }
 
@@ -28,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, t_Target.position) <= .5f) //If enemy reached target
         {
-            if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 1) //Get new target
+            if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Get new target
             {
                 ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
                 Destroy(gameObject); //Enemy reached the end
@@ -48,14 +50,14 @@ public class EnemyMovement : MonoBehaviour
                 }
                 else
                 {
-                    if (i_waypoitIndex >= EnemyPathMaking.t_Points.Length - 2)
+                    if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2)
                         i_waypoitIndex--;
                     else
                         i_waypoitIndex++;
                 }
             }
 
-            t_Target = EnemyPathMaking.t_Points[i_waypoitIndex];
+            t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex];
 
             f_TimeForRot = 0;
             Vector3 lookDir = t_Target.position - transform.position;

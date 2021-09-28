@@ -21,7 +21,7 @@ public class WaveSystem : MonoBehaviour
     {
         if(totalEnemiesInWave > spawnedEnemies) //If an enemy still needs to be spawned
         {
-            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies); //Spawn Enemy
+            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies, waves[currentWave].enemiesInWave[spawnedEnemies].pathIndex); //Spawn Enemy
             Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn); //Get new enemy after time
             spawnedEnemies++;
         }
@@ -55,4 +55,5 @@ public class TypeOfEnemy
 {
     public GameObject enemy;
     public float timeTillNextSpawn;
+    public int pathIndex;
 }

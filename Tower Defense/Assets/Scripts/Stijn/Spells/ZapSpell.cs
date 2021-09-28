@@ -17,12 +17,14 @@ public class ZapSpell : MonoBehaviour
     private Vector3 spellPos;
     private float orgTime = -1;
     private Vector3 orgPosEnemy;
+    private bool isZapping = false;
 
     public void SpawnZap(Vector3 spellPos)
     {
         this.spellPos = spellPos;
         Zapped();
         ManaManager.LoseMana(cost);
+        isZapping = true;
     }
 
     private void Zapped()
@@ -39,7 +41,7 @@ public class ZapSpell : MonoBehaviour
         {
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
-            enemy.GetComponent<EnemyConditions>().isZapped = true;
+            enemy.GetComponent<EnemyMovement>().isZapped = true;
         }
         else
             Destroy(this.gameObject);
@@ -57,7 +59,7 @@ public class ZapSpell : MonoBehaviour
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            if(enemies[i].GetComponent<EnemyConditions>().isZapped)
+            if(enemies[i].GetComponent<EnemyMovement>().isZapped)
                 continue;
 
             if (Vector3.Distance(enemy.transform.position, enemies[i].transform.position) < distanceFromEnemy)
@@ -80,12 +82,57 @@ public class ZapSpell : MonoBehaviour
             enemy = closestEnemy;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
-            enemy.GetComponent<EnemyConditions>().isZapped = true;
+            enemy.GetComponent<EnemyMovement>().isZapped = true;
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
-                enemies[i].GetComponent<EnemyConditions>().isZapped = false;
+                enemies[i].GetComponent<EnemyMovement>().isZapped = false;
+
+            Destroy(this.gameObject);
+        }
+
+        orgTime = durationSpell;
+    }
+    private void EnemyKilled()
+    {
+        closestEnemy = null;
+        enemies.Clear();
+
+        for (int i = 0; i < allEnemies.transform.childCount; i++)
+            enemies.Add(allEnemies.transform.GetChild(i).gameObject);
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            if (enemies[i].GetComponent<EnemyMovement>().isZapped)
+                continue;
+
+            if (Vector3.Distance(orgPosEnemy, enemies[i].transform.position) < distanceFromEnemy)
+            {
+                if (closestEnemy == null)
+                {
+                    closestEnemy = enemies[i];
+                    continue;
+                }
+
+                if (Vector3.Distance(orgPosEnemy, closestEnemy.transform.position) > Vector3.Distance(orgPosEnemy, enemies[i].transform.position))
+                    closestEnemy = enemies[i];
+            }
+        }
+
+        enemy = null;
+
+        if (closestEnemy != null)
+        {
+            enemy = closestEnemy;
+            enemy.GetComponent<EnemyHealth>().hp -= damage;
+            orgPosEnemy = enemy.transform.position;
+            enemy.GetComponent<EnemyMovement>().isZapped = true;
+        }
+        else
+        {
+            for (int i = 0; i < enemies.Count; i++)
+                enemies[i].GetComponent<EnemyMovement>().isZapped = false;
 
             Destroy(this.gameObject);
         }
@@ -102,5 +149,7 @@ public class ZapSpell : MonoBehaviour
         }
         else if (orgTime < 0 && orgTime != -1)
             NewZap();
+        else if (enemy == null && isZapping)
+            EnemyKilled();
     }
 }
