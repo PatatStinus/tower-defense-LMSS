@@ -208,11 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   f_Speed: 5
-  f_RotateSpeed: 0.5
+  f_RotateSpeed: 5
   i_ManaWhenKilled: 30
   isConfused: 0
   divideSpeed: 1
   isZapped: 0
+  pathIndex: 0
 --- !u!114 &3386839141914109236
 MonoBehaviour:
   m_ObjectHideFlags: 0

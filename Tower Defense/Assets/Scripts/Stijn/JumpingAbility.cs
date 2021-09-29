@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class JumpingAbility : MonoBehaviour
 {
-    [HideInInspector] public bool isJumping = true;
+    [HideInInspector] public bool ability = true;
+    private bool isJumping = false;
     private EnemyMovement movement;
 
     private void Start()
@@ -14,9 +15,15 @@ public class JumpingAbility : MonoBehaviour
 
     private void Update()
     {
-        if(isJumping)
+        if(!isJumping && ability)
         {
-            //uuuuuuuuuuuuuuuuuuuuu
+            Invoke("Jump", Random.Range(2f, 4f));
+            isJumping = true;
         }
+    }
+
+    private void Jump()
+    {
+
     }
 }

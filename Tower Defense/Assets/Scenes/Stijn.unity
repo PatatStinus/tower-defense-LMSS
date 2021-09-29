@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -606,7 +606,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256890818}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.9, y: 0.5, z: 8.6}
+  m_LocalPosition: {x: -10.9, y: 0.5, z: 8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1362647617}
@@ -2930,7 +2930,7 @@ MonoBehaviour:
     - enemy: {fileID: 4502566559840250453, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
       timeTillNextSpawn: 1
       pathIndex: 0
-    - enemy: {fileID: 6752020765291753993, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+    - enemy: {fileID: 6752020765291753993, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 0
       pathIndex: 1
   - enemiesInWave:

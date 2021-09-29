@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a7d0a8f33a223e4428e8893feb6fd8f4, type: 2}
+  - {fileID: 2100000, guid: 14b2460cd48ed484da77e443988d4838, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,8 +110,9 @@ GameObject:
   - component: {fileID: 6752020765291753994}
   - component: {fileID: 2934218553110301532}
   - component: {fileID: 3386839141914109236}
+  - component: {fileID: 98270923092994772}
   m_Layer: 0
-  m_Name: Level2Enemy
+  m_Name: JumpingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10bb2bf195a66114f81ce40773cb3d24, type: 2}
+  - {fileID: 2100000, guid: 2d3ee93aec13d9a47aba0e356d82229b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,8 +209,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   f_Speed: 3
-  f_RotateSpeed: 5
-  i_ManaWhenKilled: 20
+  f_RotateSpeed: 10
+  i_ManaWhenKilled: 30
   isConfused: 0
   divideSpeed: 1
   isZapped: 0
@@ -226,5 +227,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 150
-  hp: 150
+  startHealth: 100
+  hp: 100
+--- !u!114 &98270923092994772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752020765291753993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9778bf80d82dc47b92b47d5a8a0999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: 1

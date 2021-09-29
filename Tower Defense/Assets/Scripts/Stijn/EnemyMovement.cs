@@ -5,29 +5,31 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [Range(0f, 50f)] public float f_Speed = 10f;
-    [Range(0f, 2f)] public float f_RotateSpeed = 10f;
+    [Range(0f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
     [HideInInspector] public bool isConfused;
     [HideInInspector] public float divideSpeed = 1;
     [HideInInspector] public bool isZapped = false;
     [HideInInspector] public int pathIndex;
+    private int i_waypoitIndex = 0;
     private Transform t_Target;
     private Quaternion q_LookAngle;
-    private int i_waypoitIndex = 0;
-    private float f_TimeForRot = 1;
 
-    void OnEnable()
+    private void Start()
     {
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex]; 
         transform.LookAt(t_Target);
     }
 
-    void Update()
+    private void Update()
     {
-        Vector3 dir = t_Target.position - transform.position;
-        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
+        MoveTarget();
+        GetNewTarget();
+    }
 
+    private void GetNewTarget()
+    {
         if (Vector3.Distance(transform.position, t_Target.position) <= .5f) //If enemy reached target
         {
             if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Get new target
@@ -58,16 +60,16 @@ public class EnemyMovement : MonoBehaviour
             }
 
             t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex];
-
-            f_TimeForRot = 0;
-            Vector3 lookDir = t_Target.position - transform.position;
-            q_LookAngle = Quaternion.LookRotation(lookDir, transform.up); //Get enemy to target rotation
         }
+    }
 
-        if (f_TimeForRot < 1)
-        {
-            f_TimeForRot += Time.deltaTime * f_RotateSpeed;
-            transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_TimeForRot); //Rotate enemy to target
-        }
+    private void MoveTarget()
+    {
+        Vector3 dir = t_Target.position - transform.position;
+        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
+
+        Vector3 lookDir = t_Target.position - transform.position;
+        q_LookAngle = Quaternion.LookRotation(lookDir, transform.up); //Get enemy to target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_RotateSpeed * Time.deltaTime); //Rotate enemy to target
     }
 }
