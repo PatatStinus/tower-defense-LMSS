@@ -5,6 +5,9 @@ using UnityEngine.UI;
 ///Lisa Werner
 ///</Author>
 
+///<summary>
+/// The class that handles the visuals of the Audio Menu
+/// </summary>
 public class AudioMenu : MonoBehaviour
 {
     public GameObject icon;
