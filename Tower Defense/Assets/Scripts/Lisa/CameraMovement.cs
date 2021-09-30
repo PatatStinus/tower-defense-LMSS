@@ -8,44 +8,55 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     [Header("Camera Settings")]
+    [SerializeField] private float cameraPanSpeed = 20f;
+    [SerializeField] private float cameraScrollSpeed = 4f;
+    [SerializeField] private float scrollSpeedMultiplier = 2f;
+    [SerializeField] private float minZoomHeightY = 4f; //this value is currently just for testing, will set them as constants once we have a map
+    [SerializeField] private float maxZoomHeightY = 54f; //this value is currently just for testing, will set them as constants once we have a map
+    [SerializeField] private float scroll;
+    [SerializeField] private bool canScroll;
 
-    [SerializeField] float cameraPanSpeed = 20f;
-    [SerializeField] float cameraScrollSpeed = 20f;
-    [SerializeField] float scrollSpeedMultiplier = 100f;
-    //[SerializeField] Vector2 minpanLimit;   // Once we have a map I will set this
-    //[SerializeField] Vector2 maxpanLimit;   // Once we have a map I will set this
-    [SerializeField] float minZoomHeightY = 1f; //this value is currently just for testing, will set them as constants once we have a map
-    [SerializeField] float maxZoomHeightY = 10f; //this value is currently just for testing, will set them as constants once we have a map
-    [SerializeField] float scroll;
     private float scrollClampMin = -0.2f;
     private float scrollClampMax = 0.2f;
 
-    void Update()
+    private void Update()
     {
-        Vector3 cameraPosition = this.gameObject.transform.position;
+        MoveCamera(transform.position);
+        ScrollCamera(transform.position);
+    }
 
+    private void MoveCamera(Vector3 cameraPosition)
+    {
         if (Input.GetMouseButton(2))
         {
             cameraPosition.x -= Input.GetAxis("Mouse X") * cameraPanSpeed * Time.deltaTime;
             cameraPosition.z -= Input.GetAxis("Mouse Y") * cameraPanSpeed * Time.deltaTime;
         }
 
+        cameraPosition.x = Mathf.Clamp(
+            cameraPosition.x,
+            MapBorder.VerticesPositions[(int)MapBorder.Corners.bottomLeft].x,
+            MapBorder.VerticesPositions[(int)MapBorder.Corners.bottomRight].x);
+
+        cameraPosition.z = Mathf.Clamp(
+            cameraPosition.z,
+            MapBorder.VerticesPositions[(int)MapBorder.Corners.bottomLeft].z,
+            MapBorder.VerticesPositions[(int)MapBorder.Corners.topLeft].z);
+
+        transform.position = cameraPosition;
+    }
+
+    private void ScrollCamera(Vector3 cameraPosition)
+    {
         scroll = Input.GetAxis("Mouse ScrollWheel");
 
         if (cameraPosition.y < maxZoomHeightY && scroll < 0 && scroll > scrollClampMin ||
             cameraPosition.y > minZoomHeightY && scroll > 0 && scroll < scrollClampMax)
         {
             cameraPosition += transform.forward * scroll * cameraScrollSpeed * scrollSpeedMultiplier;
-            Debug.Log($"step: {transform.forward * scroll * cameraScrollSpeed * scrollSpeedMultiplier}");
-            Debug.Log($"cameraPosition.y + scroll: {cameraPosition.y + scroll}");
         }
 
-        // UNCOMMENT ONCE THE MAP SIZE IS KNOWN
-        //cameraPosition.x = Mathf.Clamp(cameraPosition.x, minpanLimit.x, maxpanLimit.x);
-        //cameraPosition.y = Mathf.Clamp(cameraPosition.y, minZoom, maxZoom);
-        //cameraPosition.z = Mathf.Clamp(cameraPosition.z, minpanLimit.y, maxpanLimit.y);
-
         transform.position = cameraPosition;
-
     }
+
 }

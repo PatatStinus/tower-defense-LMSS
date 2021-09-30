@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     [Header("Options UI")]
-    public CanvasGroup background;
-    public Transform optionsBox;
+    public CanvasGroup background; //Background image for the main menu.
+    public Transform optionsBox; 
 
     [Header("Audio")]
     public Button button;
