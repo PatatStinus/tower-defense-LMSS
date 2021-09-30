@@ -161,8 +161,9 @@ MonoBehaviour:
   f_RotateSpeed: 10
   i_ManaWhenKilled: 30
   isConfused: 0
-  divideSpeed: 1
+  usingAbility: 0
   isZapped: 0
+  divideSpeed: 1
   pathIndex: 0
   i_waypoitIndex: 0
 --- !u!114 &2139529235658538301
@@ -178,7 +179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: 1
-  jumpWidth: 20
+  jumpWidth: 1.5
+  jumpHeight: 3
 --- !u!1 &7314432650006256017
 GameObject:
   m_ObjectHideFlags: 0
