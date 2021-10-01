@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   hp: 100
+  lerpTime: 2
 --- !u!114 &1499759888757385122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,10 +160,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   f_Speed: 3
   f_RotateSpeed: 10
-  i_ManaWhenKilled: 30
+  i_ManaWhenKilled: 50
   isConfused: 0
   usingAbility: 0
   isZapped: 0
+  doubledHealth: 0
   divideSpeed: 1
   pathIndex: 0
   i_waypoitIndex: 0
