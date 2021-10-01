@@ -23,8 +23,8 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
-        enemyMaterial = GetComponent<MeshRenderer>().material;
-        enemyColour = GetComponent<MeshRenderer>().material.color;
+        enemyMaterial = transform.GetChild(0).GetComponent<MeshRenderer>().material;
+        enemyColour = transform.GetChild(0).GetComponent<MeshRenderer>().material.color;
         hp = startHealth;
     }
 
