@@ -149,6 +149,9 @@ MonoBehaviour:
   bullet: {fileID: 1418108360271864137, guid: a775d4d2d974e414db02d3f9da0c2435, type: 3}
   rotationStrength: 2
   detectionRange: 5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!54 &2369861875625519227
 Rigidbody:
   m_ObjectHideFlags: 0

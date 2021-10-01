@@ -19,17 +19,24 @@ public class TowerShooting : MonoBehaviour
 
     [SerializeField] float detectionRange = 5f;
 
+    [SerializeField] LayerMask obstacleLayer;
+
     float timer;
+
+    Ray ray;
+    RaycastHit hit;
 
     private void Start()
     {
         timer = 0;
+        ray.origin = turret.position;
     }
 
     void Update()
     {
         GO_enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
+        //Making sure tower is placed before being able to shoot
         if (tower.tag == "Placed")
         {
             AssignTarget();
@@ -61,6 +68,16 @@ public class TowerShooting : MonoBehaviour
             {
                 closestEnemy = enemies[i];
             }
+        }
+
+        ray.direction = closestEnemy.position - ray.origin;
+
+        Debug.Log(ray.direction);
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, detectionRange, obstacleLayer))
+        {
+            Debug.Log("Obstacle!");
+            return;
         }
 
         if (Vector3.Distance(transform.position, closestEnemy.position) <= detectionRange)

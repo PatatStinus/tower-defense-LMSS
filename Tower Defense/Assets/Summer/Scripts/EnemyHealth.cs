@@ -6,23 +6,52 @@ using UnityEngine.Rendering.HighDefinition;
 public class EnemyHealth : MonoBehaviour
 {
     //Basic version for now
+
     public int startHealth = 4;
-    public int hp;
+    [HideInInspector] public float hp;
 
-    //[SerializeField] private List<GameObject> decals;
-    //[SerializeField] private Color[] colours;
+    //[SerializeField] Color firstDamageColour;
+    //[SerializeField] Color secondDamageColour;
+    //[SerializeField] Color thirdDamageColour;
 
-    //GameObject currentDecal;
+    //[SerializeField]Gradient firstGradient;
+
+    Material enemyMaterial;
+    Color enemyColour;
+
+    [SerializeField] float lerpTime = 2;
 
     private void Start()
     {
-        //decal.GetComponent<DecalProjector>().material.color;
+        enemyMaterial = GetComponent<MeshRenderer>().material;
+        enemyColour = GetComponent<MeshRenderer>().material.color;
         hp = startHealth;
-       
     }
 
     private void Update()
     {
+        //float t = Mathf.PingPong(Time.time / strobeDuration, 1f);
+
+        //enemyMaterial.color = firstGradient.Evaluate(t);
+        //if (hp <= (startHealth /100f) * 75f && hp > (startHealth / 100f) * 50f)
+        //{
+        //    Debug.Log("75% hp");
+
+        //    //enemyMaterial.color = Color.Lerp(enemyColour, firstDamageColour, 0.1f);
+        //    enemyMaterial.color = Color.Lerp(enemyColour, firstDamageColour, Mathf.PingPong(Time.time, lerpTime));
+        //}
+        //else if (hp <= (startHealth / 100f) * 50f && hp > (startHealth / 100f) * 25f)
+        //{
+        //    Debug.Log("50% hp");
+        //    lerpTime = 1.25f;
+        //    enemyMaterial.color = Color.Lerp(firstDamageColour, secondDamageColour, Mathf.PingPong(Time.time, lerpTime));
+        //}
+        //else if (hp <= (startHealth / 100f) * 25f && hp > 0f)
+        //{
+        //    Debug.Log("25% hp");
+        //    lerpTime = 0.75f;
+        //    enemyMaterial.color = Color.Lerp(secondDamageColour, thirdDamageColour, Mathf.PingPong(Time.time, lerpTime));
+        //}
         if (hp <= 0)
         {
             Destroy(gameObject);
