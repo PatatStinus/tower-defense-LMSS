@@ -2968,6 +2968,18 @@ MonoBehaviour:
     - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 1
       pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 1
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 1
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 0
+      pathIndex: 0
   - enemiesInWave:
     - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
       timeTillNextSpawn: 1
@@ -2979,11 +2991,17 @@ MonoBehaviour:
       timeTillNextSpawn: 1
       pathIndex: 1
     - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 1
+    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 1
+    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
       timeTillNextSpawn: 3
       pathIndex: 1
     - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
       timeTillNextSpawn: 0
-      pathIndex: 1
+      pathIndex: 0
   - enemiesInWave:
     - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
       timeTillNextSpawn: 1
@@ -3004,6 +3022,15 @@ MonoBehaviour:
       timeTillNextSpawn: 5
       pathIndex: 1
     - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 1
+      pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 0
       pathIndex: 0
 --- !u!114 &1238165559

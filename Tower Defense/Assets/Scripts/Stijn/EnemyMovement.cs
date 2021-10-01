@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public bool isConfused = false;
     [HideInInspector] public bool usingAbility = false;
     [HideInInspector] public bool isZapped = false;
+    [HideInInspector] public bool doubledHealth;
     [HideInInspector] public float divideSpeed = 1;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
@@ -27,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
     {
         MoveTarget();
 
-        if (Vector3.Distance(transform.position, t_Target) <= .01f && !usingAbility) //If enemy reached target
+        if (Vector3.Distance(transform.position, t_Target) <= .5f && !usingAbility) //If enemy reached target
             GetNewTarget();
     }
 
@@ -68,8 +69,7 @@ public class EnemyMovement : MonoBehaviour
         Vector3 dir = t_Target - transform.position;
         transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
 
-        Vector3 lookDir = t_Target - transform.position;
-        q_LookAngle = Quaternion.LookRotation(lookDir, transform.up); //Get enemy to target rotation
+        q_LookAngle = Quaternion.LookRotation(dir, transform.up); //Get enemy to target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_RotateSpeed * Time.deltaTime); //Rotate enemy to target
     }
     public void GetNewWayPoint()
