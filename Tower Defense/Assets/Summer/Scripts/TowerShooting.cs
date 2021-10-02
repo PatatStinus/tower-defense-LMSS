@@ -23,13 +23,9 @@ public class TowerShooting : MonoBehaviour
 
     float timer;
 
-    Ray ray;
-    RaycastHit hit;
-
     private void Start()
     {
         timer = 0;
-        ray.origin = turret.position;
     }
 
     void Update()
@@ -58,33 +54,39 @@ public class TowerShooting : MonoBehaviour
 
         for (int i = 0; i < enemies.Length; i++)
         {
-            if (closestEnemy == null)
+            //if (closestEnemy == null)
+            //{
+            //    closestEnemy = enemies[i];
+            //    return;
+            //}
+            if (Vector3.Distance(transform.position, enemies[i].position) <= detectionRange 
+                && !Physics.Linecast(turret.position, enemies[i].position, obstacleLayer))
             {
                 closestEnemy = enemies[i];
-                return;
             }
-
-            if (Vector3.Distance(transform.position, enemies[i].position) < Vector3.Distance(transform.position, closestEnemy.position))
-            {
-                closestEnemy = enemies[i];
-            }
+            //if (Physics.Linecast(turret.position, enemies[i].position, obstacleLayer))
+            //{
+            //    Debug.Log("Obstacle!");
+            //    return;
+            //}
+            //if (Vector3.Distance(transform.position, enemies[i].position) < Vector3.Distance(transform.position, closestEnemy.position))
+            //{
+            //    closestEnemy = enemies[i];
+            //}
         }
-
-        ray.direction = closestEnemy.position - ray.origin;
-
-        Debug.Log(ray.direction);
-
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, detectionRange, obstacleLayer))
+        if (closestEnemy == null)
         {
-            Debug.Log("Obstacle!");
             return;
         }
-
+        if (Physics.Linecast(turret.position, closestEnemy.position, obstacleLayer))
+        {
+            closestEnemy = null;
+            return;
+        }
         if (Vector3.Distance(transform.position, closestEnemy.position) <= detectionRange)
         {
             RotateToTarget(closestEnemy);
-        }      
-
+        }
     }
 
     private void RotateToTarget(Transform target)
@@ -105,7 +107,7 @@ public class TowerShooting : MonoBehaviour
     }
 
     private void ShootAtTarget()
-    {      
+    {
         if (timer <= 0)
         {
             bullet.GetComponent<Projectile_Script>().turret = turret;
