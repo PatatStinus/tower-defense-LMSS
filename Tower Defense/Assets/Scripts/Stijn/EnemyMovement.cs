@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Range(0f, 50f)] public float f_Speed = 10f;
-    [Range(0f, 20f)] public float f_RotateSpeed = 0.5f;
+    [Range(0f, 50f)] [SerializeField] private float f_Speed = 10f;
+    [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
     [HideInInspector] public bool isConfused = false;
@@ -34,11 +34,16 @@ public class EnemyMovement : MonoBehaviour
 
     private void GetNewTarget()
     {
-        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Get new target
+        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Enemy Reached End out of bounds
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2) //Enemy Reached End in bounds
         {
             ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
-            Destroy(gameObject); //Enemy reached the end
-            return;
+            gameObject.layer = 0;
         }
 
         if (!isConfused) //If confused spell is active, give the enemy a random target
@@ -54,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2)
+                if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 3)
                     i_waypoitIndex--;
                 else
                     i_waypoitIndex++;
@@ -72,6 +77,7 @@ public class EnemyMovement : MonoBehaviour
         q_LookAngle = Quaternion.LookRotation(dir, transform.up); //Get enemy to target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_RotateSpeed * Time.deltaTime); //Rotate enemy to target
     }
+
     public void GetNewWayPoint()
     {
         i_waypoitIndex++;

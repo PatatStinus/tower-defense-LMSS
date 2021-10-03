@@ -4,6 +4,7 @@ using TMPro;
 public class ManaManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI manaText;
+    public static int enemiesLeft = 0;
     private static int mana = 1000;
     private static bool lost = false;
 
@@ -19,10 +20,15 @@ public class ManaManager : MonoBehaviour
 
     public static void LoseMana(int removeMana) //Call ManaManager.RemoveMana(number) to remove mana from player
     {
-        if (mana - removeMana >= 0)
-            mana -= removeMana;
+        if(enemiesLeft > 0)
+            enemiesLeft--; 
         else
-            lost = true;
+        {
+            if (mana - removeMana >= 0)
+                mana -= removeMana;
+            else
+                lost = true;
+        }
     }
 
     private void Start()

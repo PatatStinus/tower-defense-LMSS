@@ -39,6 +39,7 @@ public class WaveSystem : MonoBehaviour
             currentWave++;
             totalEnemiesInWave = waves[currentWave].enemiesInWave.Count;
             spawnedEnemies = 0;
+            ManaManager.enemiesLeft = 0;
             SpawnEnemy();
         }
     }
