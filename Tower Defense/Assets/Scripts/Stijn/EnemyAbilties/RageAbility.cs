@@ -19,12 +19,8 @@ public class RageAbility : MonoBehaviour
         if (hp.hp <= hp.startHealth / 2 && !raged)
         {
             hp.hp *= 2;
-            movement.divideSpeed = 0.5f;
+            movement.divideSpeed = 1f/3f;
             raged = true;
-        }
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            hp.hp -= 10;
         }
     }
 }

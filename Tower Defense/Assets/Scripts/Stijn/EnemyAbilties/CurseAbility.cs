@@ -22,7 +22,15 @@ public class CurseAbility : MonoBehaviour
         allEnemies = GameObject.FindGameObjectWithTag("Enemy");
         movement = GetComponent<EnemyMovement>();
         curse = Random.Range(1, 4);
+        ColorRainWeather.onColorRaining += RainEvent;
+        ColorRainWeather.onStopColorRaining += StopRainEvent;
         GetCurse();
+    }
+
+    private void OnDisable()
+    {
+        ColorRainWeather.onColorRaining -= RainEvent;
+        ColorRainWeather.onStopColorRaining -= StopRainEvent;
     }
 
     private void GetCurse()
@@ -127,5 +135,17 @@ public class CurseAbility : MonoBehaviour
             allConfused.Add(Instantiate(confusedEffect, allEnemies.transform.GetChild(i).transform));
             allConfused[i].transform.position = new Vector3(allEnemies.transform.GetChild(i).transform.position.x, allEnemies.transform.GetChild(i).transform.position.y + 2, allEnemies.transform.GetChild(i).transform.position.z);
         }
+    }
+
+    private void RainEvent()
+    {
+        isRaining = true;
+        ColorRainWeather.onColorRaining -= RainEvent;
+    }
+
+    private void StopRainEvent()
+    {
+        isRaining = false;
+        ColorRainWeather.onColorRaining += RainEvent;
     }
 }

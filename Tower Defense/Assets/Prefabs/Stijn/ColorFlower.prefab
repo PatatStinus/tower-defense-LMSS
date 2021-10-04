@@ -9623,7 +9623,6 @@ GameObject:
   - component: {fileID: 7661102628957975587}
   - component: {fileID: 8549663734194911706}
   - component: {fileID: 3612780837273729507}
-  - component: {fileID: 1995404497543293545}
   m_Layer: 14
   m_Name: ColorFlower
   m_TagString: Untagged
@@ -14421,18 +14420,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1995404497543293545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7851914566763539133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661bc5afc6b1eea48bb0fe54a46e0a52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackFlower: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
-  colorFlower: {fileID: 7851914566763539133}
-  raining: 0

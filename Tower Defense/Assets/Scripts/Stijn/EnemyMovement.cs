@@ -12,6 +12,7 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public bool usingAbility = false;
     [HideInInspector] public bool isZapped = false;
     [HideInInspector] public bool doubledHealth;
+    [HideInInspector] public bool reachedEnd = false;
     [HideInInspector] public float divideSpeed = 1;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
@@ -42,6 +43,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2) //Enemy Reached End in bounds
         {
+            reachedEnd = true;
             ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
             gameObject.layer = 0;
         }

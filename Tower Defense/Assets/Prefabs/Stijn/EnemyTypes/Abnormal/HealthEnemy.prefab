@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6465030660508670067}
   - component: {fileID: 1043703562846801756}
   - component: {fileID: 7149787542613749939}
+  - component: {fileID: 2409453198423219747}
   m_Layer: 14
   m_Name: HealthEnemy
   m_TagString: Untagged
@@ -151,6 +152,7 @@ MonoBehaviour:
   usingAbility: 0
   isZapped: 0
   doubledHealth: 0
+  reachedEnd: 0
   divideSpeed: 1
   pathIndex: 0
   i_waypoitIndex: 0
@@ -184,6 +186,20 @@ MonoBehaviour:
   radius: 3
   regen: 10
   isRaining: 0
+--- !u!114 &2409453198423219747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613517771040092285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 661bc5afc6b1eea48bb0fe54a46e0a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blackFlower: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
+  colorFlower: {fileID: 7851914566763539133, guid: 7c794de2152e8454f9729203d977e601, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0

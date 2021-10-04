@@ -183,6 +183,7 @@ MonoBehaviour:
   abnormals:
   - {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
   - {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+  - {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
   confusedEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
