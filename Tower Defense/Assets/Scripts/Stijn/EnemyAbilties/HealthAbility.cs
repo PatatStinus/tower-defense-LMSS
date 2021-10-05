@@ -6,12 +6,8 @@ public class HealthAbility : MonoBehaviour
 {
     [SerializeField] private float radius;
     [SerializeField] private float regen;
+    [HideInInspector] public bool isRaining = false;
     private Collider[] collisionsInRange;
-
-    private void Start()
-    {
-        GetComponent<EnemyHealth>().hp -= 20;
-    }
 
     private void Update()
     {
@@ -19,19 +15,12 @@ public class HealthAbility : MonoBehaviour
         foreach (var obj in collisionsInRange)
         {
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
-            if (enemy != null)
+            if (enemy != null && Vector3.Distance(enemy.transform.position, transform.position) != 0)
             {
-                enemy.hp += regen * Time.deltaTime;
+                enemy.hp = isRaining ? enemy.hp -= regen * Time.deltaTime : enemy.hp += regen * Time.deltaTime;
                 if (enemy.hp >= enemy.startHealth)
                     enemy.hp = enemy.startHealth;
-                Debug.Log(enemy.hp);
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, radius);
     }
 }

@@ -10,7 +10,6 @@ public class RainbowRainSpell : MonoBehaviour
     [SerializeField] private int cost = 100;
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private ParticleSystem rainbowRain;
-    private GameObject rainbowParticle;
     private Collider[] collisionsInSpell;
     private List<GameObject> enemies = new List<GameObject>();
     private Vector3 spellPos;
@@ -23,10 +22,9 @@ public class RainbowRainSpell : MonoBehaviour
         spellActive = true;
         RainbowRaining();
         orgTime = durationSpell;
-        rainbowParticle = Instantiate(rainbowRain.gameObject);
+        GameObject rainbowParticle = Instantiate(rainbowRain.gameObject);
         rainbowParticle.transform.position = new Vector3(spellPos.x, rainbowParticle.transform.position.y, spellPos.z);
         rainbowParticle.GetComponent<ParticleSystem>().Play();
-        rainbowParticle.GetComponent<RandomRainColor>().startRaining = true;
         ManaManager.LoseMana(cost);
     }
 
@@ -49,7 +47,6 @@ public class RainbowRainSpell : MonoBehaviour
         }
         else
         {
-            rainbowParticle.GetComponent<RandomRainColor>().startRaining = false;
             spellActive = false;
             durationSpell = orgTime;
             Destroy(this.gameObject);

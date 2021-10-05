@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2039292133652175213}
   - component: {fileID: 2039292133652175210}
   m_Layer: 14
-  m_Name: Level3Enemy
+  m_Name: CurseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d3ee93aec13d9a47aba0e356d82229b, type: 2}
+  - {fileID: 2100000, guid: 86fcd65c4f40d924f870e99ca3ea6708, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,8 +95,9 @@ GameObject:
   - component: {fileID: 357928578655898507}
   - component: {fileID: 6465030660508670067}
   - component: {fileID: 1043703562846801756}
+  - component: {fileID: 7348191390074597681}
   m_Layer: 14
-  m_Name: Level3Enemy
+  m_Name: CurseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_Speed: 3
+  f_Speed: 1.5
   f_RotateSpeed: 5
   i_ManaWhenKilled: 30
   isConfused: 0
@@ -164,9 +165,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 200
-  hp: 200
+  startHealth: 50
+  hp: 25
   lerpTime: 2
+--- !u!114 &7348191390074597681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613517771040092285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504c098dbaf0f904c86895a9de1d6fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abnormals:
+  - {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
+  - {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+  - {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
+  confusedEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +246,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10bb2bf195a66114f81ce40773cb3d24, type: 2}
+  - {fileID: 2100000, guid: 2d3ee93aec13d9a47aba0e356d82229b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

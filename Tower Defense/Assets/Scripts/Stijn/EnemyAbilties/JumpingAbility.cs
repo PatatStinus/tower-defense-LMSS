@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class JumpingAbility : MonoBehaviour
 {
-    [HideInInspector] public bool ability = true;
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
@@ -27,12 +26,12 @@ public class JumpingAbility : MonoBehaviour
 
     private void Update()
     {
-        if(!isJumping && ability)
+        if(!isJumping)
         {
             Invoke("Jump", Random.Range(2f, 4f));
             isJumping = true;
         }
-        if (isJumping && ability && jumpAnim)
+        if (isJumping && jumpAnim)
             LerpToPos();
 
         if (windingUp)
@@ -43,7 +42,7 @@ public class JumpingAbility : MonoBehaviour
 
     private void Jump()
     {
-        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 2)
+        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 3)
         {
             float xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.x);
             float zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.z);
@@ -60,6 +59,7 @@ public class JumpingAbility : MonoBehaviour
 
     private void LerpToPos()
     {
+        gameObject.layer = 0;
         time += Time.deltaTime / (jumpWidth * yPos * 0.1f);
 
         transform.GetChild(0).transform.localPosition = Vector3.Lerp(orgPos, new Vector3(orgPos.x, orgPos.y + yPos * jumpHeight, orgPos.z), curve.Evaluate(time));
@@ -93,6 +93,7 @@ public class JumpingAbility : MonoBehaviour
     {
         time += Time.deltaTime;
         transform.position = orgFreeze;
+        gameObject.layer = 14;
 
         if (time >= 1)
         {
