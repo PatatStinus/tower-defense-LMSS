@@ -10,7 +10,7 @@ public class SpeedGame : MonoBehaviour
     {
         if(!spedUp)
         {
-            Time.timeScale = 2;
+            Time.timeScale = 3;
             spedUp = true;
         }
         else

@@ -4,41 +4,28 @@ using UnityEngine;
 
 public class BlackRainWeather : MonoBehaviour
 {
-    public delegate void ColorRain();
-    public static event ColorRain onBlackRaining;
+    public delegate void BlackRain();
+    public static event BlackRain onBlackRaining;
 
-    public delegate void StopColorRain();
-    public static event StopColorRain onStopBlackRaining;
+    public delegate void StopBlackRain();
+    public static event StopBlackRain onStopBlackRaining;
 
     [SerializeField] private float rainTime;
-    [SerializeField] private Transform allEnemies;
     [SerializeField] private GameObject blackRain;
-    [SerializeField] private float mxTime;
-    [SerializeField] private float mnTime;
+    private Transform allEnemies;
     private GameObject blackRainEffect;
     private bool eventGoing;
     private float time;
-    private float maxTime;
 
     private void Start()
     {
-        GetNewTime();
         onStopBlackRaining += DestroyObjects;
     }
 
     private void Update()
     {
-        if (!WaveSystem.finishedWave)
+        if (!WaveSystem.finishedWave && eventGoing)
             time += Time.deltaTime;
-
-        if (time >= maxTime)
-        {
-            time = 0;
-            eventGoing = true;
-            SpawnBlackRain();
-            onBlackRaining();
-            GetNewTime();
-        }
 
         if (time >= rainTime - 2f && blackRainEffect != null)
             blackRainEffect.GetComponent<ParticleSystem>().Stop();
@@ -57,9 +44,13 @@ public class BlackRainWeather : MonoBehaviour
         }
     }
 
-    private void GetNewTime()
+    public void StartWeather(Transform enemies)
     {
-        maxTime = Random.Range(mnTime, mxTime);
+        allEnemies = enemies;
+        time = 0;
+        eventGoing = true;
+        SpawnBlackRain();
+        onBlackRaining?.Invoke();
     }
 
     private void SpawnBlackRain()

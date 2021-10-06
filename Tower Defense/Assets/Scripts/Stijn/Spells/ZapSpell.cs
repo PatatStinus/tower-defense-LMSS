@@ -140,6 +140,18 @@ public class ZapSpell : MonoBehaviour
         orgTime = durationSpell;
     }
 
+    private void Thunder()
+    {
+        durationSpell = 2f;
+        damage = 50;
+    }
+
+    private void StopThunder()
+    {
+        durationSpell = 0.5f;
+        damage = 20;
+    }
+
     private void Update()
     {
         if (orgTime > 0 && enemy != null)
@@ -151,5 +163,17 @@ public class ZapSpell : MonoBehaviour
             NewZap();
         else if (enemy == null && isZapping)
             EnemyKilled();
+    }
+
+    private void Start()
+    {
+        ThunderWeather.onThunder += Thunder;
+        ThunderWeather.onStopThunder += StopThunder;
+    }
+
+    private void OnDisable()
+    {
+        ThunderWeather.onThunder -= Thunder;
+        ThunderWeather.onStopThunder -= StopThunder;
     }
 }

@@ -1277,6 +1277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 503190405}
   - component: {fileID: 503190404}
+  - component: {fileID: 503190406}
+  - component: {fileID: 503190407}
   m_Layer: 0
   m_Name: WeatherManager
   m_TagString: Untagged
@@ -1297,10 +1299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rainTime: 30
-  allEnemies: {fileID: 954197137}
   colorRain: {fileID: 4810753509165399767, guid: db5f1e9c2920605408936a13e5afe35a, type: 3}
-  mxTime: 100
-  mnTime: 500
 --- !u!4 &503190405
 Transform:
   m_ObjectHideFlags: 0
@@ -1315,6 +1314,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &503190406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503190403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b812ee30e925837419b5b7f3e01f9d19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainTime: 30
+  blackRain: {fileID: 7679590074040201522, guid: e89dffac50027a54ea6f710e3418283f, type: 3}
+--- !u!114 &503190407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 503190403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2b44aba1050a0478de5195ff6da685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thunderHeight: 0
+  weatherTime: 0
+  thunder: {fileID: 0}
 --- !u!1 &578762733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SPEED
+  m_Text: '>>'
 --- !u!222 &578762736
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3101,6 +3129,7 @@ GameObject:
   - component: {fileID: 1238165556}
   - component: {fileID: 1238165558}
   - component: {fileID: 1238165559}
+  - component: {fileID: 1238165561}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -3725,6 +3754,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5b978b2050ce34daa74526a99066e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1238165561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238165553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f6aa4610ffd7d45b422345d1389125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allEnemies: {fileID: 954197137}
+  allWeathers: {fileID: 503190403}
+  mxTime: 100
+  mnTime: 500
 --- !u!1 &1248036606
 GameObject:
   m_ObjectHideFlags: 0
@@ -4405,7 +4450,7 @@ GameObject:
   - component: {fileID: 1517807639}
   - component: {fileID: 1517807638}
   m_Layer: 5
-  m_Name: SpeedGame
+  m_Name: Speed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

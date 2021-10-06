@@ -11,34 +11,21 @@ public class ColorRainWeather : MonoBehaviour
     public static event StopColorRain onStopColorRaining;
 
     [SerializeField] private float rainTime;
-    [SerializeField] private Transform allEnemies;
     [SerializeField] private GameObject colorRain;
-    [SerializeField] private float mxTime;
-    [SerializeField] private float mnTime;
+    private Transform allEnemies;
     private GameObject colorRainEffect;
     private bool eventGoing;
     private float time;
-    private float maxTime;
 
     private void Start()
     {
-        GetNewTime();
         onStopColorRaining += DestroyObjects;
     }
 
     private void Update()
     {
-        if(!WaveSystem.finishedWave)
+        if(!WaveSystem.finishedWave && eventGoing)
             time += Time.deltaTime;
-
-        if(time >= maxTime)
-        {
-            time = 0;
-            eventGoing = true;
-            SpawnColorRain();
-            onColorRaining();
-            GetNewTime();
-        }
 
         if(time >= rainTime - 2f && colorRainEffect != null)
             colorRainEffect.GetComponent<ParticleSystem>().Stop();
@@ -57,9 +44,13 @@ public class ColorRainWeather : MonoBehaviour
         }
     }
 
-    private void GetNewTime()
+    public void StartWeather(Transform enemies)
     {
-        maxTime = Random.Range(mnTime, mxTime);
+        allEnemies = enemies;
+        time = 0;
+        eventGoing = true;
+        SpawnColorRain();
+        onColorRaining?.Invoke();
     }
 
     private void SpawnColorRain()
