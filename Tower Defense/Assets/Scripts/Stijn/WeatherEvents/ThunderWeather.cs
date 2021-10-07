@@ -13,16 +13,13 @@ public class ThunderWeather : MonoBehaviour
     [SerializeField] private float thunderHeight;
     [SerializeField] private float weatherTime;
     [SerializeField] private GameObject thunder;
+    private Vector3 orgPos;
     private List<GameObject> allObjects = new List<GameObject>();
     private GameObject target;
     private GameObject thunderEffect;
     private bool eventGoing;
+    private bool stunned;
     private float time;
-
-    private void Start()
-    {
-        onStopThunder += DestroyObjects;
-    }
 
     private void Update()
     {
@@ -31,8 +28,20 @@ public class ThunderWeather : MonoBehaviour
 
         if (eventGoing && time >= weatherTime)
         {
-            onStopThunder();
+            onStopThunder?.Invoke();
             eventGoing = false;
+        }
+
+        if(stunned)
+        {
+            target.transform.position = orgPos;
+            //Stun tower shooting
+        }
+
+        for (int i = 0; i < allObjects.Count; i++)
+        {
+            if (allObjects[i].layer == 0)
+                allObjects.RemoveAt(i);
         }
     }
 
@@ -47,15 +56,34 @@ public class ThunderWeather : MonoBehaviour
             allObjects.Add(enemies.GetChild(i).gameObject);
         time = 0;
         eventGoing = true;
-        ChooseTarget();
         SpawnThunder();
         onThunder?.Invoke();
     }
 
     private void SpawnThunder()
     {
-        thunderEffect = Instantiate(thunder);
-        thunderEffect.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + thunderHeight, target.transform.position.z);
+        if(eventGoing)
+        {
+            Debug.Log("Thunder");
+            ChooseTarget();
+            thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
+            thunderEffect = Instantiate(thunder);
+            Invoke("Stun", 1f);
+            Invoke("DestroyObjects", 1.6f);
+            Invoke("StopStun", 3f);
+            Invoke("SpawnThunder", Random.Range(4f, 6f));
+        }
+    }
+
+    private void StopStun()
+    {
+        stunned = false;
+    }
+    
+    private void Stun()
+    {
+        orgPos = target.transform.position;
+        stunned = true;
     }
 
     private void DestroyObjects()

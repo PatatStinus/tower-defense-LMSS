@@ -37,11 +37,7 @@ public class BlackRainWeather : MonoBehaviour
         }
 
         if (eventGoing)
-        {
             onBlackRaining?.Invoke();
-            for (int i = 0; i < allEnemies.childCount; i++)
-                allEnemies.GetChild(i).gameObject.GetComponent<EnemyHealth>().hp += Time.deltaTime;
-        }
     }
 
     public void StartWeather(Transform enemies)

@@ -26,6 +26,14 @@ public class EnemyHealth : MonoBehaviour
         enemyMaterial = transform.GetChild(0).GetComponent<MeshRenderer>().material;
         enemyColour = transform.GetChild(0).GetComponent<MeshRenderer>().material.color;
         hp = startHealth;
+        BlackRainWeather.onBlackRaining += RainRegen;
+        ColorRainWeather.onColorRaining += RainDamage;
+    }
+
+    private void OnDisable()
+    {
+        BlackRainWeather.onBlackRaining -= RainRegen;
+        ColorRainWeather.onColorRaining -= RainDamage;
     }
 
     private void Update()
@@ -69,5 +77,15 @@ public class EnemyHealth : MonoBehaviour
     public void TakeDamage(int dam)
     {
         hp -= dam;
+    }
+
+    private void RainDamage()
+    {
+        hp--;
+    }
+
+    private void RainRegen()
+    {
+        hp++;
     }
 }

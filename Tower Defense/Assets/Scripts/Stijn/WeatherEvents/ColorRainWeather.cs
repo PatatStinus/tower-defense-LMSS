@@ -37,11 +37,7 @@ public class ColorRainWeather : MonoBehaviour
         }
 
         if(eventGoing)
-        {
             onColorRaining?.Invoke();
-            for (int i = 0; i < allEnemies.childCount; i++)
-                allEnemies.GetChild(i).gameObject.GetComponent<EnemyHealth>().hp -= Time.deltaTime;
-        }
     }
 
     public void StartWeather(Transform enemies)
