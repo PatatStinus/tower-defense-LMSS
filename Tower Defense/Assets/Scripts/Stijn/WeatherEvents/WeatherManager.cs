@@ -42,10 +42,10 @@ public class WeatherManager : MonoBehaviour
             switch (Random.Range(0, totalWeathers))
             {
                 case 0:
-                    thunder.StartWeather(allEnemies);
+                    colorRain.StartWeather(allEnemies);
                     break;
                 case 1:
-                    thunder.StartWeather(allEnemies);
+                    blackRain.StartWeather(allEnemies);
                     break;
                 case 2:
                     thunder.StartWeather(allEnemies);

@@ -10,10 +10,12 @@ public class ZapSpell : MonoBehaviour
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float distanceFromEnemy = 5;
     [SerializeField] private GameObject allEnemies;
+    [SerializeField] private GameObject zapEffectStart;
     private List<GameObject> enemies = new List<GameObject>();
     private GameObject closestEnemy;
-    private Collider[] collisionsInSpell;
     private GameObject enemy;
+    private GameObject zapEffectLong;
+    private Collider[] collisionsInSpell;
     private Vector3 spellPos;
     private float orgTime = -1;
     private Vector3 orgPosEnemy;
@@ -42,6 +44,8 @@ public class ZapSpell : MonoBehaviour
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            zapEffectLong = Instantiate(zapEffectStart);
+            zapEffectLong.transform.position = new Vector3(enemy.transform.position.x, zapEffectLong.transform.position.y, enemy.transform.position.z);
         }
         else
             Destroy(this.gameObject);

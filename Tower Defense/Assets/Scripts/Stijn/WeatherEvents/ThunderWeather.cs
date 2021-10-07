@@ -13,10 +13,12 @@ public class ThunderWeather : MonoBehaviour
     [SerializeField] private float thunderHeight;
     [SerializeField] private float weatherTime;
     [SerializeField] private GameObject thunder;
+    [SerializeField] private GameObject longThunder;
     private Vector3 orgPos;
     private List<GameObject> allObjects = new List<GameObject>();
     private GameObject target;
     private GameObject thunderEffect;
+    private GameObject longThunderEffect;
     private bool eventGoing;
     private bool stunned;
     private float time;
@@ -28,8 +30,9 @@ public class ThunderWeather : MonoBehaviour
 
         if (eventGoing && time >= weatherTime)
         {
-            onStopThunder?.Invoke();
+            Destroy(longThunderEffect);
             eventGoing = false;
+            onStopThunder?.Invoke();
         }
 
         if(stunned)
@@ -56,6 +59,7 @@ public class ThunderWeather : MonoBehaviour
             allObjects.Add(enemies.GetChild(i).gameObject);
         time = 0;
         eventGoing = true;
+        longThunderEffect = Instantiate(longThunder);
         SpawnThunder();
         onThunder?.Invoke();
     }
