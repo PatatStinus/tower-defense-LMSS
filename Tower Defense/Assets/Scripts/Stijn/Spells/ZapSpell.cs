@@ -27,6 +27,8 @@ public class ZapSpell : MonoBehaviour
         Zapped();
         ManaManager.LoseMana(cost);
         isZapping = true;
+        zapEffectLong = Instantiate(zapEffectStart);
+        zapEffectLong.transform.position = new Vector3(spellPos.x, zapEffectLong.transform.position.y, spellPos.z);
     }
 
     private void Zapped()
@@ -44,8 +46,8 @@ public class ZapSpell : MonoBehaviour
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
-            zapEffectLong = Instantiate(zapEffectStart);
-            zapEffectLong.transform.position = new Vector3(enemy.transform.position.x, zapEffectLong.transform.position.y, enemy.transform.position.z);
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
             Destroy(this.gameObject);
@@ -87,11 +89,17 @@ public class ZapSpell : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
+            {
                 enemies[i].GetComponent<EnemyMovement>().isZapped = false;
+                if (enemies[i].GetComponent<JumpingAbility>() != null)
+                    enemies[i].GetComponent<JumpingAbility>().canAbility = true;
+            }
 
             Destroy(this.gameObject);
         }
@@ -132,11 +140,17 @@ public class ZapSpell : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
+            {
                 enemies[i].GetComponent<EnemyMovement>().isZapped = false;
+                if (enemies[i].GetComponent<JumpingAbility>() != null)
+                    enemies[i].GetComponent<JumpingAbility>().canAbility = true;
+            }
 
             Destroy(this.gameObject);
         }

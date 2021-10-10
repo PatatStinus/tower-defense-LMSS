@@ -68,7 +68,6 @@ public class ThunderWeather : MonoBehaviour
     {
         if(eventGoing)
         {
-            Debug.Log("Thunder");
             ChooseTarget();
             thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
             thunderEffect = Instantiate(thunder);
