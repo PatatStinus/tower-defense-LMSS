@@ -10,6 +10,7 @@ public class PoisonLakeSpell : MonoBehaviour
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float slowness = 2;
     [SerializeField] private GameObject allEnemies;
+    [SerializeField] private GameObject posionLakeEffect;
     private Collider[] collisionsInSpell;
     private List<GameObject> enemies = new List<GameObject>();
     private Vector3 spellPos;
@@ -23,6 +24,8 @@ public class PoisonLakeSpell : MonoBehaviour
         PoisonLakeActive();
         orgTime = durationSpell;
         ManaManager.LoseMana(cost);
+        posionLakeEffect.transform.position = new Vector3(spellPos.x, 0, spellPos.z);
+        Instantiate(posionLakeEffect);
     }
 
     private void PoisonLakeActive()
