@@ -8,7 +8,8 @@ public class TowerShooting : MonoBehaviour
 
     [SerializeField] float fireRate = 2f;
 
-    GameObject[] GO_enemies;
+    private List<Transform> GO_enemies = new List<Transform>();
+    GameObject allEnemies;
     [SerializeField] Transform[] enemies;
 
     [SerializeField] Transform closestEnemy;
@@ -28,11 +29,15 @@ public class TowerShooting : MonoBehaviour
     private void Start()
     {
         timer = 0;
+        allEnemies = GameObject.FindGameObjectWithTag("Enemy");
     }
 
     void Update()
     {
-        GO_enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GO_enemies.Clear();
+
+        for (int i = 0; i < allEnemies.transform.childCount; i++)
+            GO_enemies.Add(allEnemies.transform.GetChild(i));
 
         //Making sure tower is placed before being able to shoot
         if (tower.tag == "Placed")
@@ -44,12 +49,12 @@ public class TowerShooting : MonoBehaviour
     private void AssignTarget()
     {
         timer -= Time.deltaTime;
-        enemies = new Transform[GO_enemies.Length];
+        enemies = new Transform[GO_enemies.Count];
 
         if (enemies.Length == 0)
             return;
 
-        for (int i = 0; i < GO_enemies.Length; i++)
+        for (int i = 0; i < GO_enemies.Count; i++)
         {
             enemies[i] = GO_enemies[i].transform;
         }

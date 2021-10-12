@@ -152,6 +152,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32768
+  damage: 0
 --- !u!54 &2369861875625519227
 Rigidbody:
   m_ObjectHideFlags: 0

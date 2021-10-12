@@ -7,7 +7,7 @@ public class JumpingAbility : MonoBehaviour
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
-    [HideInInspector] public bool canAbility = true;
+    [SerializeField] public bool canAbility = true;
     
     private Vector3 jumpTarget;
     private Vector3 orgPos;
@@ -23,6 +23,7 @@ public class JumpingAbility : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<EnemyMovement>();
+        canAbility = true;
         //To Do: If Frozen/Zapped don't jump
     }
 
