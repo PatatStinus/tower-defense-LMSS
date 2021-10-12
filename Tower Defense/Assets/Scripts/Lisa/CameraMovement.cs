@@ -13,9 +13,9 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private float scrollSpeedMultiplier = 2f;
     [SerializeField] private float minZoomHeightY = 4f; //this value is currently just for testing, will set them as constants once we have a map
     [SerializeField] private float maxZoomHeightY = 54f; //this value is currently just for testing, will set them as constants once we have a map
-    [SerializeField] private float scroll;
     [SerializeField] private bool canScroll;
 
+    private float scroll;
     private float scrollClampMin = -0.2f;
     private float scrollClampMax = 0.2f;
 
@@ -29,8 +29,16 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(2))
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+
             cameraPosition.x -= Input.GetAxis("Mouse X") * cameraPanSpeed * Time.deltaTime;
             cameraPosition.z -= Input.GetAxis("Mouse Y") * cameraPanSpeed * Time.deltaTime;
+        }
+        if (Input.GetMouseButtonUp(2))
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         cameraPosition.x = Mathf.Clamp(
