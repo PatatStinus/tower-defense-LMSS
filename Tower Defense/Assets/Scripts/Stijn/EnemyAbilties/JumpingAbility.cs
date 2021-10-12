@@ -7,8 +7,8 @@ public class JumpingAbility : MonoBehaviour
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
-    [SerializeField] public bool canAbility = true;
     
+    [HideInInspector] public bool canAbility = true;
     private Vector3 jumpTarget;
     private Vector3 orgPos;
     private Vector3 orgFreeze;

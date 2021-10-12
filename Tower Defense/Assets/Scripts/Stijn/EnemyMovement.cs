@@ -8,6 +8,7 @@ public class EnemyMovement : MonoBehaviour
     [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
+    [HideInInspector] public double percentAllPaths;
     [HideInInspector] public bool isConfused = false;
     [HideInInspector] public bool usingAbility = false;
     [HideInInspector] public bool isZapped = false;
@@ -18,6 +19,8 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public int i_waypoitIndex = 0;
     private Vector3 t_Target;
     private Quaternion q_LookAngle;
+    private float percentToPoint;
+    private float progressPath;
 
     private void Start()
     {
@@ -31,6 +34,9 @@ public class EnemyMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, t_Target) <= .5f && !usingAbility) //If enemy reached target
             GetNewTarget();
+
+        if (i_waypoitIndex > 0)
+            GetPercentWaypoint();
     }
 
     private void GetNewTarget()
@@ -78,6 +84,13 @@ public class EnemyMovement : MonoBehaviour
 
         q_LookAngle = Quaternion.LookRotation(dir, transform.up); //Get enemy to target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_RotateSpeed * Time.deltaTime); //Rotate enemy to target
+    }
+
+    private void GetPercentWaypoint()
+    {
+        percentToPoint = Vector3.Distance(transform.position, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].position) / EnemyPathMaking.distancePoints[pathIndex][i_waypoitIndex - 1];
+        progressPath = i_waypoitIndex + percentToPoint;
+        percentAllPaths = progressPath / EnemyPathMaking.t_Points[pathIndex].Length * 100;
     }
 
     public void GetNewWayPoint()
