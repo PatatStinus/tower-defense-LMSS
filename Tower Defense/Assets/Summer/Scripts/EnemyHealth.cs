@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     //Basic version for now
 
-    public int startHealth = 4;
+    public float startHealth = 4;
     [HideInInspector] public float hp;
 
     //[SerializeField] Color firstDamageColour;
@@ -74,7 +74,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int dam)
+    public void TakeDamage(float dam)
     {
         hp -= dam;
     }

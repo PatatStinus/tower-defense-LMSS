@@ -39,7 +39,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Galaxy:
-        m_Texture: {fileID: 8900000, guid: 4d7b73d29b4627f4dafd0735f3d1f3dd, type: 3}
+        m_Texture: {fileID: 8900000, guid: 0bedfe3fff4684c43981efff53f6581a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:

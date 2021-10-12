@@ -13,6 +13,8 @@ public class Projectile_Script : MonoBehaviour
 
     private GameObject spawnObject;
 
+    public float damage;
+
     private void Start()
     {
 
@@ -64,6 +66,8 @@ public class Projectile_Script : MonoBehaviour
                     spawnObject.transform.position.y - Random.Range(0f, 0.3f), spawnObject.transform.position.z - Random.Range(0f, 0.2f));
             }
             spawnObject.transform.parent = Target.transform;
+
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
 
             Destroy(gameObject);
         }

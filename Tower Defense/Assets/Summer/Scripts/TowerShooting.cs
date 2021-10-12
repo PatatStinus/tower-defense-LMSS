@@ -23,6 +23,8 @@ public class TowerShooting : MonoBehaviour
 
     float timer;
 
+    public float damage;
+
     private void Start()
     {
         timer = 0;
@@ -110,6 +112,7 @@ public class TowerShooting : MonoBehaviour
     {
         if (timer <= 0)
         {
+            bullet.GetComponent<Projectile_Script>().damage = damage;
             bullet.GetComponent<Projectile_Script>().turret = turret;
             bullet.GetComponent<Projectile_Script>().Target = closestEnemy;
             Instantiate(bullet, turret.position, Quaternion.identity);
