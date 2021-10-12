@@ -10,10 +10,12 @@ public class ZapSpell : MonoBehaviour
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float distanceFromEnemy = 5;
     [SerializeField] private GameObject allEnemies;
+    [SerializeField] private GameObject zapEffectStart;
     private List<GameObject> enemies = new List<GameObject>();
     private GameObject closestEnemy;
-    private Collider[] collisionsInSpell;
     private GameObject enemy;
+    private GameObject zapEffectLong;
+    private Collider[] collisionsInSpell;
     private Vector3 spellPos;
     private float orgTime = -1;
     private Vector3 orgPosEnemy;
@@ -25,6 +27,8 @@ public class ZapSpell : MonoBehaviour
         Zapped();
         ManaManager.LoseMana(cost);
         isZapping = true;
+        zapEffectLong = Instantiate(zapEffectStart);
+        zapEffectLong.transform.position = new Vector3(spellPos.x, zapEffectLong.transform.position.y, spellPos.z);
     }
 
     private void Zapped()
@@ -42,6 +46,8 @@ public class ZapSpell : MonoBehaviour
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
             Destroy(this.gameObject);
@@ -83,11 +89,17 @@ public class ZapSpell : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
+            {
                 enemies[i].GetComponent<EnemyMovement>().isZapped = false;
+                if (enemies[i].GetComponent<JumpingAbility>() != null)
+                    enemies[i].GetComponent<JumpingAbility>().canAbility = true;
+            }
 
             Destroy(this.gameObject);
         }
@@ -128,11 +140,17 @@ public class ZapSpell : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
             enemy.GetComponent<EnemyMovement>().isZapped = true;
+            if (enemy.GetComponent<JumpingAbility>() != null)
+                enemy.GetComponent<JumpingAbility>().canAbility = false;
         }
         else
         {
             for (int i = 0; i < enemies.Count; i++)
+            {
                 enemies[i].GetComponent<EnemyMovement>().isZapped = false;
+                if (enemies[i].GetComponent<JumpingAbility>() != null)
+                    enemies[i].GetComponent<JumpingAbility>().canAbility = true;
+            }
 
             Destroy(this.gameObject);
         }

@@ -7,6 +7,7 @@ public class JumpingAbility : MonoBehaviour
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
+    [HideInInspector] public bool canAbility = true;
     
     private Vector3 jumpTarget;
     private Vector3 orgPos;
@@ -22,6 +23,7 @@ public class JumpingAbility : MonoBehaviour
     private void Start()
     {
         movement = GetComponent<EnemyMovement>();
+        //To Do: If Frozen/Zapped don't jump
     }
 
     private void Update()
@@ -42,7 +44,7 @@ public class JumpingAbility : MonoBehaviour
 
     private void Jump()
     {
-        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 3)
+        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 3 && canAbility)
         {
             float xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.x);
             float zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.z);
@@ -55,6 +57,8 @@ public class JumpingAbility : MonoBehaviour
             windingUp = true;
             orgFreeze = transform.position;
         }
+        else
+            isJumping = false;
     }
 
     private void LerpToPos()

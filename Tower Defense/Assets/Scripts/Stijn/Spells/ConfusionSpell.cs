@@ -9,6 +9,7 @@ public class ConfusionSpell : MonoBehaviour
     [SerializeField] private int cost = 100;
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private GameObject spellEffect;
+    [SerializeField] private GameObject particleEffect;
     private Collider[] collisionsInSpell;
     private List<GameObject> allConfused = new List<GameObject>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -18,6 +19,8 @@ public class ConfusionSpell : MonoBehaviour
     public void SpawnConfuse(Vector3 spellPos)
     {
         this.spellPos = spellPos;
+        particleEffect.transform.position = spellPos;
+        Instantiate(particleEffect);
         Confusing();
         ManaManager.LoseMana(cost);
     }
