@@ -240,7 +240,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7018291250723161084, guid: 6ef1851f228cc1e42909813802cbcc3c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7018291250723161084, guid: 6ef1851f228cc1e42909813802cbcc3c, type: 3}
       propertyPath: m_LocalScale.x
@@ -588,7 +588,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327406775
 GameObject:
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 870518287}
   - component: {fileID: 870518286}
   m_Layer: 0
-  m_Name: Spells
+  m_Name: SpellsManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2114,11 +2114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 2.5
-  damage: 3
+  damage: 5
   cost: 50
   durationSpell: 5
   slowness: 4
-  allEnemies: {fileID: 930069741}
   posionLakeEffect: {fileID: 2315551392063356573, guid: 81aa60a1c08a13549bc0f4a66fab7fa0, type: 3}
 --- !u!114 &870518288
 MonoBehaviour:
@@ -2185,7 +2184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904754738
 GameObject:
@@ -4536,7 +4535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9013024860837219419, guid: 9950206880f8b354096016544e05c647, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9013024860837219419, guid: 9950206880f8b354096016544e05c647, type: 3}
       propertyPath: m_LocalPosition.x

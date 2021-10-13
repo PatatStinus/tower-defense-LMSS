@@ -35,7 +35,7 @@ public class WaveSystem : MonoBehaviour
                 }
             }
         }
-        if(waveDone)
+        if(waveDone || allEnemies.childCount == 0)
             finishedWave = true;
     }
 

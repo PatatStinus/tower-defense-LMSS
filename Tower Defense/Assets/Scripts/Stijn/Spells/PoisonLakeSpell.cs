@@ -9,73 +9,62 @@ public class PoisonLakeSpell : MonoBehaviour
     [SerializeField] private int cost = 100;
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float slowness = 2;
-    [SerializeField] private GameObject allEnemies;
     [SerializeField] private GameObject posionLakeEffect;
-    private Collider[] collisionsInSpell;
-    private List<GameObject> enemies = new List<GameObject>();
-    private Vector3 spellPos;
+    private SphereCollider sc;
     private bool spellActive;
-    private float orgTime;
 
     public void SpawnLake(Vector3 spellPos)
     {
-        this.spellPos = spellPos;
         spellActive = true;
-        PoisonLakeActive();
-        orgTime = durationSpell;
         ManaManager.LoseMana(cost);
         posionLakeEffect.transform.position = new Vector3(spellPos.x, 0, spellPos.z);
         Instantiate(posionLakeEffect);
-    }
-
-    private void PoisonLakeActive()
-    {
-        if (durationSpell > 0)
-        {
-            for (int i = 0; i < enemies.Count; i++)
-                enemies[i].GetComponent<EnemyHealth>().hp -= damage;
-            Invoke("PoisonLakeActive", .5f);
-        }
-        else
-        {
-            spellActive = false;
-            durationSpell = orgTime;
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].GetComponent<EnemyMovement>().divideSpeed = 1;
-            }
-            Destroy(this.gameObject);
-        }
+        sc = gameObject.AddComponent<SphereCollider>();
+        sc.center = spellPos;
+        sc.radius = size;
+        sc.isTrigger = true;
     }
 
     private void Update()
     {
-        if (spellActive) 
+        if(spellActive)
         {
             durationSpell -= Time.deltaTime;
+            if (durationSpell < 0)
+                sc.center = new Vector3(100f, 1000f, 100f);
+            if (durationSpell < -0.3)
+                Destroy(gameObject);
+        }
+    }
 
-            for (int i = 0; i < allEnemies.transform.childCount; i++)
-            {
-                allEnemies.transform.GetChild(i).GetComponent<EnemyMovement>().divideSpeed = 1;
-                if (allEnemies.transform.GetChild(i).GetComponent<JumpingAbility>())
-                    allEnemies.transform.GetChild(i).GetComponent<JumpingAbility>().canAbility = true;
-            }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 14)
+        {
+            if (other.gameObject.GetComponent<EnemyMovement>())
+                other.gameObject.GetComponent<EnemyMovement>().divideSpeed = slowness;
+            if (other.gameObject.GetComponent<JumpingAbility>())
+                other.gameObject.GetComponent<JumpingAbility>().canAbility = false;
+        }
+    }
 
-            enemies.Clear();
-            collisionsInSpell = Physics.OverlapSphere(spellPos, size);
-            foreach (var obj in collisionsInSpell)
-            {
-                EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
-                if (enemy != null)
-                    enemies.Add(obj.gameObject);
-            }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 14)
+        {
+            if(other.gameObject.GetComponent<EnemyMovement>())
+                other.gameObject.GetComponent<EnemyMovement>().divideSpeed = 1;
+            if (other.gameObject.GetComponent<JumpingAbility>())
+                other.gameObject.GetComponent<JumpingAbility>().canAbility = true;
+        }
+    }
 
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                enemies[i].GetComponent<EnemyMovement>().divideSpeed = slowness;
-                if (enemies[i].GetComponent<JumpingAbility>())
-                    enemies[i].GetComponent<JumpingAbility>().canAbility = false;
-            }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == 14)
+        {
+            if (other.gameObject.GetComponent<EnemyHealth>())
+                other.gameObject.GetComponent<EnemyHealth>().hp -= damage * Time.fixedDeltaTime;
         }
     }
 }
