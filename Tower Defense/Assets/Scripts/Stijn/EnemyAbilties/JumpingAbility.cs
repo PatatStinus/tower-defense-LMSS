@@ -54,7 +54,7 @@ public class JumpingAbility : MonoBehaviour
             yPos = Vector3.Distance(transform.position, jumpTarget);
             orgPos = transform.GetChild(0).transform.localPosition;
             movement.usingAbility = true;
-            movement.divideSpeed = 0.5f;
+            movement.f_Speed *= 2f;
             windingUp = true;
             orgFreeze = transform.position;
         }
@@ -76,7 +76,7 @@ public class JumpingAbility : MonoBehaviour
             landed = true;
             movement.GetNewWayPoint();
             time = 0;
-            movement.divideSpeed = 1;
+            movement.f_Speed /= 2f;
             orgFreeze = transform.position;
         }
     }

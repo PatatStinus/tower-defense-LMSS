@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Range(0f, 50f)] [SerializeField] private float f_Speed = 10f;
+    [Range(0f, 50f)] public float f_Speed = 10f;
     [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 

@@ -55,7 +55,11 @@ public class PoisonLakeSpell : MonoBehaviour
             durationSpell -= Time.deltaTime;
 
             for (int i = 0; i < allEnemies.transform.childCount; i++)
+            {
                 allEnemies.transform.GetChild(i).GetComponent<EnemyMovement>().divideSpeed = 1;
+                if (allEnemies.transform.GetChild(i).GetComponent<JumpingAbility>())
+                    allEnemies.transform.GetChild(i).GetComponent<JumpingAbility>().canAbility = true;
+            }
 
             enemies.Clear();
             collisionsInSpell = Physics.OverlapSphere(spellPos, size);
@@ -67,7 +71,11 @@ public class PoisonLakeSpell : MonoBehaviour
             }
 
             for (int i = 0; i < enemies.Count; i++)
+            {
                 enemies[i].GetComponent<EnemyMovement>().divideSpeed = slowness;
+                if (enemies[i].GetComponent<JumpingAbility>())
+                    enemies[i].GetComponent<JumpingAbility>().canAbility = false;
+            }
         }
     }
 }
