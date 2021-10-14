@@ -14,13 +14,13 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public bool isZapped = false;
     [HideInInspector] public bool doubledHealth;
     [HideInInspector] public bool reachedEnd = false;
-    [HideInInspector] public float divideSpeed = 1;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
+    [HideInInspector] public float percentToPoint;
+    [HideInInspector] public float progressPath;
+    [HideInInspector] public float divideSpeed = 1;
     private Vector3 t_Target;
     private Quaternion q_LookAngle;
-    private float percentToPoint;
-    private float progressPath;
 
     private void Start()
     {

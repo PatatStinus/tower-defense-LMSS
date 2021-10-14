@@ -23,6 +23,7 @@ public class PoisonLakeSpell : MonoBehaviour
         sc.center = spellPos;
         sc.radius = size;
         sc.isTrigger = true;
+        gameObject.layer = 3;
     }
 
     private void Update()

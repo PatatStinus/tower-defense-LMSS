@@ -23,4 +23,10 @@ public class HealthAbility : MonoBehaviour
             }
         }
     }
+
+    private void OnDisable()
+    {
+        if (isRaining)
+            ManaManager.GetMana(100);
+    }
 }
