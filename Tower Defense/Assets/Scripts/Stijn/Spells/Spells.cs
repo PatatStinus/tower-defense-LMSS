@@ -20,6 +20,7 @@ public class Spells : MonoBehaviour
 
     [SerializeField] private GameObject allSpells;
     [SerializeField] private DecalProjector rangeProjector;
+    [SerializeField] private LayerMask ignoreSpells;
     private DecalProjector usedProjector;
     private Vector3 lastProjectorPos;
     private bool projecting;
@@ -43,7 +44,7 @@ public class Spells : MonoBehaviour
         if (projecting && Input.GetMouseButtonDown(0)) //Activate spell
             StartSpell();
 
-        if (projecting && Input.GetMouseButtonDown(1)) //Deactive spell
+        if (projecting && Input.GetMouseButtonDown(1)) //De-active spell
             StopSpell();
     }
 
@@ -58,7 +59,7 @@ public class Spells : MonoBehaviour
         radius *= 2;
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if(Physics.Raycast(ray, out hit))
+        if(Physics.Raycast(ray, out hit, 100f, ~ignoreSpells))
         {
             usedProjector.transform.position = new Vector3(hit.point.x, usedProjector.transform.position.y, hit.point.z);
             usedProjector.size = new Vector3(radius, radius, 5);

@@ -7,8 +7,8 @@ public class JumpingAbility : MonoBehaviour
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
-    [SerializeField] public bool canAbility = true;
     
+    [HideInInspector] public bool canAbility = true;
     private Vector3 jumpTarget;
     private Vector3 orgPos;
     private Vector3 orgFreeze;
@@ -54,7 +54,7 @@ public class JumpingAbility : MonoBehaviour
             yPos = Vector3.Distance(transform.position, jumpTarget);
             orgPos = transform.GetChild(0).transform.localPosition;
             movement.usingAbility = true;
-            movement.divideSpeed = 0.5f;
+            movement.f_Speed *= 2f;
             windingUp = true;
             orgFreeze = transform.position;
         }
@@ -64,47 +64,72 @@ public class JumpingAbility : MonoBehaviour
 
     private void LerpToPos()
     {
-        gameObject.layer = 0;
-        time += Time.deltaTime / (jumpWidth * yPos * 0.1f);
-
-        transform.GetChild(0).transform.localPosition = Vector3.Lerp(orgPos, new Vector3(orgPos.x, orgPos.y + yPos * jumpHeight, orgPos.z), curve.Evaluate(time));
-        
-        if(time >= 1)
+        if(canAbility)
         {
-            jumpAnim = false;
-            isJumping = false;
-            landed = true;
-            movement.GetNewWayPoint();
-            time = 0;
-            movement.divideSpeed = 1;
-            orgFreeze = transform.position;
+            gameObject.layer = 0;
+            time += Time.deltaTime / (jumpWidth * yPos * 0.1f);
+
+            transform.GetChild(0).transform.localPosition = Vector3.Lerp(orgPos, new Vector3(orgPos.x, orgPos.y + yPos * jumpHeight, orgPos.z), curve.Evaluate(time));
+        
+            if(time >= 1)
+            {
+                jumpAnim = false;
+                isJumping = false;
+                landed = true;
+                movement.GetNewWayPoint();
+                time = 0;
+                movement.f_Speed /= 2f;
+                orgFreeze = transform.position;
+            }
         }
+        else
+            NewTarget();
     }
 
     private void WindUp()
     {
-        time += Time.deltaTime;
-        transform.position = orgFreeze;
-        
-        if(time >= 1)
+        if (canAbility)
         {
-            time = 0;
-            windingUp = false;
-            jumpAnim = true;
+            time += Time.deltaTime;
+            transform.position = orgFreeze;
+
+            if (time >= 1)
+            {
+                time = 0;
+                windingUp = false;
+                jumpAnim = true;
+            }
         }
+        else
+            NewTarget();
     }
 
     private void Landed()
     {
-        time += Time.deltaTime;
-        transform.position = orgFreeze;
-        gameObject.layer = 14;
-
-        if (time >= 1)
+        if (canAbility)
         {
-            time = 0;
-            landed = false;
-            movement.usingAbility = false;
+            time += Time.deltaTime;
+            transform.position = orgFreeze;
+            gameObject.layer = 14;
+
+            if (time >= 1)
+            {
+                time = 0;
+                landed = false;
+                movement.usingAbility = false;
+            }
         }
+        else
+            NewTarget();
+    }
+
+    private void NewTarget()
+    {
+        movement.NewTarget(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].position);
+        isJumping = false;
+        windingUp = false;
+        landed = false;
+        movement.f_Speed /= 2f;
+        movement.usingAbility = false;
     }
 }

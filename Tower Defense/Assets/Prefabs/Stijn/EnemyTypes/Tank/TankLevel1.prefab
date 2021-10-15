@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2039292133652175213}
   - component: {fileID: 2039292133652175210}
   m_Layer: 14
-  m_Name: CurseEnemy
+  m_Name: Level3Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 86fcd65c4f40d924f870e99ca3ea6708, type: 2}
+  - {fileID: 2100000, guid: 34a88b9aab3dc9444abd2090edae2e09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,13 +92,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4648954637975433287}
-  - component: {fileID: -7367081348625865167}
+  - component: {fileID: -7076078924776282171}
   - component: {fileID: 357928578655898507}
   - component: {fileID: 6465030660508670067}
   - component: {fileID: 1043703562846801756}
-  - component: {fileID: 7348191390074597681}
+  - component: {fileID: 8814726097530916394}
   m_Layer: 14
-  m_Name: CurseEnemy
+  m_Name: TankLevel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,7 +119,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &-7367081348625865167
+--- !u!54 &-7076078924776282171
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_Speed: 1.5
+  f_Speed: 2
   f_RotateSpeed: 5
   i_ManaWhenKilled: 30
   percentAllPaths: 0
@@ -186,10 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 50
-  hp: 25
+  startHealth: 100
+  hp: 200
   lerpTime: 2
---- !u!114 &7348191390074597681
+--- !u!114 &8814726097530916394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,10 +198,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5613517771040092285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504c098dbaf0f904c86895a9de1d6fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: 916cc297bbd125849994c00563bf299f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursedObject: {fileID: 797379628639620160, guid: 2f6bd3381da4c104f9ed3e7c280f78b3, type: 3}
+  childSpawns: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
+  totalSpawns: 2
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d3ee93aec13d9a47aba0e356d82229b, type: 2}
+  - {fileID: 2100000, guid: 58510d3edf24a7d4ea7d5c5076a62b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

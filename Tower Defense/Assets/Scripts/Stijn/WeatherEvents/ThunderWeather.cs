@@ -50,7 +50,10 @@ public class ThunderWeather : MonoBehaviour
 
     private void ChooseTarget()
     {
-        target = allObjects[Random.Range(0, allObjects.Count)];
+        if (allObjects.Count != 0)
+            target = allObjects[Random.Range(0, allObjects.Count)];
+        else
+            eventGoing = true;
     }
 
     public void StartWeather(Transform enemies)
