@@ -13,12 +13,9 @@ public class Projectile_Script : MonoBehaviour
 
     private GameObject spawnObject;
 
+    public float bulletSpeed;
+
     public float damage;
-
-    private void Start()
-    {
-
-    }
 
     private void Update()
     {
@@ -28,12 +25,12 @@ public class Projectile_Script : MonoBehaviour
             Destroy(gameObject);
         }
         Vector3 direction = Target.position - transform.position;
-        transform.Translate(direction.normalized * 0.02f, Space.World);
+        transform.Translate(direction.normalized * (Time.deltaTime * bulletSpeed), Space.World);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.layer == 14)
         {
             switch (Random.Range(1, 5))
             {
@@ -68,6 +65,12 @@ public class Projectile_Script : MonoBehaviour
             spawnObject.transform.parent = Target.transform;
 
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
+
+            if (other.gameObject.layer == 14 && gameObject.tag == "Gum")
+            {
+                other.gameObject.tag = "Sticky";
+            }
+
 
             Destroy(gameObject);
         }
