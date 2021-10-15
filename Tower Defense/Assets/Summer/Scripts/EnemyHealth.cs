@@ -68,10 +68,10 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.gameObject.tag == "Projectile")
-        //{
-        //    TakeDamage(1);
-        //}
+        if (other.gameObject.tag == "Projectile")
+        {
+            TakeDamage(1);
+        }
     }
 
     public void TakeDamage(float dam)
@@ -81,11 +81,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void RainDamage()
     {
-        hp += Time.deltaTime;
+        hp--;
     }
 
     private void RainRegen()
     {
-        hp -= Time.deltaTime;
+        hp++;
     }
 }

@@ -10,6 +10,7 @@ public class Balloon_Tower : MonoBehaviour
     public float fireRate;
     private void Start()
     {
+        fireRate = 2.5f;
         timer = 0;
     }
 

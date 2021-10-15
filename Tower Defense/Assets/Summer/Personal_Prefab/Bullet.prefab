@@ -117,5 +117,3 @@ MonoBehaviour:
   - {fileID: 7931823912171759133, guid: 08b80e5183ad39c46b87e9df9ca2dd8b, type: 3}
   - {fileID: 3842602849602586623, guid: 31ddb8e70e23c3f4ca521508ae5dba04, type: 3}
   - {fileID: 11465569265245799, guid: 463a33b71ddcd994d900efdb581f1723, type: 3}
-  bulletSpeed: 3
-  damage: 0

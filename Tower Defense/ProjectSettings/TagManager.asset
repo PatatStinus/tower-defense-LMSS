@@ -9,8 +9,6 @@ TagManager:
   - Enemy
   - Projectile
   - GameManager
-  - Sticky
-  - Gum
   layers:
   - Default
   - TransparentFX

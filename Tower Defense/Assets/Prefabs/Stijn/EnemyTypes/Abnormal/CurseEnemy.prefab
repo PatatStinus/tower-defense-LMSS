@@ -169,11 +169,9 @@ MonoBehaviour:
   isZapped: 0
   doubledHealth: 0
   reachedEnd: 0
+  divideSpeed: 1
   pathIndex: 0
   i_waypoitIndex: 0
-  percentToPoint: 0
-  progressPath: 0
-  divideSpeed: 1
 --- !u!114 &1043703562846801756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +199,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504c098dbaf0f904c86895a9de1d6fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursedObject: {fileID: 797379628639620160, guid: 2f6bd3381da4c104f9ed3e7c280f78b3, type: 3}
+  abnormals:
+  - {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
+  - {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+  - {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
+  - {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
+  confusedEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0
