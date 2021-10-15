@@ -26,7 +26,7 @@ public class HealthAbility : MonoBehaviour
 
     private void OnDisable()
     {
-        if (isRaining && !GetComponent<EnemyMovement>().reachedEnd)
+        if (isRaining)
             ManaManager.GetMana(100);
     }
 }

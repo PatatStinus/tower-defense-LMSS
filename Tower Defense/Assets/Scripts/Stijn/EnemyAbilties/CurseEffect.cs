@@ -11,7 +11,7 @@ public class CurseEffect : MonoBehaviour
     private GameObject allEnemies;
 
 
-    private void Awake()
+    private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
         allEnemies = GameObject.FindGameObjectWithTag("Enemy");
