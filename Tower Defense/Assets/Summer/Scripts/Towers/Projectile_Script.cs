@@ -9,7 +9,7 @@ public class Projectile_Script : MonoBehaviour
 
     public Transform turret;
 
-    [SerializeField] GameObject[] paintList = new GameObject[5];
+    [SerializeField] private GameObject[] paintList = new GameObject[5];
 
     private GameObject spawnObject;
 
@@ -17,7 +17,7 @@ public class Projectile_Script : MonoBehaviour
 
     public float damage;
 
-    private void Update()
+    protected virtual void Update()
     {
         if (Target == null)
         {
@@ -28,7 +28,7 @@ public class Projectile_Script : MonoBehaviour
         transform.Translate(direction.normalized * (Time.deltaTime * bulletSpeed), Space.World);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 14)
         {
@@ -65,13 +65,7 @@ public class Projectile_Script : MonoBehaviour
             spawnObject.transform.parent = Target.transform;
 
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
-
-            if (other.gameObject.layer == 14 && gameObject.tag == "Gum")
-            {
-                other.gameObject.tag = "Sticky";
-            }
-
-
+           
             Destroy(gameObject);
         }
     }

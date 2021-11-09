@@ -4,34 +4,36 @@ using UnityEngine;
 
 public class BuildingPlacement : MonoBehaviour
 {
-    [SerializeField] Transform selectedObject = null;
+    [SerializeField] protected static Transform selectedObject = null;
 
     const string placedString = "Placed";
     const int placedInt = 12;
 
-    RaycastHit hit;
+    protected RaycastHit hit;
 
     [SerializeField] Material green;
     [SerializeField] Material red;
 
-    [SerializeField] LayerMask selectableLayer;
-    [SerializeField] LayerMask terrainLayer;
+    [SerializeField] protected LayerMask selectableLayer;
+    [SerializeField] protected LayerMask terrainLayer;
 
-    [SerializeField] bool placedObject = false;
-    [SerializeField] bool canPlace;
+    [SerializeField] protected bool placedObject = false;
+    [SerializeField] protected bool canPlace;
 
-    [SerializeField] GameObject Trigger;
+    [SerializeField] protected GameObject Trigger;
 
-    private void Start()
+    protected Ray ray;
+
+    protected virtual void Start()
     {
         Trigger.SetActive(true);
         canPlace = true;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         //Taking the mouse position relative to the screen
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         //Checking if a object is selected and that it hasnt been placed
         if (selectedObject != null && !placedObject)

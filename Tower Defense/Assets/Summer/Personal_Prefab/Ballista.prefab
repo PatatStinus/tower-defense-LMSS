@@ -229,7 +229,7 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   turret: {fileID: 5240284144637388485}
   bullet: {fileID: 1418108360271864137, guid: a775d4d2d974e414db02d3f9da0c2435, type: 3}
-  rotationStrength: 3
+  rotationStrength: 5
   detectionRange: 5
   obstacleLayer:
     serializedVersion: 2

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 8533823279298377906}
   - component: {fileID: 4025542062158248605}
   - component: {fileID: 2543105638921162664}
+  - component: {fileID: 1906102273052347472}
   m_Layer: 14
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -196,9 +197,27 @@ MonoBehaviour:
   isZapped: 0
   doubledHealth: 0
   reachedEnd: 0
-  divideSpeed: 1
   pathIndex: 0
   i_waypoitIndex: 0
+  percentToPoint: 0
+  progressPath: 0
+  divideSpeed: 1
+--- !u!114 &1906102273052347472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6727287354544040434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887b8eabc5f8865499e44c5ac9f68928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stuckCount: 2
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!1 &7608538422841854017
 GameObject:
   m_ObjectHideFlags: 0
