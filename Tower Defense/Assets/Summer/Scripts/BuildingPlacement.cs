@@ -16,11 +16,14 @@ public class BuildingPlacement : MonoBehaviour
 
     [SerializeField] protected LayerMask selectableLayer;
     [SerializeField] protected LayerMask terrainLayer;
+    [SerializeField] protected LayerMask pathLayer;
 
     [SerializeField] protected bool placedObject = false;
     [SerializeField] protected bool canPlace;
 
     [SerializeField] protected GameObject Trigger;
+
+    Renderer triggerRender;
 
     protected Ray ray;
 
@@ -28,6 +31,7 @@ public class BuildingPlacement : MonoBehaviour
     {
         Trigger.SetActive(true);
         canPlace = true;
+        triggerRender = Trigger.GetComponent<Renderer>();
     }
 
     protected virtual void Update()
@@ -44,8 +48,14 @@ public class BuildingPlacement : MonoBehaviour
                 //Setting the towers position as the mouse position
                 selectedObject.position = new Vector3(hit.point.x, selectedObject.position.y, hit.point.z);
             }
+
+            if (Physics.Linecast(ray.origin, hit.point, pathLayer))
+                triggerRender.material = red;
+            else
+                triggerRender.material = green;
+
             //Checking if the object should be able to be placed when clicking mouse
-            if (Input.GetMouseButton(0) && canPlace == true)
+            if (Input.GetMouseButton(0) && canPlace == true && !Physics.Linecast(ray.origin, hit.point, pathLayer))
             {
                 //When building placed it deactivates trigger and changes its layer + tag to placed
                 Trigger.SetActive(false);
@@ -79,12 +89,12 @@ public class BuildingPlacement : MonoBehaviour
         if (other.gameObject.tag == placedString)
         {
             canPlace = false;
-            Trigger.GetComponent<Renderer>().material = red;
+            triggerRender.material = red;
         }
         else
         {
             canPlace = true;
-            Trigger.GetComponent<Renderer>().material = green;
+            triggerRender.material = green;
         }
     }
 
@@ -93,7 +103,7 @@ public class BuildingPlacement : MonoBehaviour
         if (other.gameObject.tag == placedString)
         {
             canPlace = true;
-            Trigger.GetComponent<Renderer>().material = green;
+            triggerRender.material = green;
         }
     }
 }

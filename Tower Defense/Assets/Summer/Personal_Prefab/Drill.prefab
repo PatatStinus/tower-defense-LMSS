@@ -218,7 +218,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10bb2bf195a66114f81ce40773cb3d24, type: 2}
+  - {fileID: 2100000, guid: 34a88b9aab3dc9444abd2090edae2e09, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,6 +289,9 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 1024
+  pathLayer:
+    serializedVersion: 2
+    m_Bits: 65536
   placedObject: 0
   canPlace: 0
   Trigger: {fileID: 7939027888751165289}
@@ -313,7 +316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7939027888751165293
 Transform:
   m_ObjectHideFlags: 0
