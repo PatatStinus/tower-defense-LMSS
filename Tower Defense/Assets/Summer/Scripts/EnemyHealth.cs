@@ -81,11 +81,11 @@ public class EnemyHealth : MonoBehaviour
 
     private void RainDamage()
     {
-        hp--;
+        hp -= Time.deltaTime;
     }
 
     private void RainRegen()
     {
-        hp++;
+        hp += Time.deltaTime;
     }
 }
