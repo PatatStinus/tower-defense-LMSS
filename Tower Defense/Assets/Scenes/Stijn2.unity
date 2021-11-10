@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1062,370 +1062,108 @@ MonoBehaviour:
   spawnEnemy: {fileID: 506944752}
   waves:
   - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 0
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 0
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 0
+    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+      timeTillNextSpawn: 0
+      pathIndex: 0
+  - enemiesInWave:
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+      timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
+    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 1
+    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 1
+    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
+      timeTillNextSpawn: 2
+      pathIndex: 1
     - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
       timeTillNextSpawn: 0
       pathIndex: 1
   - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 5613517771040092285, guid: 8a7611e6e445f8942a2f829db74ed2d9, type: 3}
+      timeTillNextSpawn: 3
+      pathIndex: 1
+    - enemy: {fileID: 5613517771040092285, guid: 8a7611e6e445f8942a2f829db74ed2d9, type: 3}
+      timeTillNextSpawn: 3
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 5613517771040092285, guid: 8a7611e6e445f8942a2f829db74ed2d9, type: 3}
+      timeTillNextSpawn: 3
       pathIndex: 1
     - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
+      timeTillNextSpawn: 3
       pathIndex: 0
     - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
+      timeTillNextSpawn: 3
       pathIndex: 1
     - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
       timeTillNextSpawn: 0
-      pathIndex: 1
+      pathIndex: 0
   - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+      timeTillNextSpawn: 3
       pathIndex: 0
     - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
+      timeTillNextSpawn: 3
       pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
+    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
+      timeTillNextSpawn: 3
+      pathIndex: 0
+    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
+      timeTillNextSpawn: 3
+      pathIndex: 0
+    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
+      timeTillNextSpawn: 3
+      pathIndex: 0
     - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
       timeTillNextSpawn: 0
-      pathIndex: 1
+      pathIndex: 0
   - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
     - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 0
-      pathIndex: 1
-  - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
     - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 0
-      pathIndex: 1
-  - enemiesInWave:
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: 78ac27328588ec84db8a6be5e5211383, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 4db6d73e84aaee548bd473f1fd903ce2, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
     - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: 8d9b23f16c56e32468f9eefe030f6303, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 0
-    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
-      timeTillNextSpawn: 1
-      pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 2
       pathIndex: 1
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 1
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 2
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: c952ae0eb27e21b47a1c0086f84dcef7, type: 3}
-      timeTillNextSpawn: 0
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
+      timeTillNextSpawn: 2
       pathIndex: 1
 --- !u!114 &506944752
 MonoBehaviour:
@@ -5609,3 +5347,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140567398}
   m_CullTransparentMesh: 1
+--- !u!1001 &4583339234493631882
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858678443062064188, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174152277607614327, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
+      propertyPath: m_Name
+      value: CursedObject
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e3b3eccbe48db641901a978c1e836c4, type: 3}
