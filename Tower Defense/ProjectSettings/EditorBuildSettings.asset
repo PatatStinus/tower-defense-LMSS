@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 6d4386fd58ceefc46b47cace9e0c3bd9
   - enabled: 1
+    path: Assets/Scenes/DemoLevel.unity
+    guid: 237b5aa9f560dc54a99bcdef0e25e7e4
+  - enabled: 1
+    path: Assets/Scenes/Summer2.unity
+    guid: 721ecc84a8bec9842933a94be165b3d6
+  - enabled: 1
     path: Assets/Scenes/Stijn2.unity
     guid: 4d902fbe080569c469037e1714200b52
   m_configObjects: {}
