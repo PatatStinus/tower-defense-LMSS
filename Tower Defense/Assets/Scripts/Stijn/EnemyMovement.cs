@@ -8,7 +8,6 @@ public class EnemyMovement : MonoBehaviour
     [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
 
-    [HideInInspector] public double percentAllPaths;
     [HideInInspector] public bool isConfused = false;
     [HideInInspector] public bool usingAbility = false;
     [HideInInspector] public bool isZapped = false;
@@ -16,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public bool reachedEnd = false;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
+    public float percentAllPaths;
     [HideInInspector] public float percentToPoint;
     [HideInInspector] public float progressPath;
     [HideInInspector] public float divideSpeed = 1;
@@ -89,8 +89,8 @@ public class EnemyMovement : MonoBehaviour
     private void GetPercentWaypoint()
     {
         percentToPoint = Vector3.Distance(transform.position, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].position) / EnemyPathMaking.distancePoints[pathIndex][i_waypoitIndex - 1];
-        progressPath = i_waypoitIndex + percentToPoint;
-        percentAllPaths = progressPath / EnemyPathMaking.t_Points[pathIndex].Length * 100;
+        progressPath = i_waypoitIndex + percentToPoint; //Dus Enemy op waypoint 1 - 2 die op de helft van het pad is zou 1.5 uitkomen
+        percentAllPaths = progressPath / EnemyPathMaking.t_Points[pathIndex].Length * 100; 
     }
 
     public void GetNewWayPoint()

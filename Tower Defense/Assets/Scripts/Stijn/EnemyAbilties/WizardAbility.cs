@@ -21,18 +21,18 @@ public class WizardAbility : MonoBehaviour
 
     private void Update()
     {
-        if(!spawnedInPath && movement.percentToPoint > .40f && movement.percentToPoint < .60f)
+        if(!spawnedInPath)
         {
             orgPos = transform.position;
             freeze = true;
             GameObject enemyOne = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
             GameObject enemyTwo = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
-            enemyOne.transform.position = transform.forward + transform.position;
-            enemyTwo.transform.position = -transform.forward + transform.position;
+            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 5, movement.pathIndex);
+            enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 5, movement.pathIndex);
             EnemyMovement moveOne = enemyOne.GetComponent<EnemyMovement>();
             EnemyMovement moveTwo = enemyTwo.GetComponent<EnemyMovement>();
-            moveOne.i_waypoitIndex = movement.i_waypoitIndex;
-            moveTwo.i_waypoitIndex = movement.i_waypoitIndex;
+            moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 5, movement.pathIndex);
+            moveTwo.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths - 5, movement.pathIndex);
             moveOne.pathIndex = movement.pathIndex;
             moveTwo.pathIndex = movement.pathIndex;
             moveOne.NewTarget(EnemyPathMaking.t_Points[moveOne.pathIndex][moveOne.i_waypoitIndex].position);

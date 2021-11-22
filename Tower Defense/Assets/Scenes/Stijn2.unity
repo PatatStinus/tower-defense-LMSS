@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1062,20 +1062,8 @@ MonoBehaviour:
   spawnEnemy: {fileID: 506944752}
   waves:
   - enemiesInWave:
-    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: 86c1a5c8e6e0f4b448764a49e0106b36, type: 3}
       timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
-      timeTillNextSpawn: 2
-      pathIndex: 0
-    - enemy: {fileID: 4571087318971796752, guid: 7f5fa408ea843334b988b208a188e3ef, type: 3}
-      timeTillNextSpawn: 0
       pathIndex: 0
   - enemiesInWave:
     - enemy: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
