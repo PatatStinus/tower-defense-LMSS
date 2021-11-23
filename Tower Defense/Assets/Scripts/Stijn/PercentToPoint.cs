@@ -11,15 +11,20 @@ public class PercentToPoint : MonoBehaviour
         return waypointIndex;
     }
 
-    public static Vector3 PercentToPath(float percent, int path)
+    public static Vector3 PercentToPath(float percent, int path, Vector3 direction, Quaternion rot)
     {
         float newValue = EnemyPathMaking.t_Points[path].Length * (percent / 100);
         int waypointIndex = Mathf.FloorToInt(newValue);
-        float fDirection = Mathf.Atan2(EnemyPathMaking.t_Points[path][waypointIndex].position.x - EnemyPathMaking.t_Points[path][waypointIndex - 1].position.x, EnemyPathMaking.t_Points[path][waypointIndex].position.y - EnemyPathMaking.t_Points[path][waypointIndex - 1].position.y);
-        Vector3 tDirection = new Vector3(0, fDirection, 0);
+        Vector3 tDirection = Vector3.Scale(direction, rot.eulerAngles);
+        
         float distanceInWaypoint = (newValue - waypointIndex) * EnemyPathMaking.distancePoints[path][waypointIndex - 1];
         
-        Vector3 spawnPoint = EnemyPathMaking.t_Points[path][waypointIndex].position - tDirection * distanceInWaypoint;
+        Vector3 spawnPoint = EnemyPathMaking.t_Points[path][waypointIndex].position + tDirection * distanceInWaypoint;
         return spawnPoint;
+    }
+
+    public void AAAAAA()
+    {
+        Vector3 AAAA = transform.rotation * transform.forward;
     }
 }

@@ -27,8 +27,8 @@ public class WizardAbility : MonoBehaviour
             freeze = true;
             GameObject enemyOne = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
             GameObject enemyTwo = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
-            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 5, movement.pathIndex);
-            enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 5, movement.pathIndex);
+            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 5, movement.pathIndex, enemyOne.transform.forward, enemyOne.transform.rotation);
+            enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 5, movement.pathIndex, enemyTwo.transform.forward, enemyTwo.transform.rotation);
             EnemyMovement moveOne = enemyOne.GetComponent<EnemyMovement>();
             EnemyMovement moveTwo = enemyTwo.GetComponent<EnemyMovement>();
             moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 5, movement.pathIndex);
