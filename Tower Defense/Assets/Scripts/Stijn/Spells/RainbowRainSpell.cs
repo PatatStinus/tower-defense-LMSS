@@ -25,7 +25,7 @@ public class RainbowRainSpell : MonoBehaviour
         GameObject rainbowParticle = Instantiate(rainbowRain.gameObject);
         rainbowParticle.transform.position = new Vector3(spellPos.x, rainbowParticle.transform.position.y, spellPos.z);
         rainbowParticle.GetComponent<ParticleSystem>().Play();
-        ManaManager.LoseMana(cost);
+        ManageMoney.LoseMoney(cost);
     }
 
     private void RainbowRaining()
@@ -35,7 +35,7 @@ public class RainbowRainSpell : MonoBehaviour
         foreach (var obj in collisionsInSpell)
         {
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
-            if (enemy != null)
+            if (enemy != null && enemy.gameObject.layer != 0)
                 enemies.Add(obj.gameObject);
         }
 

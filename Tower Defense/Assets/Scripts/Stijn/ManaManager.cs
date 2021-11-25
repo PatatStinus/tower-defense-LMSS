@@ -4,21 +4,19 @@ using TMPro;
 public class ManaManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI manaText;
+    [SerializeField] private GameObject youLost;
     public static int enemiesLeft = 0;
     private static int mana = 1000;
     private static bool lost = false;
 
     //List of mana things that still needs to be added
-    //Mana after completing round (When wave system is made)
-    //Mana used as ammunition for the towers (When towers are finished)
-    //Mana used as currency for spells/towers etc. (When said things are finished)
 
     public static void GetMana(int giveMana) //Call ManaManager.GetMana(number) to give mana to player
     {
         mana += giveMana;
     }
 
-    public static void LoseMana(int removeMana) //Call ManaManager.RemoveMana(number) to remove mana from player
+    public static void LoseMana(int removeMana) //Call ManaManager.LoseMana(number) to remove mana from player
     {
         if(enemiesLeft > 0)
             enemiesLeft--; 
@@ -42,7 +40,8 @@ public class ManaManager : MonoBehaviour
 
         if(lost)
         {
-            //DEFEAT
+            Time.timeScale = 1;
+            youLost.SetActive(true);
         }
     } 
 }

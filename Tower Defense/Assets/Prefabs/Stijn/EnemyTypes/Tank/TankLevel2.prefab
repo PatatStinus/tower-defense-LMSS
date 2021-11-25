@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childSpawns: {fileID: 5613517771040092285, guid: 8a7611e6e445f8942a2f829db74ed2d9, type: 3}
-  totalSpawns: 100
+  totalSpawns: 2
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0

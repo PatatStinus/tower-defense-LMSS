@@ -25,7 +25,7 @@ public class ZapSpell : MonoBehaviour
     {
         this.spellPos = spellPos;
         Zapped();
-        ManaManager.LoseMana(cost);
+        ManageMoney.LoseMoney(cost);
         isZapping = true;
         zapEffectLong = Instantiate(zapEffectStart);
         zapEffectLong.transform.position = new Vector3(spellPos.x, zapEffectLong.transform.position.y, spellPos.z);
@@ -37,7 +37,7 @@ public class ZapSpell : MonoBehaviour
         foreach (var obj in collisionsInSpell)
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (enemy != null && enemy.gameObject.layer != 0)
                 this.enemy = obj.gameObject;
         }
 

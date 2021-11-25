@@ -26,7 +26,7 @@ public class FreezeSpell : MonoBehaviour
     {
         this.spellPos = spellPos;
         Freezing();
-        ManaManager.LoseMana(cost);
+        ManageMoney.LoseMoney(cost);
     }
 
     private void Freezing()
@@ -39,7 +39,7 @@ public class FreezeSpell : MonoBehaviour
         foreach (var obj in collisionsInSpell)
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (enemy != null && enemy.gameObject.layer != 0)
                 enemies.Add(obj.gameObject);
         }
 

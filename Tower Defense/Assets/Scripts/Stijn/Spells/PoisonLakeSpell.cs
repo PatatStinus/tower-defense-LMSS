@@ -16,7 +16,7 @@ public class PoisonLakeSpell : MonoBehaviour
     public void SpawnLake(Vector3 spellPos)
     {
         spellActive = true;
-        ManaManager.LoseMana(cost);
+        ManageMoney.LoseMoney(cost);
         posionLakeEffect.transform.position = new Vector3(spellPos.x, 0, spellPos.z);
         Instantiate(posionLakeEffect);
         sc = gameObject.AddComponent<SphereCollider>();

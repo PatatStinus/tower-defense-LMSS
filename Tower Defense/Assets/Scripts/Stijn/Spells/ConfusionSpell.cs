@@ -22,7 +22,7 @@ public class ConfusionSpell : MonoBehaviour
         particleEffect.transform.position = spellPos;
         Instantiate(particleEffect);
         Confusing();
-        ManaManager.LoseMana(cost);
+        ManageMoney.LoseMoney(cost);
     }
 
     private void Confusing()
@@ -32,7 +32,7 @@ public class ConfusionSpell : MonoBehaviour
         foreach (var obj in collisionsInSpell)
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (enemy != null && enemy.gameObject.layer != 0)
                 enemies.Add(obj.gameObject);
         }
 
