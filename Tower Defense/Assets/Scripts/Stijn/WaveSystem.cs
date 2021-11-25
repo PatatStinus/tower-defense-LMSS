@@ -7,9 +7,11 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private Transform allEnemies;
     [SerializeField] private EnemySpawning spawnEnemy;
     [SerializeField] private List<EnemiesInWave> waves;
+    [SerializeField] private float moneyFromWaves;
     public static bool finishedWave = true;
     private bool finishedSpawning;
     private bool waveDone;
+    private bool moneyFromWave;
     private int currentWave = -1;
     private int spawnedEnemies = 0;
     private int totalWaves;
@@ -36,7 +38,12 @@ public class WaveSystem : MonoBehaviour
             }
         }
         if(waveDone || allEnemies.childCount == 0 && finishedSpawning)
+        {
             finishedWave = true;
+            if(!moneyFromWave)
+                ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * (currentWave + 1 * .05f)));
+            moneyFromWave = true;
+        }
     }
 
     private void SpawnEnemy()
@@ -64,6 +71,7 @@ public class WaveSystem : MonoBehaviour
             totalEnemiesInWave = waves[currentWave].enemiesInWave.Count;
             spawnedEnemies = 0;
             ManaManager.enemiesLeft = 0;
+            moneyFromWave = false;
             SpawnEnemy();
         }
     }

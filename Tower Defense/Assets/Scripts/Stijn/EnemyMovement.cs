@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     [Range(0f, 50f)] public float f_Speed = 10f;
     [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
+    [Range(0f, 500f)] [SerializeField] private int moneyWhenKilled = 10;
 
     [HideInInspector] public bool isConfused = false;
     [HideInInspector] public bool usingAbility = false;
@@ -15,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public bool reachedEnd = false;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
-    public float percentAllPaths;
+    [HideInInspector] public float percentAllPaths;
     [HideInInspector] public float percentToPoint;
     [HideInInspector] public float progressPath;
     [HideInInspector] public float divideSpeed = 1;
@@ -44,7 +45,6 @@ public class EnemyMovement : MonoBehaviour
         {
             reachedEnd = true;
             ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
-            gameObject.layer = 0;
             Destroy(gameObject);
             return;
         }
@@ -103,5 +103,11 @@ public class EnemyMovement : MonoBehaviour
     {
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position; 
         transform.LookAt(t_Target);
+    }
+
+    private void OnDisable()
+    {
+        if(!reachedEnd)
+            ManageMoney.GetMoney(moneyWhenKilled);
     }
 }
