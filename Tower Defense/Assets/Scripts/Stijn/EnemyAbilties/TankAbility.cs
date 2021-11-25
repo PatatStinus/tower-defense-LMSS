@@ -6,8 +6,8 @@ public class TankAbility : MonoBehaviour
 {
     [SerializeField] private GameObject childSpawns;
     [SerializeField] private int totalSpawns;
-    private int evens = 1;
-    private int odds = 1;
+    private int evens = 3;
+    private int odds = -3;
     private List<GameObject> childEnemies = new List<GameObject>();
     private List<EnemyMovement> movementEnemies = new List<EnemyMovement>();
     private GameObject allEnemies;
@@ -25,22 +25,41 @@ public class TankAbility : MonoBehaviour
         {
             for (int i = 0; i < totalSpawns; i++)
             {
+                if (movement.percentAllPaths + evens > 97 || movement.percentAllPaths + odds < 3)
+                    break;
+
                 childEnemies.Add(Instantiate(childSpawns, allEnemies.transform));
+                movementEnemies.Add(childEnemies[i].GetComponent<EnemyMovement>());
+                movementEnemies[i].pathIndex = movement.pathIndex;
+
                 if(i % 2 == 0)
                 {
-                    childEnemies[i].transform.position = transform.forward * evens * 2 + transform.position;
-                    evens++;
+                    movementEnemies[i].i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + evens, movement.pathIndex);
+                    childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
+                    movementEnemies[i].Target();
+                    childEnemies[i].transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + evens, movement.pathIndex, childEnemies[i].transform.rotation);
+                    evens += 3;
                 }
                 else
                 {
-                    childEnemies[i].transform.position = -transform.forward * odds * 2 + transform.position;
-                    odds++;
+                    if(PercentToPoint.WayPointIndex(movement.percentAllPaths + odds, movement.pathIndex) < 1f)
+                    {
+                        movementEnemies[i].i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + evens, movement.pathIndex);
+                        childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
+                        movementEnemies[i].Target();
+                        childEnemies[i].transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + evens, movement.pathIndex, childEnemies[i].transform.rotation);
+                        evens += 3;
+                    }
+                    else
+                    {
+                        movementEnemies[i].i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + odds, movement.pathIndex);
+                        childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
+                        movementEnemies[i].Target();
+                        childEnemies[i].transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + odds, movement.pathIndex, childEnemies[i].transform.rotation);
+                        odds -= 3;
+                    }
                 }
                 childEnemies[i].name = "Child" + i;
-                movementEnemies.Add(childEnemies[i].GetComponent<EnemyMovement>());
-                movementEnemies[i].i_waypoitIndex = movement.i_waypoitIndex;
-                movementEnemies[i].pathIndex = movement.pathIndex;
-                movementEnemies[i].NewTarget((EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex].position));
             }
         }
     }

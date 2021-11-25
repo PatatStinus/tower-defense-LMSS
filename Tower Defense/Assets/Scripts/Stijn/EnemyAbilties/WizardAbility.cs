@@ -21,7 +21,7 @@ public class WizardAbility : MonoBehaviour
 
     private void Update()
     {
-        if(!spawnedInPath)
+        if(!spawnedInPath && movement.percentAllPaths + 7 < 100)
         {
             orgPos = transform.position;
             freeze = true;
@@ -29,16 +29,16 @@ public class WizardAbility : MonoBehaviour
             GameObject enemyTwo = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
             EnemyMovement moveOne = enemyOne.GetComponent<EnemyMovement>();
             EnemyMovement moveTwo = enemyTwo.GetComponent<EnemyMovement>();
-            moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 5, movement.pathIndex);
-            moveTwo.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths - 5, movement.pathIndex);
+            moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 3, movement.pathIndex);
+            moveTwo.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths - 3, movement.pathIndex);
             moveOne.pathIndex = movement.pathIndex;
             moveTwo.pathIndex = movement.pathIndex;
             enemyOne.transform.position = EnemyPathMaking.t_Points[moveOne.pathIndex][moveOne.i_waypoitIndex - 1].transform.position;
             enemyTwo.transform.position = EnemyPathMaking.t_Points[moveTwo.pathIndex][moveTwo.i_waypoitIndex - 1].transform.position;
             moveOne.Target();
             moveTwo.Target();
-            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 5, movement.pathIndex, enemyOne.transform.rotation);
-            enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 5, movement.pathIndex, enemyTwo.transform.rotation);
+            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 3, movement.pathIndex, enemyOne.transform.rotation);
+            enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 3, movement.pathIndex, enemyTwo.transform.rotation);
             enemyOne.name = "Clone";
             enemyTwo.name = "Clone";
             spawnedInPath = true;

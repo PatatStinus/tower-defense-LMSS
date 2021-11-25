@@ -42,15 +42,11 @@ public class EnemyMovement : MonoBehaviour
     {
         if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Enemy Reached End out of bounds
         {
-            Destroy(gameObject);
-            return;
-        }
-
-        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2) //Enemy Reached End in bounds
-        {
             reachedEnd = true;
             ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
             gameObject.layer = 0;
+            Destroy(gameObject);
+            return;
         }
 
         if (!isConfused) //If confused spell is active, give the enemy a random target
