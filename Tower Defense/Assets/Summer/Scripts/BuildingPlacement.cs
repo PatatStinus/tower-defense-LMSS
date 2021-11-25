@@ -74,13 +74,6 @@ public class BuildingPlacement : MonoBehaviour
                 selectedObject = hit.transform;
             }
         }
-
-        //if (Input.GetMouseButtonDown(0) && selectedObject != null && canPlace)
-        //{
-        //    selectedObject.gameObject.tag = placedString;
-        //    selectedObject.gameObject.layer = placedInt;
-        //    selectedObject = null;
-        //}
     }
 
     //Changing canPlace value and setting triggers 

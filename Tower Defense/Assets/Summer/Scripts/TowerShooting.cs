@@ -61,25 +61,11 @@ public class TowerShooting : MonoBehaviour
 
         for (int i = 0; i < enemies.Length; i++)
         {
-            //if (closestEnemy == null)
-            //{
-            //    closestEnemy = enemies[i];
-            //    return;
-            //}
             if (Vector3.Distance(transform.position, enemies[i].position) <= detectionRange 
                 && !Physics.Linecast(turret.position, enemies[i].position, obstacleLayer))
             {
                 closestEnemy = enemies[i];
             }
-            //if (Physics.Linecast(turret.position, enemies[i].position, obstacleLayer))
-            //{
-            //    Debug.Log("Obstacle!");
-            //    return;
-            //}
-            //if (Vector3.Distance(transform.position, enemies[i].position) < Vector3.Distance(transform.position, closestEnemy.position))
-            //{
-            //    closestEnemy = enemies[i];
-            //}
         }
         if (closestEnemy == null)
         {
