@@ -35,7 +35,7 @@ public class ThunderWeather : MonoBehaviour
             onStopThunder?.Invoke();
         }
 
-        if(stunned)
+        if(stunned && target != null)
         {
             target.transform.position = orgPos;
             //Stun tower shooting
@@ -72,7 +72,8 @@ public class ThunderWeather : MonoBehaviour
         if(eventGoing)
         {
             ChooseTarget();
-            thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
+            if (target != null)
+                thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
             thunderEffect = Instantiate(thunder);
             Invoke("Stun", 1f);
             Invoke("DestroyObjects", 1.6f);
