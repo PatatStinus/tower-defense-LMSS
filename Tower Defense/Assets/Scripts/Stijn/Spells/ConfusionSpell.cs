@@ -12,7 +12,7 @@ public class ConfusionSpell : MonoBehaviour
     [SerializeField] private GameObject particleEffect;
     private Collider[] collisionsInSpell;
     private List<GameObject> allConfused = new List<GameObject>();
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<EnemyMovement> enemies = new List<EnemyMovement>();
     private Vector3 spellPos;
     private float orgTime = -1;
 
@@ -33,12 +33,12 @@ public class ConfusionSpell : MonoBehaviour
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
             if (enemy != null && enemy.gameObject.layer != 0)
-                enemies.Add(obj.gameObject);
+                enemies.Add(enemy);
         }
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].GetComponent<EnemyMovement>().isConfused = true;
+            enemies[i].isConfused = true;
             allConfused.Add(Instantiate(spellEffect, enemies[i].transform));
             allConfused[i].transform.position = new Vector3(enemies[i].transform.position.x, enemies[i].transform.position.y + 2, enemies[i].transform.position.z);
         }
@@ -55,7 +55,7 @@ public class ConfusionSpell : MonoBehaviour
             for (int i = 0; i < enemies.Count; i++)
             {
                 if(enemies[i] != null)
-                    enemies[i].GetComponent<EnemyMovement>().isConfused = false;
+                    enemies[i].isConfused = false;
 
                 Destroy(allConfused[i]);
             }

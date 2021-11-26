@@ -5,10 +5,13 @@ public class ManageMoney : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI moneyText;
     private static int money = 1000;
+    private bool maxMoneyReached;
+    private float moneyCountdown;
 
 
     public static void GetMoney(int giveMoney) //Call ManageMoney.GetMoney(number) to give money to player
     {
+        if (!ManaManager.lost)
         money += giveMoney;
     }
 
@@ -25,5 +28,16 @@ public class ManageMoney : MonoBehaviour
     private void Update()
     {
         moneyText.text = money.ToString();
+        if(ManaManager.lost && !maxMoneyReached)
+        {
+            moneyCountdown += Time.deltaTime;
+            money -= Mathf.RoundToInt(100 * Time.deltaTime * moneyCountdown);
+            if (money <= -99999)
+            {
+                money = -99999;
+                maxMoneyReached = true;
+                moneyText.GetComponent<Animator>().Play("MoneyBlink");
+            }
+        }
     }
 }

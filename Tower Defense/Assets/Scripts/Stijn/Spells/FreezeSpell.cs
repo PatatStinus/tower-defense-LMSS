@@ -52,8 +52,8 @@ public class FreezeSpell : MonoBehaviour
             orgMatEnemy.Add(rendererEnemy[i].material);
             rendererEnemy[i].material = freezeMat;
             orgPosEnemy.Add(enemies[i].transform.position);
-            if (enemies[i].GetComponent<JumpingAbility>() != null)
-                enemies[i].GetComponent<JumpingAbility>().canAbility = false;
+            if (enemies[i].TryGetComponent(out JumpingAbility jump))
+                jump.canAbility = false;
         }
 
         orgTime = durationSpell;
@@ -79,8 +79,8 @@ public class FreezeSpell : MonoBehaviour
                 if (enemies[i] != null)
                 {
                     rendererEnemy[i].material = orgMatEnemy[i];
-                    if (enemies[i].GetComponent<JumpingAbility>() != null)
-                        enemies[i].GetComponent<JumpingAbility>().canAbility = true;
+                    if (enemies[i].TryGetComponent(out JumpingAbility jump))
+                        jump.canAbility = true;
                 }
             }
             Destroy(this.gameObject);
