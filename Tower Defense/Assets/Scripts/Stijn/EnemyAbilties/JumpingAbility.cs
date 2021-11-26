@@ -9,6 +9,7 @@ public class JumpingAbility : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
     
     [HideInInspector] public bool canAbility = true;
+    private bool confusedJump;
     private Vector3 jumpTarget;
     private Vector3 orgPos;
     private Vector3 orgFreeze;
@@ -45,10 +46,22 @@ public class JumpingAbility : MonoBehaviour
 
     private void Jump()
     {
-        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 2 && canAbility)
+        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 2 && canAbility && !movement.isConfused || movement != null && movement.isConfused && movement.i_waypoitIndex > 1 && canAbility)
         {
-            float xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.x);
-            float zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.z);
+            float xPos;
+            float zPos;
+            if(!movement.isConfused)
+            {
+                xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.x);
+                zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.z);
+                confusedJump = false;
+            }
+            else
+            {
+                xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 1].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 2].transform.position.x);
+                zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 1].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 2].transform.position.z);
+                confusedJump = true;
+            }
             jumpTarget = new Vector3(xPos, transform.position.y, zPos);
             movement.NewTarget(jumpTarget);
             yPos = Vector3.Distance(transform.position, jumpTarget);
@@ -76,7 +89,8 @@ public class JumpingAbility : MonoBehaviour
                 jumpAnim = false;
                 isJumping = false;
                 landed = true;
-                movement.GetNewWayPoint();
+                movement.GetNewWayPoint(confusedJump);
+                confusedJump = false;
                 time = 0;
                 movement.f_Speed /= 2f;
                 orgFreeze = transform.position;

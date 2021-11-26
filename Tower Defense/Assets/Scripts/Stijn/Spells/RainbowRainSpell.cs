@@ -11,7 +11,7 @@ public class RainbowRainSpell : MonoBehaviour
     [SerializeField] private float durationSpell = 3f;
     [SerializeField] private ParticleSystem rainbowRain;
     private Collider[] collisionsInSpell;
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<EnemyHealth> enemies = new List<EnemyHealth>();
     private Vector3 spellPos;
     private bool spellActive;
     private float orgTime = -1;
@@ -36,13 +36,13 @@ public class RainbowRainSpell : MonoBehaviour
         {
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
             if (enemy != null && enemy.gameObject.layer != 0)
-                enemies.Add(obj.gameObject);
+                enemies.Add(enemy);
         }
 
         if (durationSpell > 0)
         {
             for (int i = 0; i < enemies.Count; i++)
-                enemies[i].GetComponent<EnemyHealth>().hp -= damage;
+                enemies[i].hp -= damage;
             Invoke("RainbowRaining", .5f);
         }
         else

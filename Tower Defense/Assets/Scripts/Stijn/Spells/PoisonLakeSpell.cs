@@ -42,10 +42,10 @@ public class PoisonLakeSpell : MonoBehaviour
     {
         if(other.gameObject.layer == 14)
         {
-            if (other.gameObject.GetComponent<EnemyMovement>())
-                other.gameObject.GetComponent<EnemyMovement>().divideSpeed = slowness;
-            if (other.gameObject.GetComponent<JumpingAbility>())
-                other.gameObject.GetComponent<JumpingAbility>().canAbility = false;
+            if (other.gameObject.TryGetComponent(out EnemyMovement movement))
+                movement.divideSpeed = slowness;
+            if (other.gameObject.TryGetComponent(out JumpingAbility jump))
+                jump.canAbility = false;
         }
     }
 
@@ -53,10 +53,10 @@ public class PoisonLakeSpell : MonoBehaviour
     {
         if (other.gameObject.layer == 14)
         {
-            if(other.gameObject.GetComponent<EnemyMovement>())
-                other.gameObject.GetComponent<EnemyMovement>().divideSpeed = 1;
-            if (other.gameObject.GetComponent<JumpingAbility>())
-                other.gameObject.GetComponent<JumpingAbility>().canAbility = true;
+            if (other.gameObject.TryGetComponent(out EnemyMovement movement))
+                movement.divideSpeed = 1;
+            if (other.gameObject.TryGetComponent(out JumpingAbility jump))
+                jump.canAbility = true;
         }
     }
 
@@ -64,8 +64,8 @@ public class PoisonLakeSpell : MonoBehaviour
     {
         if (other.gameObject.layer == 14)
         {
-            if (other.gameObject.GetComponent<EnemyHealth>())
-                other.gameObject.GetComponent<EnemyHealth>().hp -= damage * Time.fixedDeltaTime;
+            if (other.gameObject.TryGetComponent(out EnemyHealth health))
+                health.hp -= damage * Time.fixedDeltaTime;
         }
     }
 }

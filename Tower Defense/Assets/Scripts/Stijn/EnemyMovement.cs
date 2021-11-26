@@ -88,10 +88,18 @@ public class EnemyMovement : MonoBehaviour
         percentAllPaths = progressPath / EnemyPathMaking.t_Points[pathIndex].Length * 100; 
     }
 
-    public void GetNewWayPoint()
+    public void GetNewWayPoint(bool confused)
     {
-        i_waypoitIndex++;
-        t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
+        if(confused)
+        {
+            i_waypoitIndex--;
+            t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
+        }
+        else
+        {
+            i_waypoitIndex++;
+            t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
+        }
     } 
 
     public void NewTarget(Vector3 newTarget)
