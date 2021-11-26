@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     //Basic version for now
 
     public float startHealth = 4;
-    [HideInInspector] public float hp;
+     public float hp;
 
     //[SerializeField] Color firstDamageColour;
     //[SerializeField] Color secondDamageColour;
