@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb_Script : MonoBehaviour
+public class Bomb_Projectile : Projectile_Script
 {
-    [SerializeField] public float damage;
-
     [SerializeField] ParticleSystem explosion;
 
     [SerializeField] float blastRadius;
 
     [SerializeField] LayerMask enemyLayer;
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 10 || other.gameObject.layer == 14)
         {
@@ -25,6 +23,6 @@ public class Bomb_Script : MonoBehaviour
             }
 
             Destroy(gameObject);
-        }           
+        }
     }
 }
