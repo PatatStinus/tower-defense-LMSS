@@ -89,7 +89,8 @@ public class ThunderWeather : MonoBehaviour
     
     private void Stun()
     {
-        orgPos = target.transform.position;
+        if (target != null)
+            orgPos = target.transform.position;
         stunned = true;
     }
 

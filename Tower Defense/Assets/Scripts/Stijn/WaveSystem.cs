@@ -12,13 +12,14 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private float moneyFromWaves;
     [SerializeField] private TextMeshProUGUI wavesText;
     [SerializeField] private Image autoStartButton;
+    [SerializeField] private GameObject freePlayPanel;
     public static bool finishedWave = true;
     private bool finishedSpawning;
     private bool waveDone;
     private bool moneyFromWave;
     private bool autoStart;
     private bool freePlay;
-    private int maxWave;
+    private int maxWave = 10;
     private int currentWave = -1;
     private int spawnedEnemies = 0;
     private int totalWaves;
@@ -27,9 +28,8 @@ public class WaveSystem : MonoBehaviour
     private void Start()
     {
         totalWaves = waves.Count;
-        wavesText.text = currentWave + 1 + "/40";
+        wavesText.text = currentWave + 1 + "/" + maxWave;
         finishedWave = true;
-        maxWave = 40;
     }
 
     private void Update()
@@ -51,9 +51,22 @@ public class WaveSystem : MonoBehaviour
         {
             finishedWave = true;
             if(!moneyFromWave)
-                ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * ((currentWave + 1) * .05f)));
+            {
+                if(freePlay)
+                    ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * maxWave * .025f));
+                else
+                    ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * (currentWave + 1) * .05f));
+            }
             moneyFromWave = true;
-            if (autoStart)
+
+            if(currentWave + 1 == maxWave)
+            {
+                Time.timeScale = 1;
+                freePlayPanel.SetActive(true);
+                freePlay = true;
+            }
+            
+            if (autoStart && currentWave + 1 != maxWave)
                 StartWaveButton();
         }
     }
@@ -83,10 +96,7 @@ public class WaveSystem : MonoBehaviour
             currentWave++;
             totalEnemiesInWave = waves[currentWave].enemiesInWave.Count;
             if (currentWave + 1 > maxWave)
-            {
                 wavesText.text = (currentWave + 1).ToString();
-                freePlay = true;
-            }
             else
                 wavesText.text = currentWave + 1 + "/" + maxWave;
             spawnedEnemies = 0;
@@ -107,6 +117,11 @@ public class WaveSystem : MonoBehaviour
             autoStartButton.color = Color.green;
             autoStart = true;
         }
+    }
+
+    public void Continue()
+    {
+        freePlayPanel.SetActive(false);
     }
 }
 

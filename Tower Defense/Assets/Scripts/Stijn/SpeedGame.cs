@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class SpeedGame : MonoBehaviour
 {
-    private bool spedUp;
-
     public void Speed()
     {
-        if(!spedUp)
-        {
+        if(Time.timeScale == 1)
             Time.timeScale = 3;
-            spedUp = true;
-        }
         else
-        {
             Time.timeScale = 1;
-            spedUp = false;
-        }
     }
 }
