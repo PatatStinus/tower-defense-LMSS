@@ -19,8 +19,8 @@ public class ConfusionSpell : MonoBehaviour
     public void SpawnConfuse(Vector3 spellPos)
     {
         this.spellPos = spellPos;
-        particleEffect.transform.position = spellPos;
-        Instantiate(particleEffect);
+        GameObject particleDuck = Instantiate(particleEffect);
+        particleDuck.transform.position = spellPos;
         Confusing();
         ManageMoney.LoseMoney(cost);
     }

@@ -34,8 +34,8 @@ public class FreezeSpell : MonoBehaviour
         enemies.Clear();
         orgPosEnemy.Clear();
         collisionsInSpell = Physics.OverlapSphere(spellPos, size);
-        iceSpellEffect.transform.position = spellPos;
-        Instantiate(iceSpellEffect);
+        GameObject freezeEffect = Instantiate(iceSpellEffect);
+        freezeEffect.transform.position = spellPos;
         foreach (var obj in collisionsInSpell)
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
