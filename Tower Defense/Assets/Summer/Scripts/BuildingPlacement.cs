@@ -7,7 +7,7 @@ public class BuildingPlacement : MonoBehaviour
     [SerializeField] protected static Transform selectedObject = null;
 
     const string placedString = "Placed";
-    const int placedInt = 12;
+    protected const int placedInt = 12;
 
     protected RaycastHit hit;
 
@@ -46,7 +46,7 @@ public class BuildingPlacement : MonoBehaviour
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, terrainLayer))
             {
                 //Setting the towers position as the mouse position
-                selectedObject.position = new Vector3(hit.point.x, selectedObject.position.y, hit.point.z);
+                selectedObject.position = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
             }
 
             if (Physics.Linecast(ray.origin, hit.point, pathLayer))

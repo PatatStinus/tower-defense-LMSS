@@ -55,7 +55,7 @@ public class Balloon_Placement : MonoBehaviour
             {
                 placedObject = true;
                 selectedObject.gameObject.tag = "Balloon";
-                selectedObject.gameObject.layer = placedInt;
+                selectedObject.gameObject.layer = 17;
                 selectedObject = null;
             }
         }

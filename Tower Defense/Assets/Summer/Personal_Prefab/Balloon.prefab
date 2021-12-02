@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4286225351842990939}
   m_Layer: 11
   m_Name: Platform
-  m_TagString: Building
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,6 @@ GameObject:
   - component: {fileID: 8613624224460427046}
   - component: {fileID: 5218948055574470669}
   - component: {fileID: 171495167592365967}
-  - component: {fileID: 2535079794746215212}
   m_Layer: 11
   m_Name: Bloom
   m_TagString: Untagged
@@ -554,19 +553,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2535079794746215212
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8103344039047722367}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8798192808064591586
 GameObject:
   m_ObjectHideFlags: 0

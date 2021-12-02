@@ -16,6 +16,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1132218187958144385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590957053722686464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0b24260b2733e4faabc7f953f75cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  green: {fileID: 2100000, guid: a7d0a8f33a223e4428e8893feb6fd8f4, type: 2}
+  red: {fileID: 2100000, guid: 2a462518565ad6c47b47a10e0ca8008a, type: 2}
+  selectableLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  terrainLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  pathLayer:
+    serializedVersion: 2
+    m_Bits: 65536
+  placedObject: 0
+  canPlace: 0
+  Trigger: {fileID: 2590957053363143656}
+  balloonLayer:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1 &4130828130867187938
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +371,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6748705250455566327, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748705250455566327, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
       propertyPath: pathLayer.m_Bits
       value: 65536
       objectReference: {fileID: 0}
@@ -355,5 +388,10 @@ GameObject:
 --- !u!4 &2590957053722686491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 233515676823988222, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
+  m_PrefabInstance: {fileID: 2362543669216203749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2590957053363143656 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 233515676511899661, guid: c8a6e8960a5d1da44a830ac4fe1d9f8b, type: 3}
   m_PrefabInstance: {fileID: 2362543669216203749}
   m_PrefabAsset: {fileID: 0}
