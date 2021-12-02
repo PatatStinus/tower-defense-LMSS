@@ -1406,7 +1406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690c68e9e09b7341b4b865e15c16cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tower: {fileID: 1174246716421712831, guid: fb473bb350b3cb949bc532e81224edcc, type: 3}
+  tower: {fileID: 8798192808064591586, guid: 1c6f0a11a425f144eb180143f91c0794, type: 3}
 --- !u!114 &530688496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1480,9 @@ MonoBehaviour:
       timeTillNextSpawn: 0.1
       pathIndex: 1
   moneyFromWaves: 0
+  wavesText: {fileID: 0}
+  autoStartButton: {fileID: 0}
+  freePlayPanel: {fileID: 0}
 --- !u!114 &530688499
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class BuildingPlacement : MonoBehaviour
     [SerializeField] protected LayerMask pathLayer;
 
     [SerializeField] protected bool placedObject = false;
-    [SerializeField] protected bool canPlace;
+    [SerializeField] public bool canPlace;
 
     [SerializeField] protected GameObject Trigger;
 

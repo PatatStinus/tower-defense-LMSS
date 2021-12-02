@@ -11,6 +11,7 @@ TagManager:
   - GameManager
   - Sticky
   - Gum
+  - Balloon
   layers:
   - Default
   - TransparentFX

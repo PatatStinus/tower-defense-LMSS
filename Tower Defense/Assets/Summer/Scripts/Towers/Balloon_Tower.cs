@@ -8,16 +8,19 @@ public class Balloon_Tower : MonoBehaviour
 
     float timer;
     public float fireRate;
+
+    Balloon_Placement bp;
     private void Start()
     {
         timer = 0;
+        bp = GetComponent<Balloon_Placement>();
     }
 
     void Update()
     {
         timer -= Time.deltaTime;
 
-        if (timer <= 0)
+        if (timer <= 0 && bp.placedObject)
         {
             Instantiate(bomb, transform.position, Quaternion.identity);
             timer = fireRate;
