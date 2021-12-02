@@ -19,7 +19,9 @@ public class WaveSystem : MonoBehaviour
     private bool moneyFromWave;
     private bool autoStart;
     private bool freePlay;
+    private float floatedDifficulty;
     private int maxWave = 10;
+    private int difficulty = 2;
     private int currentWave = -1;
     private int spawnedEnemies = 0;
     private int totalWaves;
@@ -27,7 +29,24 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
+        difficulty = PlayerPrefs.GetInt("Difficulty");
+        difficulty = 2;
         totalWaves = waves.Count;
+        switch(difficulty)
+        {
+            case 1: //Easy
+                floatedDifficulty = 0.8f;
+                maxWave = 40;
+                break;
+            case 2: //Normal
+                floatedDifficulty = 1f;
+                maxWave = 60;
+                break;
+            case 3: //Hard
+                floatedDifficulty = 1.2f;
+                maxWave = 80;
+                break;
+        }
         wavesText.text = currentWave + 1 + "/" + maxWave;
         finishedWave = true;
     }
@@ -53,7 +72,10 @@ public class WaveSystem : MonoBehaviour
             if(!moneyFromWave)
             {
                 if(freePlay)
+                {
                     ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * maxWave * .025f));
+                    floatedDifficulty += (currentWave - maxWave) * .001f;
+                }
                 else
                     ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * (currentWave + 1) * .05f));
             }
@@ -75,7 +97,7 @@ public class WaveSystem : MonoBehaviour
     {
         if(totalEnemiesInWave > spawnedEnemies) //If an enemy still needs to be spawned
         {
-            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies, waves[currentWave].enemiesInWave[spawnedEnemies].pathIndex); //Spawn Enemy
+            spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies, waves[currentWave].enemiesInWave[spawnedEnemies].pathIndex, floatedDifficulty); //Spawn Enemy
             Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn); //Get new enemy after time
             spawnedEnemies++;
         }
