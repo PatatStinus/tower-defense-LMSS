@@ -15,15 +15,12 @@ public class TEMP_GumCheck : MonoBehaviour
 
     float timer = 2;
 
-    float baseSpeed;
-
     Transform startParent;
 
     private void Start()
     {
         thisEnemyMove = GetComponent<EnemyMovement>();
         gumCheck = GetComponent<TEMP_GumCheck>();
-        baseSpeed = thisEnemyMove.f_Speed;
         startParent = transform.parent;
     }
 
@@ -42,7 +39,7 @@ public class TEMP_GumCheck : MonoBehaviour
             timer = 2f;
             transform.parent = startParent;
             stuckCount = 2;
-            thisEnemyMove.f_Speed = baseSpeed;
+            thisEnemyMove.divideSpeed = 1f;
             GumTower.stickyEnemies.Remove(gameObject);
         }
     }
@@ -56,7 +53,7 @@ public class TEMP_GumCheck : MonoBehaviour
             hit.collider.gameObject.TryGetComponent<EnemyMovement>(out var hitMove);
             hit.collider.gameObject.TryGetComponent<TEMP_GumCheck>(out var hitCheck);
 
-            thisEnemyMove.f_Speed = 0.5f;
+            thisEnemyMove.divideSpeed = 2f;
 
             if (hitMove == null || hitCheck == null)
                 return;

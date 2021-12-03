@@ -44,7 +44,6 @@ public class WizardAbility : MonoBehaviour
             spawnedInPath = true;
             Invoke("NewSpawn", Random.Range(5f, 10f));
             Invoke("StopFreeze", 2f);
-
         }
         if(freeze)
             transform.position = orgPos;
