@@ -18,6 +18,10 @@ public class MainMenu : MonoBehaviour
     public GameObject mapMenu;
     public GameObject difficultyMenu;
 
+
+    public int selectedLevelIndex;
+    public string selectedDifficultyIndex;
+
     void Start()
     {
         titleGameObject.transform.localScale = Vector2.zero; // Set the size of the main menu to zero before it sizes in
@@ -38,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        MapMenu();
+        SceneManager.LoadScene(selectedLevelIndex);
     }
     public void MapMenu()
     {
@@ -74,4 +78,6 @@ public class MainMenu : MonoBehaviour
             button.SetActive(true);
         }
     }
+
+    
 }
