@@ -37,12 +37,12 @@ public class TimeWarpEnemy : MonoBehaviour
 
         for (int i = 0; i < enemyMovements.Count; i++)
         {
-            enemyMovements[i].divideSpeed = .2f;
-            enemyMovements[i].f_RotateSpeed *= 5f;
+            enemyMovements[i].divideSpeed = 1/3f;
+            enemyMovements[i].f_RotateSpeed *= 3f;
         }
 
         movement.divideSpeed = 1f;
-        movement.f_RotateSpeed *= 2f;
+        movement.f_RotateSpeed *= 3f + 1/3f;
 
         yield return null;
     }
