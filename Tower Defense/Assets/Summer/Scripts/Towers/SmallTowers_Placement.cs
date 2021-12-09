@@ -30,6 +30,12 @@ public class SmallTowers_Placement : BuildingPlacement
                 selectedObject = null;
             }
         }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+
 
     }
 }

@@ -77,7 +77,7 @@ public class BuildingPlacement : MonoBehaviour
     }
 
     //Changing canPlace value and setting triggers 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == placedString)
         {
@@ -91,7 +91,7 @@ public class BuildingPlacement : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == placedString)
         {
