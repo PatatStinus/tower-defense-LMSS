@@ -15,6 +15,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private float timeButton = 1f; //Takes this amount of time to scale the button
 
     public GameObject optionsMenu;
+    public GameObject mapMenu;
+    public GameObject difficultyMenu;
+
+
+    public int selectedLevelIndex;
+    public string selectedDifficultyIndex;
 
     void Start()
     {
@@ -36,14 +42,13 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(selectedLevelIndex);
     }
-
-    public void ExitGame()
+    public void MapMenu()
     {
-        Application.Quit();
+        // Display Map selection menu
+        mapMenu.SetActive(true);
     }
-
     public void Options(Transform optionsButton)
     {
         if (optionsButton.transform.localScale.x >= 1 && transform.localScale.y >= 1)
@@ -52,4 +57,27 @@ public class MainMenu : MonoBehaviour
             optionsMenu.SetActive(true);
         }
     }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void HideTitle()
+    {
+        titleGameObject.SetActive(false);
+        foreach (GameObject button in buttons)
+        {
+            button.SetActive(false);
+        }
+    }
+    public void ShowTitle()
+    {
+        titleGameObject.SetActive(true);
+        foreach (GameObject button in buttons)
+        {
+            button.SetActive(true);
+        }
+    }
+
+    
 }

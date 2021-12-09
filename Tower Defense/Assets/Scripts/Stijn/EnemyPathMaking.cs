@@ -10,6 +10,8 @@ public class EnemyPathMaking : MonoBehaviour
 
     private void Awake()
     {
+        t_Points.Clear();
+        distancePoints.Clear();
         for (int k = 0; k < t_Paths.Count; k++)
         {
             t_Points.Add(new Transform[t_Paths[k].childCount]);

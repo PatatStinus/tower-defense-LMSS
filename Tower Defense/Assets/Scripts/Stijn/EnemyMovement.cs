@@ -1,25 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [Range(0f, 50f)] public float f_Speed = 10f;
-    [Range(0f, 20f)] [SerializeField] private float f_RotateSpeed = 0.5f;
+    public AnimationCurve f_Speed;
+    [Range(0f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
     [Range(0f, 500f)] [SerializeField] private int moneyWhenKilled = 10;
+    [SerializeField] private float timeOfMovCurve;
 
     [HideInInspector] public bool isConfused = false;
     [HideInInspector] public bool usingAbility = false;
     [HideInInspector] public bool isZapped = false;
-    [HideInInspector] public bool doubledHealth;
     [HideInInspector] public bool reachedEnd = false;
     [HideInInspector] public int pathIndex;
     [HideInInspector] public int i_waypoitIndex = 0;
-    [HideInInspector] public float percentAllPaths;
-    [HideInInspector] public float percentToPoint;
-    [HideInInspector] public float progressPath;
     [HideInInspector] public float divideSpeed = 1;
+    [ReadOnly] public float percentAllPaths;
+    private float progressPath;
+    private float percentToPoint;
+    private float time;
     private Vector3 t_Target;
     private Quaternion q_LookAngle;
 
@@ -74,8 +76,11 @@ public class EnemyMovement : MonoBehaviour
 
     private void MoveTarget()
     {
+        time += Time.deltaTime;
+        if (time > timeOfMovCurve)
+            time = 0;
         Vector3 dir = t_Target - transform.position;
-        transform.Translate(dir.normalized * (f_Speed / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
+        transform.Translate(dir.normalized * (f_Speed.Evaluate(time) / divideSpeed) * Time.deltaTime, Space.World); //Move enemy to target
 
         q_LookAngle = Quaternion.LookRotation(dir, transform.up); //Get enemy to target rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, q_LookAngle, f_RotateSpeed * Time.deltaTime); //Rotate enemy to target
@@ -117,5 +122,26 @@ public class EnemyMovement : MonoBehaviour
     {
         if(!reachedEnd)
             ManageMoney.GetMoney(moneyWhenKilled);
+    }
+}
+
+public class ReadOnlyAttribute : PropertyAttribute
+{
+
+}
+
+[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+public class ReadOnlyDrawer : PropertyDrawer
+{
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        return EditorGUI.GetPropertyHeight(property, label, true);
+    }
+
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    {
+        GUI.enabled = false;
+        EditorGUI.PropertyField(position, property, label, true);
+        GUI.enabled = true;
     }
 }

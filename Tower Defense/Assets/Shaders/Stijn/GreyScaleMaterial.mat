@@ -46,7 +46,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - PercentHealth: 0
+    - NoiseStrength: 0.09
+    - PercentHealth: 0.68
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
