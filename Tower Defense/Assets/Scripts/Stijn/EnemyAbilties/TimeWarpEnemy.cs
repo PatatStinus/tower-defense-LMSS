@@ -48,12 +48,20 @@ public class TimeWarpEnemy : MonoBehaviour
             enemyMovements[i].transform.position = EnemyPathMaking.t_Points[enemyMovements[i].pathIndex][enemyMovements[i].i_waypoitIndex - 1].transform.position;
             enemyMovements[i].Target();
             enemyMovements[i].transform.position = PercentToPoint.PercentToPath(enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue), enemyMovements[i].pathIndex, enemyMovements[i].transform.rotation);
+            if (enemyMovements[i].TryGetComponent(out JumpingAbility jump))
+                jump.canAbility = false;
         }
 
         movement.divideSpeed = 1f;
         movement.f_RotateSpeed = orgRot;
 
         yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < enemyMovements.Count; i++)
+        {
+            if (enemyMovements[i].TryGetComponent(out JumpingAbility jump))
+                jump.canAbility = true;
+        }
 
         Destroy(effect);
 
