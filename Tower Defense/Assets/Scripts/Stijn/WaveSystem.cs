@@ -30,7 +30,8 @@ public class WaveSystem : MonoBehaviour
     private void Start()
     {
         difficulty = PlayerPrefs.GetInt("Difficulty");
-        difficulty = 2;
+        if (!PlayerPrefs.HasKey("Difficulty"))
+            difficulty = 2;
         totalWaves = waves.Count;
         switch(difficulty)
         {

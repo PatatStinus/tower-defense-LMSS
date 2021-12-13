@@ -6,7 +6,7 @@ using UnityEditor;
 public class EnemyMovement : MonoBehaviour
 {
     public AnimationCurve f_Speed;
-    [Range(0f, 20f)] public float f_RotateSpeed = 0.5f;
+    [Range(-1f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
     [Range(0f, 500f)] [SerializeField] private int moneyWhenKilled = 10;
     [SerializeField] private float timeOfMovCurve;

@@ -12,6 +12,7 @@ TagManager:
   - Sticky
   - Gum
   - Balloon
+  - Canvas
   layers:
   - Default
   - TransparentFX
