@@ -102,7 +102,8 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            i_waypoitIndex++;
+            if(i_waypoitIndex + 1 < EnemyPathMaking.t_Points[pathIndex].Length)
+                i_waypoitIndex++;
             t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
         }
     } 

@@ -7,22 +7,25 @@ public class TimeWarpEnemy : MonoBehaviour
     //BOSS ENEMY
     [SerializeField] private float timeSkipValue = 1f;
     [SerializeField] private GameObject timeSkipEffect;
+    [SerializeField] private Vector2 attackRange;
     private GameObject canvas;
     private GameObject enemyParent;
     private List<EnemyMovement> enemyMovements = new List<EnemyMovement>();
     private EnemyMovement movement;
     private bool doneTime;
+    private float attackPercent;
 
     private void Start()
     {
         enemyParent = GameObject.FindGameObjectWithTag("Enemy");
         movement = GetComponent<EnemyMovement>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
+        attackPercent = Random.Range(attackRange.x, attackRange.y + 1);
     }
 
     private void Update()
     {
-        if(movement.percentAllPaths > 20 && !doneTime)
+        if(movement.percentAllPaths > attackPercent && !doneTime)
         {
             StartCoroutine(TimeSkip());
             doneTime = true;
@@ -44,10 +47,15 @@ public class TimeWarpEnemy : MonoBehaviour
 
         for (int i = 0; i < enemyMovements.Count; i++)
         {
-            enemyMovements[i].i_waypoitIndex = PercentToPoint.WayPointIndex(enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue), enemyMovements[i].pathIndex);
+            float percentPath = enemyMovements[i].isConfused ? Random.Range(0, 2) == 0 ? enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue) : enemyMovements[i].percentAllPaths - (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue) : enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue);
+            if (percentPath > 99)
+                percentPath = 99;
+
+            enemyMovements[i].i_waypoitIndex = PercentToPoint.WayPointIndex(percentPath, enemyMovements[i].pathIndex);
             enemyMovements[i].transform.position = EnemyPathMaking.t_Points[enemyMovements[i].pathIndex][enemyMovements[i].i_waypoitIndex - 1].transform.position;
             enemyMovements[i].Target();
-            enemyMovements[i].transform.position = PercentToPoint.PercentToPath(enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue), enemyMovements[i].pathIndex, enemyMovements[i].transform.rotation);
+            enemyMovements[i].transform.position = PercentToPoint.PercentToPath(percentPath, enemyMovements[i].pathIndex, enemyMovements[i].transform.rotation);
+            
             if (enemyMovements[i].TryGetComponent(out JumpingAbility jump))
                 jump.canAbility = false;
         }
@@ -59,6 +67,8 @@ public class TimeWarpEnemy : MonoBehaviour
 
         for (int i = 0; i < enemyMovements.Count; i++)
         {
+            if (enemyMovements[i] == null)
+                continue;
             if (enemyMovements[i].TryGetComponent(out JumpingAbility jump))
                 jump.canAbility = true;
         }
