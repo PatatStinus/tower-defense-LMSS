@@ -42,5 +42,5 @@ public class Towers
 {
     public int id;
     public Vector3 pos;
-    public int upgrades1, upgrades2, upgrades3;
+    public List<int> pathUpgrades = new List<int>();
 }

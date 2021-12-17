@@ -2813,6 +2813,12 @@ MonoBehaviour:
   wavesText: {fileID: 3033968}
   autoStartButton: {fileID: 1648418120}
   freePlayPanel: {fileID: 22624688}
+  towers:
+  - {fileID: 1174246716421712831, guid: fb473bb350b3cb949bc532e81224edcc, type: 3}
+  - {fileID: 3934270122608099970, guid: bb473a8279f69c441b4136b30d8e7f8c, type: 3}
+  - {fileID: 6377932236829630768, guid: 9ddde057684306e40845b9610571d23a, type: 3}
+  - {fileID: 4862524516408727138, guid: 781efe944c1fc8446a04199beed928ad, type: 3}
+  - {fileID: 8881291634760973827, guid: cf7603753ced72346867761b5e164714, type: 3}
 --- !u!114 &506944752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2925,9 +2931,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData:
-    mapID: 0
-    difficulty: 1
-    wave: 1
+    mapID: 1
+    difficulty: 2
+    wave: -1
     towers: []
 --- !u!1 &515775209
 GameObject:

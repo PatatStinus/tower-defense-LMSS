@@ -14,6 +14,7 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI wavesText;
     [SerializeField] private Image autoStartButton;
     [SerializeField] private GameObject freePlayPanel;
+    [SerializeField] private List<GameObject> towers;
     public static bool finishedWave = true;
     private bool finishedSpawning;
     private bool waveDone;
@@ -38,7 +39,7 @@ public class WaveSystem : MonoBehaviour
 
         loadedGame = PlayerPrefs.GetInt("LoadedGame");
         if (!PlayerPrefs.HasKey("LoadedGame"))
-            loadedGame = 1;
+            loadedGame = 0;
 
         saveFiles = GetComponent<SaveSystem>();
         if(loadedGame == 1)
@@ -52,6 +53,11 @@ public class WaveSystem : MonoBehaviour
         {
             difficulty = saveFiles.gameData.difficulty;
             currentWave = saveFiles.gameData.wave;
+            for (int i = 0; i < saveFiles.gameData.towers.Count; i++)
+            {
+                GameObject tower = Instantiate(towers[saveFiles.gameData.towers[i].id]);
+                tower.transform.position = saveFiles.gameData.towers[i].pos;
+            }
         }
 
         totalWaves = waves.Count;
