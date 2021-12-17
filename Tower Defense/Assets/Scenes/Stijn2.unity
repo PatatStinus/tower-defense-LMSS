@@ -2926,8 +2926,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData:
     mapID: 0
-    difficulty: 10
-    wave: 23
+    difficulty: 1
+    wave: 1
     towers: []
 --- !u!1 &515775209
 GameObject:

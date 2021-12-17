@@ -38,7 +38,21 @@ public class WaveSystem : MonoBehaviour
 
         loadedGame = PlayerPrefs.GetInt("LoadedGame");
         if (!PlayerPrefs.HasKey("LoadedGame"))
-            loadedGame = 0;
+            loadedGame = 1;
+
+        saveFiles = GetComponent<SaveSystem>();
+        if(loadedGame == 1)
+        {
+            saveFiles.gameData.difficulty = difficulty;
+            UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            saveFiles.gameData.mapID = scene.buildIndex;
+            saveFiles.gameData.wave = -1;
+        }
+        else if(loadedGame == 0)
+        {
+            difficulty = saveFiles.gameData.difficulty;
+            currentWave = saveFiles.gameData.wave;
+        }
 
         totalWaves = waves.Count;
         switch(difficulty)
@@ -57,18 +71,6 @@ public class WaveSystem : MonoBehaviour
                 break;
         }
         finishedWave = true;
-        saveFiles = GetComponent<SaveSystem>();
-        if(loadedGame == 1)
-        {
-            saveFiles.gameData.difficulty = difficulty;
-            UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-            saveFiles.gameData.mapID = scene.buildIndex;
-            saveFiles.gameData.wave = -1;
-        }
-        if(loadedGame == 0)
-        {
-            currentWave = saveFiles.gameData.wave;
-        }
         wavesText.text = currentWave + 1 + "/" + maxWave;
     }
 

@@ -48,7 +48,7 @@ public class ThunderWeather : MonoBehaviour
     {
         for (int i = 0; i < allObjects.Count; i++)
         {
-            if (allObjects[i].layer == 0)
+            if (allObjects[i] == null || allObjects[i].layer == 0)
             {
                 allObjects.RemoveAt(i);
                 AllObjects();

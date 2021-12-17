@@ -12,7 +12,6 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         safefile = Application.persistentDataPath + "/ContinueGame.json";
-        LoadGame();
     }
 
     public void SaveGame()
@@ -35,5 +34,13 @@ public class ContinueGame
     public int mapID;
     public int difficulty;
     public int wave;
-    public List<GameObject> towers = new List<GameObject>();
+    public List<Towers> towers = new List<Towers>();
+}
+
+[System.Serializable]
+public class Towers
+{
+    public int id;
+    public Vector3 pos;
+    public int upgrades1, upgrades2, upgrades3;
 }
