@@ -11,7 +11,7 @@ public class BuildingPlacement : MonoBehaviour
 
     protected RaycastHit hit;
 
-    [SerializeField] Material green;
+    [SerializeField] protected Material green;
     [SerializeField] Material red;
 
     [SerializeField] protected LayerMask selectableLayer;
@@ -23,7 +23,7 @@ public class BuildingPlacement : MonoBehaviour
 
     [SerializeField] protected GameObject Trigger;
 
-    Renderer triggerRender;
+    protected Renderer triggerRender;
 
     protected Ray ray;
 
@@ -50,9 +50,9 @@ public class BuildingPlacement : MonoBehaviour
             }
 
             if (Physics.Linecast(ray.origin, hit.point, pathLayer))
-                triggerRender.material = red;
+                canPlace = false;
             else
-                triggerRender.material = green;
+                canPlace = true;
 
             //Checking if the object should be able to be placed when clicking mouse
             if (Input.GetMouseButton(0) && canPlace == true && !Physics.Linecast(ray.origin, hit.point, pathLayer))
@@ -74,29 +74,27 @@ public class BuildingPlacement : MonoBehaviour
                 selectedObject = hit.transform;
             }
         }
+
+        if (canPlace)
+            triggerRender.material = green;
+        else 
+            triggerRender.material = red;
     }
 
     //Changing canPlace value and setting triggers 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == placedString)
-        {
             canPlace = false;
-            triggerRender.material = red;
-        }
         else
-        {
             canPlace = true;
-            triggerRender.material = green;
-        }
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == placedString)
-        {
             canPlace = true;
-            triggerRender.material = green;
-        }
+        //else if (other.gameObject.layer == pathLayer)
+        //    canPlace = true;
     }
 }

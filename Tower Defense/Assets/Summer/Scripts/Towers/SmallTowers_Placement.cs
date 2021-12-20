@@ -6,6 +6,8 @@ public class SmallTowers_Placement : BuildingPlacement
 {
     [SerializeField] LayerMask balloonLayer;
 
+    Balloon_Placement balloonScript;
+
     protected override void Start()
     {
         base.Start();
@@ -19,15 +21,24 @@ public class SmallTowers_Placement : BuildingPlacement
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, balloonLayer))
         {
-            selectedObject.position = new Vector3(hit.point.x, hit.transform.position.y + 0.5f, hit.point.z);
+            var balloonScript = hit.transform.GetComponent<Balloon_Placement>();
 
-            if (Input.GetMouseButton(0) && canPlace == true)
+            if (balloonScript != null && balloonScript.towerHoldCount > 0)
             {
-                Trigger.SetActive(false);
-                placedObject = true;
-                selectedObject.gameObject.tag = "Placed";
-                selectedObject.gameObject.layer = placedInt;
-                selectedObject = null;
+                selectedObject.position = new Vector3(balloonScript.towerPlacePoint.position.x, balloonScript.towerPlacePoint.position.y + 0.5f, balloonScript.towerPlacePoint.position.z);
+
+                triggerRender.material = green;
+
+                if (Input.GetMouseButton(0) && canPlace)
+                {
+                    Trigger.SetActive(false);
+                    placedObject = true;
+                    selectedObject.gameObject.tag = "Placed";
+                    selectedObject.gameObject.layer = placedInt;
+                    selectedObject = null;
+
+                    balloonScript.towerHoldCount--;
+                }
             }
         }
     }
@@ -35,7 +46,10 @@ public class SmallTowers_Placement : BuildingPlacement
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
+    }
 
-
+    protected override void OnTriggerExit(Collider other)
+    {
+        base.OnTriggerExit(other);
     }
 }

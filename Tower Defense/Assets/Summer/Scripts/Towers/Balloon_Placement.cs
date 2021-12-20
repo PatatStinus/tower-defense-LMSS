@@ -22,6 +22,9 @@ public class Balloon_Placement : MonoBehaviour
     [SerializeField] public bool placedObject = false;
     [SerializeField] bool canPlace;
 
+    public Transform towerPlacePoint;
+    public int towerHoldCount;
+
     Renderer triggerRender;
 
     protected Ray ray;
@@ -29,6 +32,7 @@ public class Balloon_Placement : MonoBehaviour
     private void Start()
     {
         canPlace = true;
+        towerHoldCount = 1;
     }
 
     void Update()
