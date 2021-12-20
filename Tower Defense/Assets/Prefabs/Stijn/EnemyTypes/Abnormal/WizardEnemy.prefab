@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3186181790008050484}
   - component: {fileID: 3186181790008050483}
   m_Layer: 14
-  m_Name: RageEnemy
+  m_Name: WizardEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,8 +209,8 @@ MonoBehaviour:
   reachedEnd: 0
   pathIndex: 0
   i_waypoitIndex: 0
-  percentAllPaths: 0
   divideSpeed: 1
+  percentAllPaths: 0
 --- !u!114 &-9005893999615191169
 MonoBehaviour:
   m_ObjectHideFlags: 0

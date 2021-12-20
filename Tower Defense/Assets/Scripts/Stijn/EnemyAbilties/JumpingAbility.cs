@@ -25,7 +25,6 @@ public class JumpingAbility : MonoBehaviour
     {
         movement = GetComponent<EnemyMovement>();
         canAbility = true;
-        //To Do: If Frozen/Zapped don't jump
     }
 
     private void Update()
@@ -33,6 +32,7 @@ public class JumpingAbility : MonoBehaviour
         if(!isJumping)
         {
             Invoke("Jump", Random.Range(2f, 4f));
+            transform.GetChild(0).transform.localPosition = new Vector3(0, 0.5f, 0);
             isJumping = true;
         }
         if (isJumping && jumpAnim)
@@ -140,10 +140,11 @@ public class JumpingAbility : MonoBehaviour
     private void NewTarget()
     {
         movement.NewTarget(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].position);
-        isJumping = false;
+        transform.GetChild(0).transform.localPosition = new Vector3(0, 0.5f, 0);
         windingUp = false;
         landed = false;
         movement.divideSpeed = 1f;
         movement.usingAbility = false;
+        time = 0f;
     }
 }

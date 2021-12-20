@@ -1072,7 +1072,7 @@ PrefabInstance:
       objectReference: {fileID: 1874896550}
     - target: {fileID: 6172859496349910865, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
       propertyPath: difficulty
-      value: medium
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
@@ -1376,7 +1376,7 @@ PrefabInstance:
       objectReference: {fileID: 1874896550}
     - target: {fileID: 6172859496349910865, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
       propertyPath: difficulty
-      value: hard
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
@@ -2851,7 +2851,7 @@ PrefabInstance:
       objectReference: {fileID: 1874896550}
     - target: {fileID: 6172859496349910865, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
       propertyPath: difficulty
-      value: easy
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000cada7259bcfc42af0f225eaed03b1, type: 3}
@@ -4370,7 +4370,7 @@ MonoBehaviour:
   optionsMenu: {fileID: 536575569}
   mapMenu: {fileID: 1399654164}
   difficultyMenu: {fileID: 237568601}
-  selectedLevelIndex: 0
+  selectedLevelIndex: 1
   selectedDifficultyIndex: 
 --- !u!224 &1936996238 stripped
 RectTransform:

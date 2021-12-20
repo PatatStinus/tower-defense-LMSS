@@ -6,7 +6,7 @@ using UnityEditor;
 public class EnemyMovement : MonoBehaviour
 {
     public AnimationCurve f_Speed;
-    [Range(0f, 20f)] public float f_RotateSpeed = 0.5f;
+    [Range(-1f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
     [Range(0f, 500f)] [SerializeField] private int moneyWhenKilled = 10;
     [SerializeField] private float timeOfMovCurve;
@@ -102,7 +102,8 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
-            i_waypoitIndex++;
+            if(i_waypoitIndex + 1 < EnemyPathMaking.t_Points[pathIndex].Length)
+                i_waypoitIndex++;
             t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
         }
     } 

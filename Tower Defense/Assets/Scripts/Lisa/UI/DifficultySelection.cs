@@ -5,10 +5,10 @@ using UnityEngine;
 public class DifficultySelection : MonoBehaviour
 {
     public MainMenu mainMenu;
-    public string difficulty;
+    public int difficulty;
 
     public void SetMapDifficulty()
     {
-        mainMenu.selectedDifficultyIndex = difficulty;
+        PlayerPrefs.SetInt("Difficulty", difficulty);
     }
 }

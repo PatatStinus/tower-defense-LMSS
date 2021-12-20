@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.IO;
 
 public class WaveSystem : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class WaveSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI wavesText;
     [SerializeField] private Image autoStartButton;
     [SerializeField] private GameObject freePlayPanel;
+    [SerializeField] private List<GameObject> towers;
     public static bool finishedWave = true;
     private bool finishedSpawning;
     private bool waveDone;
@@ -20,17 +22,44 @@ public class WaveSystem : MonoBehaviour
     private bool autoStart;
     private bool freePlay;
     private float floatedDifficulty;
+    private int loadedGame;
     private int maxWave = 10;
     private int difficulty = 2;
     private int currentWave = -1;
     private int spawnedEnemies = 0;
     private int totalWaves;
     private int totalEnemiesInWave;
+    private SaveSystem saveFiles;
 
     private void Start()
     {
         difficulty = PlayerPrefs.GetInt("Difficulty");
-        difficulty = 2;
+        if (!PlayerPrefs.HasKey("Difficulty"))
+            difficulty = 2;
+
+        loadedGame = PlayerPrefs.GetInt("LoadedGame");
+        if (!PlayerPrefs.HasKey("LoadedGame"))
+            loadedGame = 0;
+
+        saveFiles = GetComponent<SaveSystem>();
+        if(loadedGame == 1)
+        {
+            saveFiles.gameData.difficulty = difficulty;
+            UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            saveFiles.gameData.mapID = scene.buildIndex;
+            saveFiles.gameData.wave = -1;
+        }
+        else if(loadedGame == 0)
+        {
+            difficulty = saveFiles.gameData.difficulty;
+            currentWave = saveFiles.gameData.wave;
+            for (int i = 0; i < saveFiles.gameData.towers.Count; i++)
+            {
+                GameObject tower = Instantiate(towers[saveFiles.gameData.towers[i].id]);
+                tower.transform.position = saveFiles.gameData.towers[i].pos;
+            }
+        }
+
         totalWaves = waves.Count;
         switch(difficulty)
         {
@@ -47,8 +76,8 @@ public class WaveSystem : MonoBehaviour
                 maxWave = 80;
                 break;
         }
-        wavesText.text = currentWave + 1 + "/" + maxWave;
         finishedWave = true;
+        wavesText.text = currentWave + 1 + "/" + maxWave;
     }
 
     private void Update()
@@ -81,7 +110,11 @@ public class WaveSystem : MonoBehaviour
             }
             moneyFromWave = true;
 
-            if(currentWave + 1 == maxWave)
+            saveFiles.gameData.wave = currentWave;
+
+            saveFiles.SaveGame();
+
+            if (currentWave + 1 == maxWave)
             {
                 Time.timeScale = 1;
                 freePlayPanel.SetActive(true);

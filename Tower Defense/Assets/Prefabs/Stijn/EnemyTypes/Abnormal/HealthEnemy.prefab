@@ -196,8 +196,8 @@ MonoBehaviour:
   reachedEnd: 0
   pathIndex: 0
   i_waypoitIndex: 0
-  percentAllPaths: 0
   divideSpeed: 1
+  percentAllPaths: 0
 --- !u!114 &1043703562846801756
 MonoBehaviour:
   m_ObjectHideFlags: 0
