@@ -4,7 +4,7 @@ using TMPro;
 public class ManageMoney : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI moneyText;
-    private static int money = 1000;
+    public static int money = 1000;
     private bool maxMoneyReached;
     private float moneyCountdown;
 
