@@ -74,4 +74,16 @@ public class Balloon_Placement : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 17)
+            canPlace = false;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 17)
+            canPlace = true;
+    }
 }
