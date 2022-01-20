@@ -39,12 +39,13 @@ MonoBehaviour:
   pathLayer:
     serializedVersion: 2
     m_Bits: 65536
-  placedObject: 0
-  canPlace: 0
-  Trigger: {fileID: 2590957053363143656}
   balloonLayer:
     serializedVersion: 2
     m_Bits: 131072
+  placedObject: 0
+  canPlace: 0
+  Trigger: {fileID: 2590957053363143656}
+  turret: {fileID: 8155181552283856286}
 --- !u!1 &4130828130867187938
 GameObject:
   m_ObjectHideFlags: 0

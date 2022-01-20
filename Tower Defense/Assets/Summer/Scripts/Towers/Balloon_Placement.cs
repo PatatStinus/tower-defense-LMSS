@@ -60,6 +60,7 @@ public class Balloon_Placement : MonoBehaviour
                 placedObject = true;
                 selectedObject.gameObject.tag = "Balloon";
                 selectedObject.gameObject.layer = 17;
+                canPlace = false;
                 selectedObject = null;
             }
         }

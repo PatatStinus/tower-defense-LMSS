@@ -50,10 +50,10 @@ public class BuildingPlacement : MonoBehaviour
                 selectedObject.position = new Vector3(hit.point.x, hit.point.y + 0.5f, hit.point.z);
             }
 
-            if (Physics.Linecast(ray.origin, hit.point, pathLayer))
-                canPlace = false;
-            else
-                canPlace = true;
+            //if (Physics.Linecast(ray.origin, hit.point, pathLayer))
+            //    canPlace = false;
+            //else
+            //    canPlace = true;
 
             //Checking if the object should be able to be placed when clicking mouse
             if (Input.GetMouseButton(0) && canPlace == true && !Physics.Linecast(ray.origin, hit.point, pathLayer) &&
@@ -87,19 +87,17 @@ public class BuildingPlacement : MonoBehaviour
     //Changing canPlace value and setting triggers 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == placedString)
-            canPlace = false; 
-        if (other.gameObject.layer == pathLayer)
+        if (other.gameObject.layer == 12)
             canPlace = false;
-        else
-            canPlace = true;
+        else if (other.gameObject.layer == 16)
+            canPlace = false;
     }
 
     protected virtual void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == placedString)
+        if (other.gameObject.layer == 12)
             canPlace = true;
-        //else if (other.gameObject.layer == pathLayer)
-        //    canPlace = true;
+        else if (other.gameObject.layer == 16)
+            canPlace = true;
     }
 }

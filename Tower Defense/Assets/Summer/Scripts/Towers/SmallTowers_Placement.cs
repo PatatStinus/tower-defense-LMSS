@@ -6,6 +6,8 @@ public class SmallTowers_Placement : BuildingPlacement
 {   
     Balloon_Placement balloonScript;
 
+    [SerializeField] GameObject turret;
+
     protected override void Start()
     {
         base.Start();
@@ -35,12 +37,13 @@ public class SmallTowers_Placement : BuildingPlacement
                     selectedObject.gameObject.tag = "Placed";
                     selectedObject.gameObject.layer = placedInt;
                     selectedObject = null;
+                    canPlace = false;
 
-                    if (TryGetComponent<TowerShooting>(out var shoot))
-                    {
+                    if (turret.TryGetComponent<TowerShooting>(out var shoot))
+                    {                        
                         shoot.detectionRange = 50f;
                     }
-                    else if (TryGetComponent<GumTower>(out var gumShoot))
+                    else if (turret.TryGetComponent<GumTower>(out var gumShoot))
                     {
                         gumShoot.detectionRange = 50f;
                     }
@@ -50,13 +53,13 @@ public class SmallTowers_Placement : BuildingPlacement
         }
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-    }
+    //protected override void OnTriggerEnter(Collider other)
+    //{
+    //    base.OnTriggerEnter(other);
+    //}
 
-    protected override void OnTriggerExit(Collider other)
-    {
-        base.OnTriggerExit(other);
-    }
+    //protected override void OnTriggerExit(Collider other)
+    //{
+    //    base.OnTriggerExit(other);
+    //}
 }
