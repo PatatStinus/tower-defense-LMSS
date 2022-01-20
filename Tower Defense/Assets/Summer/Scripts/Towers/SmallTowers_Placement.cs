@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SmallTowers_Placement : BuildingPlacement
-{
-    [SerializeField] LayerMask balloonLayer;
-
+{   
     Balloon_Placement balloonScript;
 
     protected override void Start()
@@ -21,15 +19,16 @@ public class SmallTowers_Placement : BuildingPlacement
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, balloonLayer))
         {
-            var balloonScript = hit.transform.GetComponent<Balloon_Placement>();
+            balloonScript = hit.transform.GetComponent<Balloon_Placement>();
 
             if (balloonScript != null && balloonScript.towerHoldCount > 0)
             {
                 selectedObject.position = new Vector3(balloonScript.towerPlacePoint.position.x, balloonScript.towerPlacePoint.position.y + 0.5f, balloonScript.towerPlacePoint.position.z);
+                canPlace = true;
 
                 triggerRender.material = green;
 
-                if (Input.GetMouseButton(0) && canPlace)
+                if (Input.GetMouseButtonDown(0) && canPlace)
                 {
                     Trigger.SetActive(false);
                     placedObject = true;
@@ -37,6 +36,14 @@ public class SmallTowers_Placement : BuildingPlacement
                     selectedObject.gameObject.layer = placedInt;
                     selectedObject = null;
 
+                    if (TryGetComponent<TowerShooting>(out var shoot))
+                    {
+                        shoot.detectionRange = 50f;
+                    }
+                    else if (TryGetComponent<GumTower>(out var gumShoot))
+                    {
+                        gumShoot.detectionRange = 50f;
+                    }
                     balloonScript.towerHoldCount--;
                 }
             }

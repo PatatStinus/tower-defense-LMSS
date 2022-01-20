@@ -17,6 +17,7 @@ public class BuildingPlacement : MonoBehaviour
     [SerializeField] protected LayerMask selectableLayer;
     [SerializeField] protected LayerMask terrainLayer;
     [SerializeField] protected LayerMask pathLayer;
+    [SerializeField] protected LayerMask balloonLayer;
 
     [SerializeField] protected bool placedObject = false;
     [SerializeField] public bool canPlace;
@@ -40,7 +41,7 @@ public class BuildingPlacement : MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         //Checking if a object is selected and that it hasnt been placed
-        if (selectedObject != null && !placedObject)
+        if (selectedObject != null && !placedObject && selectedObject == gameObject.transform)
         {
             //Checking if terrain layer is selected with raycast
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, terrainLayer))
@@ -55,17 +56,19 @@ public class BuildingPlacement : MonoBehaviour
                 canPlace = true;
 
             //Checking if the object should be able to be placed when clicking mouse
-            if (Input.GetMouseButton(0) && canPlace == true && !Physics.Linecast(ray.origin, hit.point, pathLayer))
+            if (Input.GetMouseButton(0) && canPlace == true && !Physics.Linecast(ray.origin, hit.point, pathLayer) &&
+                !Physics.Linecast(ray.origin, hit.point, balloonLayer))
             {
                 //When building placed it deactivates trigger and changes its layer + tag to placed
                 Trigger.SetActive(false);
+                canPlace = false;
                 placedObject = true;
                 selectedObject.gameObject.tag = placedString;
                 selectedObject.gameObject.layer = placedInt;
                 selectedObject = null;
             }
         }
-        else
+        else if (selectedObject == null)
         {
             //Checking if the object is selectable
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 1000, selectableLayer))
@@ -85,6 +88,8 @@ public class BuildingPlacement : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == placedString)
+            canPlace = false; 
+        if (other.gameObject.layer == pathLayer)
             canPlace = false;
         else
             canPlace = true;

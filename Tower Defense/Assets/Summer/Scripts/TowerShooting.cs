@@ -18,7 +18,7 @@ public class TowerShooting : MonoBehaviour
 
     [SerializeField] float rotationStrength = 2f;
 
-    [SerializeField] float detectionRange = 5f;
+    public float detectionRange = 5f;
 
     [SerializeField] LayerMask obstacleLayer;
 

@@ -18,7 +18,7 @@ public class OffensiveTowers : MonoBehaviour
 
     [SerializeField] protected float rotationStrength = 2f;
 
-    [SerializeField] protected float detectionRange = 5f;
+    public float detectionRange = 5f;
 
     [SerializeField] protected LayerMask obstacleLayer;
 
