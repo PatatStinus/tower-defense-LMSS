@@ -52,14 +52,4 @@ public class SmallTowers_Placement : BuildingPlacement
             }
         }
     }
-
-    //protected override void OnTriggerEnter(Collider other)
-    //{
-    //    base.OnTriggerEnter(other);
-    //}
-
-    //protected override void OnTriggerExit(Collider other)
-    //{
-    //    base.OnTriggerExit(other);
-    //}
 }
