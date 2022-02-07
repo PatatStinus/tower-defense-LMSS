@@ -61,7 +61,7 @@ public class Spells : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray, out hit, 100f, ~ignoreSpells))
         {
-            usedProjector.transform.position = new Vector3(hit.point.x, usedProjector.transform.position.y, hit.point.z);
+            usedProjector.transform.position = hit.point;
             usedProjector.size = new Vector3(radius, radius, 5);
         }
     }

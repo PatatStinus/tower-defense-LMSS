@@ -16,7 +16,7 @@ public class RageAbility : MonoBehaviour
 
     private void Update()
     {
-        if (hp.hp <= hp.startHealth / 2 && !raged)
+        if (hp.hp <= hp.startHealth / 2 && !raged) //If enemy is less then half, double hp && triple movement speed
         {
             hp.hp *= 2;
             movement.divideSpeed = 1f/3f;
