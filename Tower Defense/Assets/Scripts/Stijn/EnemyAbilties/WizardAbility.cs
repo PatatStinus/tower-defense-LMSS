@@ -16,28 +16,28 @@ public class WizardAbility : MonoBehaviour
         movement = GetComponent<EnemyMovement>();
         allEnemies = GameObject.FindGameObjectWithTag("Enemy");
         spawnedInPath = true;
-        Invoke("NewSpawn", Random.Range(5f, 10f));
+        Invoke("NewSpawn", Random.Range(5f, 10f)); //Random
     }
 
     private void Update()
     {
-        if(!spawnedInPath && movement.percentAllPaths + 7 < 100)
+        if(!spawnedInPath && movement.percentAllPaths + 7 < 100) //Spawn 2 enemies if not reached end
         {
             orgPos = transform.position;
             freeze = true;
-            GameObject enemyOne = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
+            GameObject enemyOne = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform); //Spawn
             GameObject enemyTwo = Instantiate(spawnables[Random.Range(0, spawnables.Count)], allEnemies.transform);
             EnemyMovement moveOne = enemyOne.GetComponent<EnemyMovement>();
             EnemyMovement moveTwo = enemyTwo.GetComponent<EnemyMovement>();
-            moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 3, movement.pathIndex);
+            moveOne.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths + 3, movement.pathIndex); //Get waypoint for enemy
             moveTwo.i_waypoitIndex = PercentToPoint.WayPointIndex(movement.percentAllPaths - 3, movement.pathIndex);
             moveOne.pathIndex = movement.pathIndex;
             moveTwo.pathIndex = movement.pathIndex;
-            enemyOne.transform.position = EnemyPathMaking.t_Points[moveOne.pathIndex][moveOne.i_waypoitIndex - 1].transform.position;
+            enemyOne.transform.position = EnemyPathMaking.t_Points[moveOne.pathIndex][moveOne.i_waypoitIndex - 1].transform.position; //Set position to waypoint
             enemyTwo.transform.position = EnemyPathMaking.t_Points[moveTwo.pathIndex][moveTwo.i_waypoitIndex - 1].transform.position;
             moveOne.Target();
             moveTwo.Target();
-            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 3, movement.pathIndex, enemyOne.transform.rotation);
+            enemyOne.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths + 3, movement.pathIndex, enemyOne.transform.rotation); //Set position in % of road
             enemyTwo.transform.position = PercentToPoint.PercentToPath(movement.percentAllPaths - 3, movement.pathIndex, enemyTwo.transform.rotation);
             enemyOne.name = "Clone";
             enemyTwo.name = "Clone";

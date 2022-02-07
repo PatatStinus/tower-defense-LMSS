@@ -20,7 +20,7 @@ public class TimeWarpEnemy : MonoBehaviour
         enemyParent = GameObject.FindGameObjectWithTag("Enemy");
         movement = GetComponent<EnemyMovement>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        attackPercent = Random.Range(attackRange.x, attackRange.y + 1);
+        attackPercent = Random.Range(attackRange.x, attackRange.y + 1); //Random spot to use ability
     }
 
     private void Update()
@@ -48,10 +48,11 @@ public class TimeWarpEnemy : MonoBehaviour
         for (int i = 0; i < enemyMovements.Count; i++)
         {
             float percentPath = enemyMovements[i].isConfused ? Random.Range(0, 2) == 0 ? enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue) : enemyMovements[i].percentAllPaths - (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue) : enemyMovements[i].percentAllPaths + (enemyMovements[i].f_Speed.Evaluate(0f) * timeSkipValue);
+            //Caculation to move enemy certain amount of % after timeskip ^
             if (percentPath > 99)
                 percentPath = 99;
 
-            enemyMovements[i].i_waypoitIndex = PercentToPoint.WayPointIndex(percentPath, enemyMovements[i].pathIndex);
+            enemyMovements[i].i_waypoitIndex = PercentToPoint.WayPointIndex(percentPath, enemyMovements[i].pathIndex); //Percent To Point script
             enemyMovements[i].transform.position = EnemyPathMaking.t_Points[enemyMovements[i].pathIndex][enemyMovements[i].i_waypoitIndex - 1].transform.position;
             enemyMovements[i].Target();
             enemyMovements[i].transform.position = PercentToPoint.PercentToPath(percentPath, enemyMovements[i].pathIndex, enemyMovements[i].transform.rotation);

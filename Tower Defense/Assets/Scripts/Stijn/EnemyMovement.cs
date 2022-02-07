@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        Target();
+        Target(); //Look at target
     }
 
     private void Update()
@@ -107,12 +107,12 @@ public class EnemyMovement : MonoBehaviour
         }
     } 
 
-    public void NewTarget(Vector3 newTarget)
+    public void NewTarget(Vector3 newTarget) //Custom Target
     {
         t_Target = newTarget;
     }
 
-    public void Target()
+    public void Target() //Target point on field
     {
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position; 
         transform.LookAt(t_Target);
