@@ -22,7 +22,7 @@ public class ManageMoney : MonoBehaviour
 
     private void Start()
     {
-        money = 1000;
+        money = 9999;
     }
 
     private void Update()

@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 100
-  hp: 100
+  startHealth: 5000
+  hp: 5000
   lerpTime: 2
 --- !u!114 &1499759888757385122
 MonoBehaviour:

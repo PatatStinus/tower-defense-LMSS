@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 150
-  hp: 150
+  startHealth: 250
+  hp: 250
   lerpTime: 2
 --- !u!1 &8928494660057575895
 GameObject:

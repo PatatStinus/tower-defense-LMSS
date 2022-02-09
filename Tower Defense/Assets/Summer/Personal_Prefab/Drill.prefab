@@ -152,7 +152,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32768
-  damage: 1
+  damage: 50
 --- !u!1 &7939027888559392897
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +292,9 @@ MonoBehaviour:
   pathLayer:
     serializedVersion: 2
     m_Bits: 65536
+  balloonLayer:
+    serializedVersion: 2
+    m_Bits: 0
   placedObject: 0
   canPlace: 0
   Trigger: {fileID: 7939027888751165289}

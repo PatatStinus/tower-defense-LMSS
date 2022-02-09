@@ -135,7 +135,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bulletSpeed: 3
-  damage: 50
+  damage: 150
   explosion: {fileID: 5921766520075561652, guid: dc2d5a3e8f165f341b4a9e2c80fe122c, type: 3}
   blastRadius: 1.5
   enemyLayer:

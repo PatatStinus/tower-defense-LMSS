@@ -264,7 +264,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32768
-  damage: 1
+  damage: 100
 --- !u!1 &8881291634760973827
 GameObject:
   m_ObjectHideFlags: 0
