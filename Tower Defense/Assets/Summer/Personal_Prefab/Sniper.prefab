@@ -220,6 +220,9 @@ MonoBehaviour:
   pathLayer:
     serializedVersion: 2
     m_Bits: 65536
+  balloonLayer:
+    serializedVersion: 2
+    m_Bits: 0
   placedObject: 0
   canPlace: 0
   Trigger: {fileID: 2003937256782965641}
@@ -487,4 +490,4 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32768
-  damage: 5
+  damage: 50

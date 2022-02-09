@@ -35,7 +35,7 @@ public class ManaManager : MonoBehaviour
 
     private void Start()
     {
-        mana = 100000;
+        mana = 1000;
         lost = false;
     }
 

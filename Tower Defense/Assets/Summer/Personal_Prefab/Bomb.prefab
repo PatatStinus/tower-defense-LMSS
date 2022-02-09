@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c24a87756f3d8f498f092de9ea2926f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 150
   explosion: {fileID: 5921766520075561652, guid: dc2d5a3e8f165f341b4a9e2c80fe122c, type: 3}
   blastRadius: 1.5
   enemyLayer:

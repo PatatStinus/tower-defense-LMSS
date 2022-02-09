@@ -39,7 +39,7 @@ public class WaveSystem : MonoBehaviour
 
         loadedGame = PlayerPrefs.GetInt("LoadedGame");
         if (!PlayerPrefs.HasKey("LoadedGame"))
-            loadedGame = 0;
+            loadedGame = 1;
 
         saveFiles = GetComponent<SaveSystem>();
         if(loadedGame == 1)
