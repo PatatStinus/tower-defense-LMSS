@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingPlacement : MonoBehaviour
 {
-    [SerializeField] protected static Transform selectedObject = null;
+    [SerializeField] protected Transform selectedObject = null;
 
     const string placedString = "Placed";
     protected const int placedInt = 12;
