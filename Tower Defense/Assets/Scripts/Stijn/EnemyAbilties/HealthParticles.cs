@@ -8,7 +8,7 @@ public class HealthParticles : MonoBehaviour
     [SerializeField] private GameObject colorFlower;
     private Quaternion orgRot;
 
-    private void Start()
+    private void OnEnable()
     {
         ColorRainWeather.onColorRaining += TurnColor;
         ColorRainWeather.onStopColorRaining += TurnDark;

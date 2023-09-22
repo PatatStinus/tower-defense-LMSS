@@ -9,16 +9,16 @@ public class HealthAbility : MonoBehaviour
     [HideInInspector] public bool isRaining = false;
     private Collider[] collisionsInRange;
 
-    private void Update()
+    private void FixedUpdate()
     {
         collisionsInRange = Physics.OverlapSphere(transform.position, radius);
         foreach (var obj in collisionsInRange)
         {
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
-            if (enemy != null && Vector3.Distance(enemy.transform.position, transform.position) != 0)
+            if (enemy != null && Vector3.Distance(enemy.transform.position, transform.position) != 0) //Why distance check??
             {
-                enemy.hp = isRaining ? enemy.hp -= regen * Time.deltaTime : enemy.hp += regen * Time.deltaTime;
-                if (enemy.hp >= enemy.startHealth)
+                enemy.hp = isRaining ? enemy.hp -= regen * Time.fixedDeltaTime : enemy.hp += regen * Time.fixedDeltaTime; //isRaining can be optimised through subscribing
+                if (enemy.hp >= enemy.startHealth) //Should be done in enemyhealth
                     enemy.hp = enemy.startHealth;
             }
         }
