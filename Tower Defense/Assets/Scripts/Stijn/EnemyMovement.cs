@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    //Check script voor meer optimizing
+
     public AnimationCurve f_Speed;
     [Range(-1f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
@@ -18,18 +20,16 @@ public class EnemyMovement : MonoBehaviour
     [HideInInspector] public int i_waypoitIndex = 0;
     [HideInInspector] public float divideSpeed = 1;
     [ReadOnly] public float percentAllPaths;
-    private float progressPath;
-    private float percentToPoint;
     private float time;
     private Vector3 t_Target;
     private Quaternion q_LookAngle;
 
-    private void Start()
+    protected virtual void Start()
     {
         Target(); //Look at target
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         MoveTarget();
 
@@ -87,12 +87,21 @@ public class EnemyMovement : MonoBehaviour
 
     private void GetPercentWaypoint()
     {
-        percentToPoint = Vector3.Distance(transform.position, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].position) / EnemyPathMaking.distancePoints[pathIndex][i_waypoitIndex - 1];
-        progressPath = i_waypoitIndex + percentToPoint; //Dus Enemy op waypoint 1 - 2 die op de helft van het pad is zou 1.5 uitkomen
-        percentAllPaths = progressPath / EnemyPathMaking.t_Points[pathIndex].Length * 100; 
+        float distanceToNextWaypoint = EnemyPathMaking.distancePoints[pathIndex][i_waypoitIndex - 1] - Vector3.Distance(transform.position, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position);
+        float totalDistanceInPath = 0;
+        for (int i = 0; i < EnemyPathMaking.distancePoints[pathIndex].Length; i++)
+        {
+            if(i_waypoitIndex - 1 <= i)
+            {
+                totalDistanceInPath += distanceToNextWaypoint;
+                break;
+            }
+            totalDistanceInPath += EnemyPathMaking.distancePoints[pathIndex][i];
+        }
+        percentAllPaths = totalDistanceInPath / EnemyPathMaking.totalDistancePath[pathIndex] * 100f;
     }
 
-    public void GetNewWayPoint(bool confused)
+    protected void GetNewWayPoint(bool confused)
     {
         if(confused)
         {
@@ -105,20 +114,20 @@ public class EnemyMovement : MonoBehaviour
                 i_waypoitIndex++;
             t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
         }
-    } 
+    }
 
-    public void NewTarget(Vector3 newTarget) //Custom Target
+    protected void NewTarget(Vector3 newTarget) //Custom Target
     {
         t_Target = newTarget;
     }
 
-    public void Target() //Target point on field
+    public void Target() //Target point on field (Instant rotations)
     {
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position; 
         transform.LookAt(t_Target);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         if(!reachedEnd)
             ManageMoney.GetMoney(moneyWhenKilled);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpingAbility : MonoBehaviour
+public class JumpingAbility : EnemyMovement
 {
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
@@ -17,21 +17,21 @@ public class JumpingAbility : MonoBehaviour
     private bool landed;
     private bool isJumping = false;
     private bool jumpAnim;
-    private EnemyMovement movement;
     private float yPos;
-    private float time = 0;
+    private float timeA = 0;
 
-    private void Start()
+    protected override void Start()
     {
-        movement = GetComponent<EnemyMovement>();
+        base.Start();
         canAbility = true;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if(!isJumping)
         {
-            Invoke("Jump", Random.Range(2f, 4f));
+            Invoke(nameof(Jump), Random.Range(2f, 4f));
             transform.GetChild(0).transform.localPosition = new Vector3(0, 0.5f, 0);
             isJumping = true;
         }
@@ -44,30 +44,30 @@ public class JumpingAbility : MonoBehaviour
             Landed();
     }
 
-    private void Jump()
+    private void Jump() //Needs better system
     {
-        if (movement != null && movement.i_waypoitIndex < EnemyPathMaking.t_Points[movement.pathIndex].Length - 2 && canAbility && !movement.isConfused || movement != null && movement.isConfused && movement.i_waypoitIndex > 1 && canAbility)
+        if (i_waypoitIndex < EnemyPathMaking.t_Points[pathIndex].Length - 1 && canAbility && !isConfused || isConfused && i_waypoitIndex > 1 && canAbility)
         {
             float xPos;
             float zPos;
-            if(!movement.isConfused)
+            if(!isConfused)
             {
-                xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.x);
-                zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex + 1].transform.position.z);
+                xPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex + 1].transform.position.x);
+                zPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex + 1].transform.position.z);
                 confusedJump = false;
             }
             else
             {
-                xPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 1].transform.position.x, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 2].transform.position.x);
-                zPos = Random.Range(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 1].transform.position.z, EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex - 2].transform.position.z);
+                xPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].transform.position.x, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 2].transform.position.x);
+                zPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].transform.position.z, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 2].transform.position.z);
                 confusedJump = true;
             }
             jumpTarget = new Vector3(xPos, transform.position.y, zPos);
-            movement.NewTarget(jumpTarget);
+            NewTarget(jumpTarget);
             yPos = Vector3.Distance(transform.position, jumpTarget);
             orgPos = transform.GetChild(0).transform.localPosition;
-            movement.usingAbility = true;
-            movement.divideSpeed = .5f;
+            usingAbility = true;
+            divideSpeed = .5f;
             windingUp = true;
             orgFreeze = transform.position;
         }
@@ -80,19 +80,19 @@ public class JumpingAbility : MonoBehaviour
         if(canAbility)
         {
             gameObject.layer = 0;
-            time += Time.deltaTime / (jumpWidth * yPos * 0.1f);
+            timeA += Time.deltaTime / (jumpWidth * yPos * 0.1f);
 
-            transform.GetChild(0).transform.localPosition = Vector3.Lerp(orgPos, new Vector3(orgPos.x, orgPos.y + yPos * jumpHeight, orgPos.z), curve.Evaluate(time));
+            transform.GetChild(0).transform.localPosition = Vector3.Lerp(orgPos, new Vector3(orgPos.x, orgPos.y + yPos * jumpHeight, orgPos.z), curve.Evaluate(timeA));
         
-            if(time >= 1)
+            if(timeA >= 1)
             {
                 jumpAnim = false;
                 isJumping = false;
                 landed = true;
-                movement.GetNewWayPoint(confusedJump);
+                GetNewWayPoint(confusedJump);
                 confusedJump = false;
-                time = 0;
-                movement.divideSpeed = 1f;
+                timeA = 0;
+                divideSpeed = 1f;
                 orgFreeze = transform.position;
             }
         }
@@ -104,12 +104,12 @@ public class JumpingAbility : MonoBehaviour
     {
         if (canAbility)
         {
-            time += Time.deltaTime;
+            timeA += Time.deltaTime;
             transform.position = orgFreeze;
 
-            if (time >= 1)
+            if (timeA >= 1)
             {
-                time = 0;
+                timeA = 0;
                 windingUp = false;
                 jumpAnim = true;
             }
@@ -122,15 +122,15 @@ public class JumpingAbility : MonoBehaviour
     {
         if (canAbility)
         {
-            time += Time.deltaTime;
+            timeA += Time.deltaTime;
             transform.position = orgFreeze;
             gameObject.layer = 14;
 
-            if (time >= 1)
+            if (timeA >= 1)
             {
-                time = 0;
+                timeA = 0;
                 landed = false;
-                movement.usingAbility = false;
+                usingAbility = false;
             }
         }
         else
@@ -139,12 +139,12 @@ public class JumpingAbility : MonoBehaviour
 
     private void NewTarget()
     {
-        movement.NewTarget(EnemyPathMaking.t_Points[movement.pathIndex][movement.i_waypoitIndex].position);
+        NewTarget(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position);
         transform.GetChild(0).transform.localPosition = new Vector3(0, 0.5f, 0);
         windingUp = false;
         landed = false;
-        movement.divideSpeed = 1f;
-        movement.usingAbility = false;
-        time = 0f;
+        divideSpeed = 1f;
+        usingAbility = false;
+        timeA = 0f;
     }
 }

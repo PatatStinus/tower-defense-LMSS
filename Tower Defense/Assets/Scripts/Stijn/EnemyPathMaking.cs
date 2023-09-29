@@ -7,6 +7,7 @@ public class EnemyPathMaking : MonoBehaviour
     [SerializeField] private List<Transform> t_Paths = new List<Transform>();
     public static List<Transform[]> t_Points = new List<Transform[]>();
     public static List<float[]> distancePoints = new List<float[]>();
+    public static List<float> totalDistancePath = new List<float>();
 
     private void Awake()
     {
@@ -20,6 +21,13 @@ public class EnemyPathMaking : MonoBehaviour
                 t_Points[k][i] = t_Paths[k].GetChild(i);
             for (int i = 0; i < distancePoints[k].Length; i++)
                 distancePoints[k][i] = Vector3.Distance(t_Points[k][i].position, t_Points[k][i + 1].position);
+        }
+
+        for (int i = 0; i < distancePoints.Count; i++)
+        {
+            totalDistancePath.Add(0);
+            for (int k = 0; k < distancePoints[i].Length; k++)
+                totalDistancePath[i] += distancePoints[i][k];
         }
     }
 }

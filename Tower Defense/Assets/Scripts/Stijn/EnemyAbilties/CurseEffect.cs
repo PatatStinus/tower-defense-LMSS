@@ -32,8 +32,8 @@ public class CurseEffect : MonoBehaviour
                     break;
                 case 3: //Spawn 3 Random Abnormal(Ability) Enemies
                     SpawnAbnormals();
-                    Invoke("SpawnAbnormals", 1f);
-                    Invoke("SpawnAbnormals", 2f);
+                    Invoke(nameof(SpawnAbnormals), 1f);
+                    Invoke(nameof(SpawnAbnormals), 2f);
                     break;
             }
         }

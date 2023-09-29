@@ -96,10 +96,8 @@ GameObject:
   - component: {fileID: 4648954637975433287}
   - component: {fileID: 2261910754452125448}
   - component: {fileID: 357928578655898507}
-  - component: {fileID: 6465030660508670067}
   - component: {fileID: 1043703562846801756}
   - component: {fileID: 7149787542613749939}
-  - component: {fileID: 2409453198423219747}
   m_Layer: 14
   m_Name: HealthEnemy
   m_TagString: Untagged
@@ -152,7 +150,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &6465030660508670067
+--- !u!114 &1043703562846801756
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,7 +159,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5613517771040092285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
+  m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHealth: 500
+  hp: 500
+  lerpTime: 2
+--- !u!114 &7149787542613749939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5613517771040092285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d55466db06032748ac52e4f42c77699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   f_Speed:
@@ -200,50 +213,11 @@ MonoBehaviour:
   i_waypoitIndex: 0
   divideSpeed: 1
   percentAllPaths: 0
---- !u!114 &1043703562846801756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613517771040092285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0c4e90cad5a1fa4e9a6b670b0def088, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startHealth: 500
-  hp: 500
-  lerpTime: 2
---- !u!114 &7149787542613749939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613517771040092285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d55466db06032748ac52e4f42c77699, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  blackFlower: {fileID: 181737071472876463}
+  colorFlower: {fileID: 7851914566763539133, guid: 7c794de2152e8454f9729203d977e601, type: 3}
   radius: 3
   regen: 10
   isRaining: 0
---- !u!114 &2409453198423219747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5613517771040092285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661bc5afc6b1eea48bb0fe54a46e0a52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackFlower: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
-  colorFlower: {fileID: 7851914566763539133, guid: 7c794de2152e8454f9729203d977e601, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
+--- !u!1 &181737071472876463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
+  m_PrefabInstance: {fileID: 7958478832926650642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &298229425623205169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7661102628957975587, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}

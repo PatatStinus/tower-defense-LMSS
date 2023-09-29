@@ -2,39 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CurseAbility : MonoBehaviour
+public class CurseAbility : EnemyMovement
 {
     [SerializeField] private GameObject cursedObject;
     private GameObject theCurse;
     private bool isRaining;
     private bool doCurse;
-    private EnemyMovement movement;
     private int curse;
 
 
-    private void Start()
+    protected override void Start()
     {
-        movement = GetComponent<EnemyMovement>();
+        base.Start();
         curse = Random.Range(1, 4);
         ColorRainWeather.onColorRaining += RainEvent;
         ColorRainWeather.onStopColorRaining += StopRainEvent;
         GetCurse();
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if (movement.i_waypoitIndex > EnemyPathMaking.t_Points[movement.pathIndex].Length - 2 && !doCurse)
+        base.Update();
+        if (i_waypoitIndex > EnemyPathMaking.t_Points[pathIndex].Length - 2 && !doCurse)
         {
             doCurse = true;
             SpawnCurse();
         }
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         ColorRainWeather.onColorRaining -= RainEvent;
         ColorRainWeather.onStopColorRaining -= StopRainEvent;
-        if (isRaining && !movement.reachedEnd)
+        if (isRaining && !reachedEnd) //DoGoodCurse if it was raining //Wouldn't it be better if it did the curse when it dies always?
             SpawnCurse();
     }
 

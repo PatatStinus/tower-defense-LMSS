@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RageAbility : MonoBehaviour
+public class RageAbility : EnemyMovement
 {
     private EnemyHealth hp;
-    private EnemyMovement movement;
     private bool raged;
 
-    private void Start()
+    protected override void Start()
     {
-        movement = GetComponent<EnemyMovement>();
+        base.Start();
         hp = GetComponent<EnemyHealth>();
     }
 
-    private void Update()
+    protected override void Update() //Would be cool if it had a little revv like a bull before enraging
     {
+        base.Update();
         if (hp.hp <= hp.startHealth / 2 && !raged) //If enemy is less then half, double hp && triple movement speed
         {
             hp.hp *= 2;
-            movement.divideSpeed = 1f/3f;
+            divideSpeed = 1f/3f;
             raged = true;
         }
     }

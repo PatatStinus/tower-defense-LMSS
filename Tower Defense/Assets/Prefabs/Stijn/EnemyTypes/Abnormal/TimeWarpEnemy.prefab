@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 7621369715863772320}
   - component: {fileID: 7642130058365071577}
   - component: {fileID: 1672643127369551882}
-  - component: {fileID: 1499759888757385122}
   - component: {fileID: -2174374444196964964}
   m_Layer: 14
   m_Name: TimeWarpEnemy
@@ -165,7 +164,7 @@ MonoBehaviour:
   startHealth: 5000
   hp: 5000
   lerpTime: 2
---- !u!114 &1499759888757385122
+--- !u!114 &-2174374444196964964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3935059792401641794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
+  m_Script: {fileID: 11500000, guid: 66005e0f2ff3a47408fb78eaad265f47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   f_Speed:
@@ -210,7 +209,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 2.5
       value: 0
-      inSlope: -0
+      inSlope: 0
       outSlope: 0
       tangentMode: 69
       weightedMode: 0
@@ -231,18 +230,6 @@ MonoBehaviour:
   i_waypoitIndex: 0
   divideSpeed: 1
   percentAllPaths: 0
---- !u!114 &-2174374444196964964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3935059792401641794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66005e0f2ff3a47408fb78eaad265f47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   timeSkipValue: 4
   timeSkipEffect: {fileID: 7841071257367480033, guid: f2a6ff03e30ba6a47a572c94b1125de7, type: 3}
   attackRange: {x: 20, y: 40}

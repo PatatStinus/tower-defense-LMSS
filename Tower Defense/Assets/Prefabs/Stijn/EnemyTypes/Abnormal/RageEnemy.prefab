@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 7621369715863772320}
   - component: {fileID: 7642130058365071577}
   - component: {fileID: 1672643127369551882}
-  - component: {fileID: 1499759888757385122}
   - component: {fileID: -7283493571408864110}
   m_Layer: 14
   m_Name: RageEnemy
@@ -165,7 +164,7 @@ MonoBehaviour:
   startHealth: 600
   hp: 600
   lerpTime: 2
---- !u!114 &1499759888757385122
+--- !u!114 &-7283493571408864110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3935059792401641794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65e11fcbb3a567f40a12500860dc4847, type: 3}
+  m_Script: {fileID: 11500000, guid: 63a7cdba9ff63c1418b941e1db46847e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   f_Speed:
@@ -213,18 +212,6 @@ MonoBehaviour:
   i_waypoitIndex: 0
   divideSpeed: 1
   percentAllPaths: 0
---- !u!114 &-7283493571408864110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3935059792401641794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63a7cdba9ff63c1418b941e1db46847e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7314432650006256017
 GameObject:
   m_ObjectHideFlags: 0

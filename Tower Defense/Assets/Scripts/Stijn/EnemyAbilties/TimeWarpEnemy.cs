@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeWarpEnemy : MonoBehaviour
+public class TimeWarpEnemy : EnemyMovement
 {
     //BOSS ENEMY
     [SerializeField] private float timeSkipValue = 1f;
@@ -11,32 +11,32 @@ public class TimeWarpEnemy : MonoBehaviour
     private GameObject canvas;
     private GameObject enemyParent;
     private List<EnemyMovement> enemyMovements = new List<EnemyMovement>();
-    private EnemyMovement movement;
     private bool doneTime;
     private float attackPercent;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         enemyParent = GameObject.FindGameObjectWithTag("Enemy");
-        movement = GetComponent<EnemyMovement>();
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         attackPercent = Random.Range(attackRange.x, attackRange.y + 1); //Random spot to use ability
     }
 
-    private void Update()
+    protected override void Update()
     {
-        if(movement.percentAllPaths > attackPercent && !doneTime)
+        base.Update();
+        if(percentAllPaths > attackPercent && !doneTime)
         {
             StartCoroutine(TimeSkip());
             doneTime = true;
         }
     }
 
-    private IEnumerator TimeSkip()
+    private IEnumerator TimeSkip() //NEEDS A REWORK
     {
-        movement.divideSpeed = 1000f;
-        float orgRot = movement.f_RotateSpeed;
-        movement.f_RotateSpeed = 0f;
+        divideSpeed = 1000f;
+        float orgRot = f_RotateSpeed;
+        f_RotateSpeed = 0f;
 
         yield return new WaitForSeconds(3f);
 
@@ -52,7 +52,7 @@ public class TimeWarpEnemy : MonoBehaviour
             if (percentPath > 99)
                 percentPath = 99;
 
-            enemyMovements[i].i_waypoitIndex = PercentToPoint.WayPointIndex(percentPath, enemyMovements[i].pathIndex); //Percent To Point script
+            enemyMovements[i].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentPath, enemyMovements[i].pathIndex); //Percent To Point script
             enemyMovements[i].transform.position = EnemyPathMaking.t_Points[enemyMovements[i].pathIndex][enemyMovements[i].i_waypoitIndex - 1].transform.position;
             enemyMovements[i].Target();
             enemyMovements[i].transform.position = PercentToPoint.PercentToPath(percentPath, enemyMovements[i].pathIndex, enemyMovements[i].transform.rotation);
@@ -61,8 +61,8 @@ public class TimeWarpEnemy : MonoBehaviour
                 jump.canAbility = false;
         }
 
-        movement.divideSpeed = 1f;
-        movement.f_RotateSpeed = orgRot;
+        divideSpeed = 1f;
+        f_RotateSpeed = orgRot;
 
         yield return new WaitForSeconds(0.5f);
 
@@ -79,8 +79,9 @@ public class TimeWarpEnemy : MonoBehaviour
         yield return null;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         if(doneTime)
         {
             for (int i = 0; i < enemyMovements.Count; i++)
