@@ -6,6 +6,7 @@ public class CurseEffect : MonoBehaviour
 {
     [SerializeField] private List<GameObject> abnormals;
     [SerializeField] private GameObject confusedEffect;
+    [SerializeField] private GameObject[] indicatorEffect = new GameObject[3];
     private List<GameObject> allConfused = new List<GameObject>();
     private GameObject gameManager;
     private GameObject allEnemies;
@@ -53,6 +54,7 @@ public class CurseEffect : MonoBehaviour
                     break;
             }
         }
+        Instantiate(indicatorEffect[curse - 1], GameObject.FindGameObjectWithTag("Canvas").transform);
     }
 
     private void OnDisable()

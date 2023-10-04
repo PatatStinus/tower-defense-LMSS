@@ -7,9 +7,9 @@ public class JumpingAbility : EnemyMovement
     [SerializeField] private float jumpWidth;
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
+    [SerializeField] private GameObject cube;
     
     [HideInInspector] public bool canAbility = true;
-    private bool confusedJump;
     private Vector3 jumpTarget;
     private Vector3 orgPos;
     private Vector3 orgFreeze;
@@ -18,6 +18,7 @@ public class JumpingAbility : EnemyMovement
     private bool isJumping = false;
     private bool jumpAnim;
     private float yPos;
+    private float newPercentage;
     private float timeA = 0;
 
     protected override void Start()
@@ -44,25 +45,18 @@ public class JumpingAbility : EnemyMovement
             Landed();
     }
 
-    private void Jump() //Needs better system
+    private void Jump()
     {
-        if (i_waypoitIndex < EnemyPathMaking.t_Points[pathIndex].Length - 1 && canAbility && !isConfused || isConfused && i_waypoitIndex > 1 && canAbility)
+        if (percentAllPaths < 88 && canAbility && !isConfused || isConfused && percentAllPaths > 12 && canAbility)
         {
-            float xPos;
-            float zPos;
-            if(!isConfused)
-            {
-                xPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].transform.position.x, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex + 1].transform.position.x);
-                zPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].transform.position.z, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex + 1].transform.position.z);
-                confusedJump = false;
-            }
-            else
-            {
-                xPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].transform.position.x, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 2].transform.position.x);
-                zPos = Random.Range(EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].transform.position.z, EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 2].transform.position.z);
-                confusedJump = true;
-            }
-            jumpTarget = new Vector3(xPos, transform.position.y, zPos);
+            newPercentage = isConfused ? Random.Range(percentAllPaths - 5, percentAllPaths - 10) : Random.Range(percentAllPaths + 5, percentAllPaths + 10);
+
+            int nextWaypoint = PercentToPoint.GetWayPointIndexFromPercent(newPercentage, pathIndex);
+            GameObject objectRot = Instantiate(cube);
+            objectRot.transform.position = EnemyPathMaking.t_Points[pathIndex][nextWaypoint - 1].transform.position;
+            objectRot.transform.LookAt(EnemyPathMaking.t_Points[pathIndex][nextWaypoint].position);
+            jumpTarget = PercentToPoint.PercentToPath(newPercentage, pathIndex, objectRot.transform.rotation);
+            Destroy(objectRot);
             NewTarget(jumpTarget);
             yPos = Vector3.Distance(transform.position, jumpTarget);
             orgPos = transform.GetChild(0).transform.localPosition;
@@ -75,7 +69,7 @@ public class JumpingAbility : EnemyMovement
             isJumping = false;
     }
 
-    private void LerpToPos()
+    private void LerpToPos() //The bar part
     {
         if(canAbility)
         {
@@ -89,8 +83,7 @@ public class JumpingAbility : EnemyMovement
                 jumpAnim = false;
                 isJumping = false;
                 landed = true;
-                GetNewWayPoint(confusedJump);
-                confusedJump = false;
+                i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(newPercentage, pathIndex) - 1; //Minus 1 for some reason >:(
                 timeA = 0;
                 divideSpeed = 1f;
                 orgFreeze = transform.position;
@@ -100,7 +93,7 @@ public class JumpingAbility : EnemyMovement
             NewTarget();
     }
 
-    private void WindUp()
+    private void WindUp() 
     {
         if (canAbility)
         {

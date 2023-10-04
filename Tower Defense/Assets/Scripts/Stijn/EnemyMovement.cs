@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    //Check script voor meer optimizing
-
     public AnimationCurve f_Speed;
     [Range(-1f, 20f)] public float f_RotateSpeed = 0.5f;
     [Range(0f, 500f)] [SerializeField] private int i_ManaWhenKilled = 10;
@@ -55,19 +53,9 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             if(Random.Range(1, 3) == 1)
-            {
-                if (i_waypoitIndex != 0)
-                    i_waypoitIndex--;
-                else
-                    i_waypoitIndex++;
-            }
+                i_waypoitIndex = i_waypoitIndex != 0 ? i_waypoitIndex-- : i_waypoitIndex++;
             else
-            {
-                if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 3)
-                    i_waypoitIndex--;
-                else
-                    i_waypoitIndex++;
-            }
+                i_waypoitIndex = i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2 ? i_waypoitIndex-- : i_waypoitIndex++;
         }
 
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
@@ -99,21 +87,6 @@ public class EnemyMovement : MonoBehaviour
             totalDistanceInPath += EnemyPathMaking.distancePoints[pathIndex][i];
         }
         percentAllPaths = totalDistanceInPath / EnemyPathMaking.totalDistancePath[pathIndex] * 100f;
-    }
-
-    protected void GetNewWayPoint(bool confused)
-    {
-        if(confused)
-        {
-            i_waypoitIndex--;
-            t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
-        }
-        else
-        {
-            if(i_waypoitIndex + 1 < EnemyPathMaking.t_Points[pathIndex].Length)
-                i_waypoitIndex++;
-            t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;
-        }
     }
 
     protected void NewTarget(Vector3 newTarget) //Custom Target

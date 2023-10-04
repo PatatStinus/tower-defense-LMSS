@@ -25,14 +25,14 @@ public class TankAbility : EnemyMovement
         {
             for (int i = 0; i < totalSpawns; i++)
             {
-                if (percentAllPaths + evens > 97 || percentAllPaths + odds < 3)
-                    break;
+                if (percentAllPaths + evens > 95 || percentAllPaths + odds < 5)
+                    continue;
 
                 childEnemies.Add(Instantiate(childSpawns, allEnemies.transform));
                 movementEnemies.Add(childEnemies[i].GetComponent<EnemyMovement>());
                 movementEnemies[i].pathIndex = pathIndex;
 
-                if(i % 2 == 0) //If enemy index is divideble by 2 do: Spawn enemy in front of tank enemy
+                if(i % 2 == 0) //If enemy index is divisible by 2 do: Spawn enemy in front of tank enemy
                 {
                     movementEnemies[i].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + evens, pathIndex);
                     childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;

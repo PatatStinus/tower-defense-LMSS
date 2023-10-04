@@ -227,7 +227,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7
+      time: 0.34971923
       value: 1
       inSlope: 0
       outSlope: 0
@@ -238,8 +238,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.99835205
       value: 0
-      inSlope: -3.351745
-      outSlope: -3.351745
+      inSlope: -1.5417043
+      outSlope: -1.5417043
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -247,6 +247,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  cube: {fileID: 2918603575396049698, guid: 7fa26a28cfe2af341a76dff0528dc166, type: 3}
   canAbility: 1
 --- !u!1 &7314432650006256017
 GameObject:

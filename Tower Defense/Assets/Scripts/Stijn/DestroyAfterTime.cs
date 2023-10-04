@@ -5,13 +5,17 @@ using UnityEngine;
 public class DestroyAfterTime : MonoBehaviour
 {
     [SerializeField] private float timeDestroy;
-    private float time;
 
-    private void Update()
+    private IEnumerator Start()
     {
-        time += Time.deltaTime;
+        float time = 0;
 
-        if (time >= timeDestroy)
-            Destroy(this.gameObject);
+        while (time < timeDestroy)
+        {
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(this.gameObject);
     }
 }

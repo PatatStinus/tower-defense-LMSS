@@ -9,7 +9,7 @@ public class PercentToPoint : MonoBehaviour
     //1. PercentToPoint.GetWayPointIndexFromPercent | Zodat de enemy een nieuwe waypoint heeft
     //2. Set Enemy.Transform.Position to waypointindex - 1 | - 1 voor de vorige waypoint
     //3. Enemy.Target(); | Zodat de enemy naar de volgende target kijkt, dan kan die vooruit met de benodigde distance vanaf de vorige waypoint
-    //4. PercentToPoint.PercentToPath | Bereken de distance naar volgende waypoint
+    //4. PercentToPoint.PercentToPath | Zet het percentage om naar de goeie plek in de map
 
     public static int GetWayPointIndexFromPercent(float percent, int path)
     {
