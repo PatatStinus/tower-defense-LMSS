@@ -8,6 +8,7 @@ public class ManaManager : MonoBehaviour
     [SerializeField] private GameObject youLost;
     public static int enemiesLeft = 0;
     private static int mana = 1000;
+    private static bool didLose;
 
     public delegate void Lost();
     public static event Lost OnLost;
@@ -24,6 +25,7 @@ public class ManaManager : MonoBehaviour
 
     private void HasLost()
     {
+        didLose = true;
         mana = 0;
         Time.timeScale = 1;
         youLost.SetActive(true);
@@ -42,7 +44,7 @@ public class ManaManager : MonoBehaviour
         {
             if (mana - removeMana > 0)
                 mana -= removeMana;
-            else
+            else if(!didLose)
                 OnLost?.Invoke();
         }
     }

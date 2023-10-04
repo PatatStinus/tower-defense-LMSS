@@ -40,25 +40,18 @@ public class ThunderWeather : MonoBehaviour
             target.transform.position = orgPos;
             //Stun tower shooting
         }
-
-        AllObjects();
     }
 
-    private void AllObjects()
+    private void ChooseTarget()
     {
         for (int i = 0; i < allObjects.Count; i++)
         {
             if (allObjects[i] == null || allObjects[i].layer == 0)
             {
                 allObjects.RemoveAt(i);
-                AllObjects();
-                break;
+                i--;
             }
         }
-    }
-
-    private void ChooseTarget()
-    {
         if (allObjects.Count != 0)
             target = allObjects[Random.Range(0, allObjects.Count)];
         else
@@ -84,10 +77,10 @@ public class ThunderWeather : MonoBehaviour
             if (target != null)
                 thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
             thunderEffect = Instantiate(thunder);
-            Invoke("Stun", 1f);
-            Invoke("DestroyObjects", 1.6f);
-            Invoke("StopStun", 3f);
-            Invoke("SpawnThunder", Random.Range(4f, 6f));
+            Invoke(nameof(Stun), 1f);
+            Invoke(nameof(DestroyObjects), 1.6f);
+            Invoke(nameof(StopStun), 3f);
+            Invoke(nameof(SpawnThunder), Random.Range(4f, 6f));
         }
     }
 

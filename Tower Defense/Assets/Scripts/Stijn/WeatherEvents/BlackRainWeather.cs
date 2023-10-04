@@ -12,14 +12,18 @@ public class BlackRainWeather : MonoBehaviour
 
     [SerializeField] private float rainTime;
     [SerializeField] private GameObject blackRain;
-    private Transform allEnemies;
     private GameObject blackRainEffect;
     private bool eventGoing;
     private float time;
 
-    private void Start()
+    private void OnEnable()
     {
         onStopBlackRaining += DestroyObjects;
+    }
+
+    private void OnDisable()
+    {
+        onStopBlackRaining -= DestroyObjects;
     }
 
     private void Update()
@@ -32,17 +36,19 @@ public class BlackRainWeather : MonoBehaviour
 
         if (eventGoing && time >= rainTime)
         {
-            onStopBlackRaining();
+            onStopBlackRaining?.Invoke();
             eventGoing = false;
         }
 
+        //Will call event all the time because enemy health is only done once during each event call?????????????
+        //This makes it so every other function that only needs to be called once, has to remove itself from the event.
+        //Het werkt wel dus ik hou het erin, maar het kan weg als het echt moet.
         if (eventGoing)
             onBlackRaining?.Invoke();
     }
 
     public void StartWeather(Transform enemies)
     {
-        allEnemies = enemies;
         time = 0;
         eventGoing = true;
         SpawnBlackRain();

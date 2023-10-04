@@ -9,7 +9,7 @@ public class WeatherManager : MonoBehaviour
     private ColorRainWeather colorRain;
     private BlackRainWeather blackRain;
     private ThunderWeather thunder;
-    private int totalWeathers = 0;
+    private int totalWeathers = 3;
 
     [SerializeField] private float mxTime;
     [SerializeField] private float mnTime;
@@ -19,11 +19,8 @@ public class WeatherManager : MonoBehaviour
     private void Start()
     {
         colorRain = allWeathers.GetComponent<ColorRainWeather>();
-        totalWeathers++;
         blackRain = allWeathers.GetComponent<BlackRainWeather>();
-        totalWeathers++;
         thunder = allWeathers.GetComponent<ThunderWeather>();
-        totalWeathers++;
         GetNewTime();
     }
 
