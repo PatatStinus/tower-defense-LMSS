@@ -33,23 +33,25 @@ public class WaveSystem : MonoBehaviour
 
     private void Start()
     {
-        difficulty = PlayerPrefs.GetInt("Difficulty");
         if (!PlayerPrefs.HasKey("Difficulty"))
             difficulty = 2;
+        else
+            difficulty = PlayerPrefs.GetInt("Difficulty");
 
-        loadedGame = PlayerPrefs.GetInt("LoadedGame");
         if (!PlayerPrefs.HasKey("LoadedGame"))
             loadedGame = 1;
+        else
+            loadedGame = PlayerPrefs.GetInt("LoadedGame");
 
         saveFiles = GetComponent<SaveSystem>();
-        if(loadedGame == 1)
+        if(loadedGame == 1) //Save file not found
         {
             saveFiles.gameData.difficulty = difficulty;
             UnityEngine.SceneManagement.Scene scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
             saveFiles.gameData.mapID = scene.buildIndex;
             saveFiles.gameData.wave = -1;
         }
-        else if(loadedGame == 0)
+        else if(loadedGame == 0) //Save file found
         {
             difficulty = saveFiles.gameData.difficulty;
             currentWave = saveFiles.gameData.wave;
@@ -82,7 +84,7 @@ public class WaveSystem : MonoBehaviour
 
     private void Update()
     {
-        if(finishedSpawning)
+        if(finishedSpawning) //Dit moet beter geoptimized kunnen worden
         {
             for (int i = 0; i < allEnemies.childCount; i++)
             {
@@ -131,7 +133,7 @@ public class WaveSystem : MonoBehaviour
         if(totalEnemiesInWave > spawnedEnemies) //If an enemy still needs to be spawned
         {
             spawnEnemy.SpawnEnemy(waves[currentWave].enemiesInWave[spawnedEnemies].enemy, spawnedEnemies, waves[currentWave].enemiesInWave[spawnedEnemies].pathIndex, floatedDifficulty); //Spawn Enemy
-            Invoke("SpawnEnemy", waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn); //Get new enemy after time
+            Invoke(nameof(SpawnEnemy), waves[currentWave].enemiesInWave[spawnedEnemies].timeTillNextSpawn); //Get new enemy after time
             spawnedEnemies++;
         }
         else
@@ -169,8 +171,8 @@ public class WaveSystem : MonoBehaviour
         }
         else
         {
-            autoStartButton.color = Color.green;
             autoStart = true;
+            autoStartButton.color = Color.green;
         }
     }
 

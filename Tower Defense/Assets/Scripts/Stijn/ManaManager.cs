@@ -7,10 +7,27 @@ public class ManaManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaText;
     [SerializeField] private GameObject youLost;
     public static int enemiesLeft = 0;
-    public static bool lost = false;
     private static int mana = 1000;
 
-    //List of mana things that still needs to be added
+    public delegate void Lost();
+    public static event Lost OnLost;
+
+    private void OnEnable()
+    {
+        OnLost += HasLost;
+    }
+
+    private void OnDisable()
+    {
+        OnLost -= HasLost;
+    }
+
+    private void HasLost()
+    {
+        mana = 0;
+        Time.timeScale = 1;
+        youLost.SetActive(true);
+    }
 
     public static void GetMana(int giveMana) //Call ManaManager.GetMana(number) to give mana to player
     {
@@ -26,28 +43,18 @@ public class ManaManager : MonoBehaviour
             if (mana - removeMana > 0)
                 mana -= removeMana;
             else
-            {
-                lost = true;
-                mana = 0;
-            }
+                OnLost?.Invoke();
         }
     }
 
     private void Start()
     {
         mana = 1000;
-        lost = false;
     }
 
     private void Update()
     {
         manaText.text = mana.ToString();
-
-        if(lost)
-        {
-            Time.timeScale = 1;
-            youLost.SetActive(true);
-        }
     } 
 
     public void RestartGame()

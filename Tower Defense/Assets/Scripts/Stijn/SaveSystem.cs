@@ -9,6 +9,8 @@ public class SaveSystem : MonoBehaviour
 
     string safefile;
 
+    //TO DO: Uitvinden hoe ik dit moet testen, maar het ziet er prima uit. Towers worden nog niet gesaved.
+
     private void Start()
     {
         safefile = Application.persistentDataPath + "/ContinueGame.json";

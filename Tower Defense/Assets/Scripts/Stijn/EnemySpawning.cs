@@ -9,8 +9,8 @@ public class EnemySpawning : MonoBehaviour
 
     public void SpawnEnemy(GameObject enemy, int indexEnemy, int indexPath, float difficulty)
     {
-        enemy.transform.position = new Vector3(t_SpawnPoint.position.x, enemy.transform.position.y, t_SpawnPoint.position.z);
         GameObject spawnedEnemy = Instantiate(enemy, t_EnemyParent);
+        spawnedEnemy.transform.position = new Vector3(t_SpawnPoint.position.x, enemy.transform.position.y, t_SpawnPoint.position.z);
         spawnedEnemy.name = $"Enemy ({indexEnemy})";
         spawnedEnemy.GetComponent<EnemyMovement>().pathIndex = indexPath;
         if(spawnedEnemy.TryGetComponent(out EnemyHealth health))

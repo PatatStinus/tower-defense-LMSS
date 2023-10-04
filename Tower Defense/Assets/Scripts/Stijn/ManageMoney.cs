@@ -7,11 +7,26 @@ public class ManageMoney : MonoBehaviour
     public static int money = 1000;
     private bool maxMoneyReached;
     private float moneyCountdown;
+    private bool hasLost = false;
 
+
+    private void OnEnable()
+    {
+        ManaManager.OnLost += Lost;
+    }
+
+    private void OnDisable()
+    {
+        ManaManager.OnLost -= Lost;
+    }
+
+    private void Lost()
+    {
+        hasLost = true;
+    }
 
     public static void GetMoney(int giveMoney) //Call ManageMoney.GetMoney(number) to give money to player
     {
-        if (!ManaManager.lost)
         money += giveMoney;
     }
 
@@ -28,7 +43,7 @@ public class ManageMoney : MonoBehaviour
     private void Update()
     {
         moneyText.text = money.ToString();
-        if(ManaManager.lost && !maxMoneyReached)
+        if(hasLost && !maxMoneyReached)
         {
             moneyCountdown += Time.deltaTime;
             money -= Mathf.RoundToInt(100 * Time.deltaTime * moneyCountdown);
