@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyAfterTime : MonoBehaviour
 {
     [SerializeField] private float timeDestroy;
+    [SerializeField] private bool passTimeAfterWave = false;
 
     private IEnumerator Start()
     {
@@ -12,6 +13,8 @@ public class DestroyAfterTime : MonoBehaviour
 
         while (time < timeDestroy)
         {
+            if(!passTimeAfterWave)
+                yield return new WaitUntil(() => !WaveSystem.finishedWave);
             time += Time.deltaTime;
             yield return null;
         }

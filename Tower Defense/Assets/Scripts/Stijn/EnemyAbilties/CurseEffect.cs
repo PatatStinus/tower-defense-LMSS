@@ -10,6 +10,7 @@ public class CurseEffect : MonoBehaviour
     private List<GameObject> allConfused = new List<GameObject>();
     private GameObject gameManager;
     private GameObject allEnemies;
+    private int activeCurse;
 
 
     private void Awake()
@@ -20,6 +21,7 @@ public class CurseEffect : MonoBehaviour
 
     public void DoCurse(int curse, bool isRaining)
     {
+        activeCurse = curse;
         if (!isRaining)
         {
             switch (curse)
@@ -42,7 +44,7 @@ public class CurseEffect : MonoBehaviour
         {
             switch (curse)
             {
-                case 1: //Next 10 enemies in wave that make it to the end won't do damage to the unicorn (Curse Enemies won't release their curse)
+                case 1: //Next 10 enemies in wave that make it to the end won't do damage to the unicorn
                     ManaManager.enemiesLeft += 10;
                     break;
                 case 2: //Half health of all enemies on field
@@ -59,11 +61,20 @@ public class CurseEffect : MonoBehaviour
 
     private void OnDisable()
     {
-        gameManager.GetComponent<Spells>().enabled = true;
-        for (int i = 0; i < allEnemies.transform.childCount; i++)
-            allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyMovement>().isConfused = false;
-        for (int i = 0; i < allConfused.Count; i++)
-            Destroy(allConfused[i]);
+        switch(activeCurse)
+        {
+            case 1:
+                gameManager.GetComponent<Spells>().enabled = true;
+                break;
+            case 2:
+                break;
+            case 3:
+                for (int i = 0; i < allEnemies.transform.childCount; i++)
+                    allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyMovement>().isConfused = false;
+                for (int i = 0; i < allConfused.Count; i++)
+                    Destroy(allConfused[i]);
+                break;
+        }
     }
 
     private void SpawnAbnormals()
