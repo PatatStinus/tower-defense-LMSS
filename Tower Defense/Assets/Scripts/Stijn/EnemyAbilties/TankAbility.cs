@@ -25,42 +25,50 @@ public class TankAbility : EnemyMovement
         {
             for (int i = 0; i < totalSpawns; i++)
             {
-                if (percentAllPaths + evens > 95 || percentAllPaths + odds < 5)
-                    continue;
-
-                childEnemies.Add(Instantiate(childSpawns, allEnemies.transform));
-                movementEnemies.Add(childEnemies[i].GetComponent<EnemyMovement>());
-                movementEnemies[i].pathIndex = pathIndex;
-
                 if(i % 2 == 0) //If enemy index is divisible by 2 do: Spawn enemy in front of tank enemy
                 {
-                    movementEnemies[i].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + evens, pathIndex);
-                    childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
-                    movementEnemies[i].Target();
-                    childEnemies[i].transform.position = PercentToPoint.PercentToPath(percentAllPaths + evens, pathIndex, childEnemies[i].transform.rotation);
-                    evens += 3;
+                    if(percentAllPaths + evens < 95) //If tank is in frontline keep spawning in back
+                        SpawnFront(i);
+                    else if(percentAllPaths + odds > 5)
+                        SpawnBack(i);
+                    else
+                        break;
                 }
                 else //Spawn new enemy at the back of tank enemy
                 {
-                    if(PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + odds, pathIndex) < 1) //If tank is in backline keep spawning in front
-                    {
-                        movementEnemies[i].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + evens, pathIndex);
-                        childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
-                        movementEnemies[i].Target();
-                        childEnemies[i].transform.position = PercentToPoint.PercentToPath(percentAllPaths + evens, pathIndex, childEnemies[i].transform.rotation);
-                        evens += 3;
-                    }
+                    if (percentAllPaths + odds > 5) //If tank is in backline keep spawning in front
+                        SpawnBack(i);
+                    else if (percentAllPaths + evens < 95)
+                        SpawnFront(i);
                     else
-                    {
-                        movementEnemies[i].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + odds, pathIndex);
-                        childEnemies[i].transform.position = EnemyPathMaking.t_Points[movementEnemies[i].pathIndex][movementEnemies[i].i_waypoitIndex - 1].transform.position;
-                        movementEnemies[i].Target();
-                        childEnemies[i].transform.position = PercentToPoint.PercentToPath(percentAllPaths + odds, pathIndex, childEnemies[i].transform.rotation);
-                        odds -= 3;
-                    }
+                        break;
                 }
                 childEnemies[i].name = "Child" + i;
             }
         }
+    }
+
+    private void SpawnBack(int index)
+    {
+        childEnemies.Add(Instantiate(childSpawns, allEnemies.transform));
+        movementEnemies.Add(childEnemies[index].GetComponent<EnemyMovement>());
+        movementEnemies[index].pathIndex = pathIndex;
+        movementEnemies[index].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + odds, pathIndex);
+        childEnemies[index].transform.position = EnemyPathMaking.t_Points[movementEnemies[index].pathIndex][movementEnemies[index].i_waypoitIndex - 1].transform.position;
+        movementEnemies[index].Target();
+        childEnemies[index].transform.position = PercentToPoint.PercentToPath(percentAllPaths + odds, pathIndex, childEnemies[index].transform.rotation);
+        odds -= 3;
+    }
+
+    private void SpawnFront(int index)
+    {
+        childEnemies.Add(Instantiate(childSpawns, allEnemies.transform));
+        movementEnemies.Add(childEnemies[index].GetComponent<EnemyMovement>());
+        movementEnemies[index].pathIndex = pathIndex;
+        movementEnemies[index].i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentAllPaths + evens, pathIndex);
+        childEnemies[index].transform.position = EnemyPathMaking.t_Points[movementEnemies[index].pathIndex][movementEnemies[index].i_waypoitIndex - 1].transform.position;
+        movementEnemies[index].Target();
+        childEnemies[index].transform.position = PercentToPoint.PercentToPath(percentAllPaths + evens, pathIndex, childEnemies[index].transform.rotation);
+        evens += 3;
     }
 }

@@ -5,11 +5,7 @@ using UnityEngine;
 public class WeatherManager : MonoBehaviour
 {
     [SerializeField] private Transform allEnemies;
-    [SerializeField] private GameObject allWeathers;
-    private ColorRainWeather colorRain;
-    private BlackRainWeather blackRain;
-    private ThunderWeather thunder;
-    private int totalWeathers = 3;
+    [SerializeField] private Transform allWeathers;
 
     [SerializeField] private float mxTime;
     [SerializeField] private float mnTime;
@@ -18,9 +14,6 @@ public class WeatherManager : MonoBehaviour
 
     private void Start()
     {
-        colorRain = allWeathers.GetComponent<ColorRainWeather>();
-        blackRain = allWeathers.GetComponent<BlackRainWeather>();
-        thunder = allWeathers.GetComponent<ThunderWeather>();
         GetNewTime();
     }
 
@@ -36,18 +29,7 @@ public class WeatherManager : MonoBehaviour
 
         if(time >= maxTime)
         {
-            switch (Random.Range(0, totalWeathers))
-            {
-                case 0:
-                    colorRain.StartWeather(allEnemies);
-                    break;
-                case 1:
-                    blackRain.StartWeather(allEnemies);
-                    break;
-                case 2:
-                    thunder.StartWeather(allEnemies);
-                    break;
-            }
+            allWeathers.GetComponents<WeatherParent>()[Random.Range(0, 3)].StartWeather(allEnemies);
             time = 0;
             GetNewTime();
         }

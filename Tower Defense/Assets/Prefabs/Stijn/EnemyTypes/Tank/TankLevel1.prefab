@@ -213,7 +213,7 @@ MonoBehaviour:
   divideSpeed: 1
   percentAllPaths: 0
   childSpawns: {fileID: 6727287354544040434, guid: 7a914f649447eda4b8dd8459cfd347be, type: 3}
-  totalSpawns: 2
+  totalSpawns: 5
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0

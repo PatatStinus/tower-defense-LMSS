@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThunderWeather : MonoBehaviour
+public class ThunderWeather : WeatherParent
 {
     public delegate void Thunder();
     public static event Thunder onThunder;
@@ -11,26 +11,23 @@ public class ThunderWeather : MonoBehaviour
     public static event StopThunder onStopThunder;
 
     [SerializeField] private float thunderHeight;
-    [SerializeField] private float weatherTime;
     [SerializeField] private GameObject thunder;
-    [SerializeField] private GameObject longThunder;
     private Vector3 orgPos;
     private List<GameObject> allObjects = new List<GameObject>();
     private GameObject target;
     private GameObject thunderEffect;
-    private GameObject longThunderEffect;
-    private bool eventGoing;
     private bool stunned;
-    private float time;
 
     private void Update()
     {
-        if (!WaveSystem.finishedWave && eventGoing)
+        if(!eventGoing) return;
+
+        if (!WaveSystem.finishedWave)
             time += Time.deltaTime;
 
-        if (eventGoing && time >= weatherTime)
+        if (time >= weatherTime)
         {
-            Destroy(longThunderEffect);
+            Destroy(spawnedWeatherEffect);
             eventGoing = false;
             onStopThunder?.Invoke();
         }
@@ -58,13 +55,11 @@ public class ThunderWeather : MonoBehaviour
             eventGoing = true;
     }
 
-    public void StartWeather(Transform enemies)
+    public override void StartWeather(Transform enemies)
     {
+        base.StartWeather(enemies);
         for (int i = 0; i < enemies.childCount; i++)
             allObjects.Add(enemies.GetChild(i).gameObject);
-        time = 0;
-        eventGoing = true;
-        longThunderEffect = Instantiate(longThunder);
         SpawnThunder();
         onThunder?.Invoke();
     }
@@ -74,9 +69,9 @@ public class ThunderWeather : MonoBehaviour
         if(eventGoing)
         {
             ChooseTarget();
-            if (target != null)
-                thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
             thunderEffect = Instantiate(thunder);
+            if (target != null)
+                thunderEffect.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
             Invoke(nameof(Stun), 1f);
             Invoke(nameof(DestroyObjects), 1.6f);
             Invoke(nameof(StopStun), 3f);

@@ -5,16 +5,39 @@ using UnityEngine.UI;
 
 public class ButtonInteractible : MonoBehaviour
 {
-    [SerializeField] private Spells spells;
     private Button button;
+    private int activeCurses;
 
     private void Start()
     {
         button = this.gameObject.GetComponent<Button>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        button.interactable = spells.enabled;
+        CurseEffect.onSpellCurse += DisableButtons;
+        CurseEffect.onDisableSpellCurse += EnableButtons;
+    }
+
+    private void OnDisable()
+    {
+        CurseEffect.onSpellCurse -= DisableButtons;
+        CurseEffect.onDisableSpellCurse -= EnableButtons;
+    }
+
+    private void DisableButtons()
+    {
+        activeCurses++;
+        button.interactable = false;
+    }
+
+    private void EnableButtons()
+    {
+        activeCurses--;
+        if(activeCurses <= 0)
+        {
+            button.interactable = true;
+            activeCurses = 0;
+        }
     }
 }

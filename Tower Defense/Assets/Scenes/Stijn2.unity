@@ -863,10 +863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2b44aba1050a0478de5195ff6da685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thunderHeight: 0
+  weatherEffect: {fileID: 5929676911984924335, guid: b1bf13b02e14eb540b2136766d8c0ef5, type: 3}
   weatherTime: 30
+  thunderHeight: 0
   thunder: {fileID: 5929676911984924335, guid: 021b9ee4e4902804cb4353ade8d9d212, type: 3}
-  longThunder: {fileID: 5929676911984924335, guid: b1bf13b02e14eb540b2136766d8c0ef5, type: 3}
 --- !u!114 &245313690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,8 +879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b812ee30e925837419b5b7f3e01f9d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainTime: 30
-  blackRain: {fileID: 7679590074040201522, guid: e89dffac50027a54ea6f710e3418283f, type: 3}
+  weatherEffect: {fileID: 7679590074040201522, guid: e89dffac50027a54ea6f710e3418283f, type: 3}
+  weatherTime: 30
 --- !u!114 &245313691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,8 +893,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaae898b83ced3a49a70568b7b85cd25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainTime: 30
-  colorRain: {fileID: 4810753509165399767, guid: db5f1e9c2920605408936a13e5afe35a, type: 3}
+  weatherEffect: {fileID: 4810753509165399767, guid: db5f1e9c2920605408936a13e5afe35a, type: 3}
+  weatherTime: 30
 --- !u!4 &245313692
 Transform:
   m_ObjectHideFlags: 0
@@ -2495,7 +2495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a958b5e163af45832f393b3be8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: {fileID: 506944749}
 --- !u!114 &830245927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3702,7 +3701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a958b5e163af45832f393b3be8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: {fileID: 506944749}
 --- !u!114 &1195827663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4052,7 +4050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a958b5e163af45832f393b3be8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: {fileID: 506944749}
 --- !u!114 &1254847997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4690,7 +4687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a958b5e163af45832f393b3be8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: {fileID: 506944749}
 --- !u!114 &1414735158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6364,7 +6360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a958b5e163af45832f393b3be8262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spells: {fileID: 506944749}
 --- !u!114 &1868422878
 MonoBehaviour:
   m_ObjectHideFlags: 0

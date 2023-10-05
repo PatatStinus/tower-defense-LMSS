@@ -21,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
     private float time;
     private Vector3 t_Target;
     private Quaternion q_LookAngle;
+    private int activeCurses;
 
     protected virtual void Start()
     {
@@ -40,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void GetNewTarget()
     {
-        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1) //Enemy Reached End out of bounds
+        if (i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 1 && !isConfused) //Enemy Reached End out of bounds
         {
             reachedEnd = true;
             ManaManager.LoseMana(i_ManaWhenKilled); //Remove mana from unicorn
@@ -104,5 +105,30 @@ public class EnemyMovement : MonoBehaviour
     {
         if(!reachedEnd)
             ManageMoney.GetMoney(moneyWhenKilled);
+
+        CurseEffect.onConfuseCurse -= Confuse;
+        CurseEffect.onDisableConfuseCurse -= StopConfuse;
+    }
+
+    protected virtual void OnEnable()
+    {
+        CurseEffect.onConfuseCurse += Confuse;
+        CurseEffect.onDisableConfuseCurse += StopConfuse;
+    }
+
+    private void Confuse()
+    {
+        activeCurses++;
+        isConfused = true;
+    }
+
+    private void StopConfuse()
+    {
+        activeCurses--;
+        if(activeCurses <= 0)
+        {
+            isConfused = false;
+            activeCurses = 0;
+        }
     }
 }

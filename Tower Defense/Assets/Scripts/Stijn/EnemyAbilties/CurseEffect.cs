@@ -12,6 +12,17 @@ public class CurseEffect : MonoBehaviour
     private GameObject allEnemies;
     private int activeCurse;
 
+    public delegate void SpellCurse();
+    public static event SpellCurse onSpellCurse;
+
+    public delegate void RemoveSpellCurse();
+    public static event RemoveSpellCurse onDisableSpellCurse;
+
+    public delegate void ConfuseCurse();
+    public static event ConfuseCurse onConfuseCurse;
+
+    public delegate void RemoveConfuseCurse();
+    public static event RemoveConfuseCurse onDisableConfuseCurse;
 
     private void Awake()
     {
@@ -27,7 +38,7 @@ public class CurseEffect : MonoBehaviour
             switch (curse)
             {
                 case 1: //Turn off spells 30sec
-                    gameManager.GetComponent<Spells>().enabled = false;
+                    onSpellCurse?.Invoke();
                     break;
                 case 2: //Double health of all enemies on field
                     for (int i = 0; i < allEnemies.transform.childCount; i++)
@@ -52,6 +63,7 @@ public class CurseEffect : MonoBehaviour
                         allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyHealth>().TakeDamage(allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyHealth>().hp/2);
                     break;
                 case 3: //All enemies on field become confused
+                    onConfuseCurse?.Invoke();
                     ConfuseEnemies();
                     break;
             }
@@ -64,13 +76,12 @@ public class CurseEffect : MonoBehaviour
         switch(activeCurse)
         {
             case 1:
-                gameManager.GetComponent<Spells>().enabled = true;
+                onDisableSpellCurse?.Invoke();
                 break;
             case 2:
                 break;
             case 3:
-                for (int i = 0; i < allEnemies.transform.childCount; i++)
-                    allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyMovement>().isConfused = false;
+                onDisableConfuseCurse?.Invoke();
                 for (int i = 0; i < allConfused.Count; i++)
                     Destroy(allConfused[i]);
                 break;
@@ -86,7 +97,6 @@ public class CurseEffect : MonoBehaviour
     {
         for (int i = 0; i < allEnemies.transform.childCount; i++)
         {
-            allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyMovement>().isConfused = true;
             allConfused.Add(Instantiate(confusedEffect, allEnemies.transform.GetChild(i).transform));
             allConfused[i].transform.position = new Vector3(allEnemies.transform.GetChild(i).transform.position.x, allEnemies.transform.GetChild(i).transform.position.y + 2, allEnemies.transform.GetChild(i).transform.position.z);
         }
