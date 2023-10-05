@@ -9,13 +9,19 @@ public class RandomRainColor : MonoBehaviour
     private Color orgColor;
     private float time = 1;
     private int rainbow = 1;
+    private Renderer renderers;
+
+    private void Start()
+    {
+        renderers = GetComponent<Renderer>();
+    }
 
     private void Update()
     {
         if (startRaining)
         {
             time += Time.deltaTime * 2.3f;
-            GetComponent<Renderer>().material.SetColor("_BaseColor", Color.Lerp(orgColor, newColor, time));
+            renderers.material.SetColor("_BaseColor", Color.Lerp(orgColor, newColor, time));
             if (time >= 1)
                 GetNewColor();
         }
@@ -53,9 +59,7 @@ public class RandomRainColor : MonoBehaviour
         time = 0;
         rainbow++;
         if(rainbow == 8)
-        {
             rainbow = 1;
-        }
     }
 
     private void DestroyParticle()

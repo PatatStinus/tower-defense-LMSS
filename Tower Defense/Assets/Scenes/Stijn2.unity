@@ -2658,9 +2658,9 @@ MonoBehaviour:
   damage: 20
   cost: 50
   durationSpell: 0.5
+  spellEffect: {fileID: 5929676911984924335, guid: 62cfecc0b0ab12246ba9db53608d0912, type: 3}
   distanceFromEnemy: 3
   allEnemies: {fileID: 930069741}
-  zapEffectStart: {fileID: 5929676911984924335, guid: 62cfecc0b0ab12246ba9db53608d0912, type: 3}
 --- !u!114 &870518287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2677,8 +2677,8 @@ MonoBehaviour:
   damage: 5
   cost: 50
   durationSpell: 5
+  spellEffect: {fileID: 2315551392063356573, guid: 81aa60a1c08a13549bc0f4a66fab7fa0, type: 3}
   slowness: 4
-  posionLakeEffect: {fileID: 2315551392063356573, guid: 81aa60a1c08a13549bc0f4a66fab7fa0, type: 3}
 --- !u!114 &870518288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2695,8 +2695,8 @@ MonoBehaviour:
   damage: 3
   cost: 30
   durationSpell: 7
-  spellEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
-  particleEffect: {fileID: 4106877198180312327, guid: ac471856e06e80c4fb822d6f12ad9d47, type: 3}
+  spellEffect: {fileID: 4106877198180312327, guid: ac471856e06e80c4fb822d6f12ad9d47, type: 3}
+  rotatingDuck: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
 --- !u!114 &870518289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2713,9 +2713,9 @@ MonoBehaviour:
   damage: 3
   cost: 30
   durationSpell: 5
+  spellEffect: {fileID: 1799696094200850850, guid: d023861a4df75ce48a3733210adc8c88, type: 3}
   smokeHeight: 2
   freezeMat: {fileID: 2100000, guid: ce719752c743f964fb75559bec75d39a, type: 2}
-  iceSpellEffect: {fileID: 1799696094200850850, guid: d023861a4df75ce48a3733210adc8c88, type: 3}
   freezeSmoke: {fileID: 6644596146487293840, guid: c441434416a457d4a91bed976a22b1c4, type: 3}
 --- !u!114 &870518290
 MonoBehaviour:
@@ -2733,7 +2733,7 @@ MonoBehaviour:
   damage: 10
   cost: 30
   durationSpell: 3
-  rainbowRain: {fileID: 7307375071979134043, guid: 6a85fecef96362b4fae5d94f5e51c03b, type: 3}
+  spellEffect: {fileID: 7307375071979134041, guid: 6a85fecef96362b4fae5d94f5e51c03b, type: 3}
 --- !u!4 &870518291
 Transform:
   m_ObjectHideFlags: 0

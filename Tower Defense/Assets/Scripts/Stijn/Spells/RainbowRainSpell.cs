@@ -6,23 +6,15 @@ using UnityEngine.UI;
 
 public class RainbowRainSpell : SpellParent
 {
-    [SerializeField] private ParticleSystem rainbowRain;
-    private Collider[] collisionsInSpell;
     private List<EnemyHealth> enemies = new List<EnemyHealth>();
-    private Vector3 spellPos;
-    private bool spellActive;
-    private float orgTime = -1;
 
     public override void SpawnSpell(Vector3 spellPos)
     {
-        this.spellPos = spellPos;
-        spellActive = true;
-        RainbowRaining();
-        orgTime = durationSpell;
-        GameObject rainbowParticle = Instantiate(rainbowRain.gameObject);
+        base.SpawnSpell(spellPos);
+        GameObject rainbowParticle = Instantiate(spellEffect);
         rainbowParticle.transform.position = new Vector3(spellPos.x, rainbowParticle.transform.position.y, spellPos.z);
         rainbowParticle.GetComponent<ParticleSystem>().Play();
-        ManageMoney.LoseMoney(cost);
+        RainbowRaining();
     }
 
     private void RainbowRaining()
@@ -40,19 +32,16 @@ public class RainbowRainSpell : SpellParent
         {
             for (int i = 0; i < enemies.Count; i++)
                 enemies[i].hp -= damage;
-            Invoke("RainbowRaining", .5f);
+            Invoke(nameof(RainbowRaining), .5f);
         }
         else
-        {
-            spellActive = false;
-            durationSpell = orgTime;
             Destroy(this.gameObject);
-        }
     }
 
     private void Update()
     {
-        if (spellActive)
-            durationSpell -= Time.deltaTime;
+        if (!spellActive) return;
+
+        durationSpell -= Time.deltaTime;
     }
 }

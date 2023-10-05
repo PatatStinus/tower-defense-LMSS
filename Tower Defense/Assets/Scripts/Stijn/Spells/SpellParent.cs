@@ -8,18 +8,17 @@ public class SpellParent : MonoBehaviour
     [SerializeField] protected int damage = 3;
     [SerializeField] protected int cost = 100;
     [SerializeField] protected float durationSpell = 3f;
+    [SerializeField] protected GameObject spellEffect;
+    protected Vector3 spellPos;
+    protected bool spellActive;
+    protected Collider[] collisionsInSpell;
 
 
-    public virtual void SpawnSpell(Vector3 pos) { Debug.Log("Niet goed"); }
-    
-    
-    void Start()
+    public virtual void SpawnSpell(Vector3 pos)
     {
-        
-    }
-
-    void Update()
-    {
-        
+        spellPos = pos;
+        spellActive = true;
+        ManageMoney.LoseMoney(cost);
+        collisionsInSpell = Physics.OverlapSphere(spellPos, size);
     }
 }

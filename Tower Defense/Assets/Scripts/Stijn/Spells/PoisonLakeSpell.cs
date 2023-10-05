@@ -5,16 +5,13 @@ using UnityEngine;
 public class PoisonLakeSpell : SpellParent
 {
     [SerializeField] private float slowness = 2;
-    [SerializeField] private GameObject posionLakeEffect;
     private SphereCollider sc;
-    private bool spellActive;
 
     public override void SpawnSpell(Vector3 spellPos)
     {
+        Instantiate(spellEffect).transform.position = new Vector3(spellPos.x, 0, spellPos.z);
         spellActive = true;
         ManageMoney.LoseMoney(cost);
-        GameObject posionEffect = Instantiate(posionLakeEffect);
-        posionEffect.transform.position = new Vector3(spellPos.x, 0, spellPos.z);
         sc = gameObject.AddComponent<SphereCollider>();
         sc.center = spellPos;
         sc.radius = size;
@@ -24,14 +21,13 @@ public class PoisonLakeSpell : SpellParent
 
     private void Update()
     {
-        if(spellActive)
-        {
-            durationSpell -= Time.deltaTime;
-            if (durationSpell < 0)
-                sc.center = new Vector3(100f, 1000f, 100f);
-            if (durationSpell < -0.3)
-                Destroy(gameObject);
-        }
+        if (!spellActive) return;
+
+        durationSpell -= Time.deltaTime;
+        if (durationSpell < 0)
+            sc.center = new Vector3(100f, 1000f, 100f); //Om OnTriggerExit te triggeren
+        if (durationSpell < -0.3f)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

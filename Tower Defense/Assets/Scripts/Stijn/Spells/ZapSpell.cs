@@ -6,30 +6,23 @@ public class ZapSpell : SpellParent
 {
     [SerializeField] private float distanceFromEnemy = 5;
     [SerializeField] private GameObject allEnemies;
-    [SerializeField] private GameObject zapEffectStart;
     private List<GameObject> enemies = new List<GameObject>();
     private GameObject closestEnemy;
     private GameObject enemy;
-    private GameObject zapEffectLong;
-    private Collider[] collisionsInSpell;
-    private Vector3 spellPos;
-    private float orgTime = -1;
     private Vector3 orgPosEnemy;
     private bool isZapping = false;
+    private float orgTime = -1;
 
     public override void SpawnSpell(Vector3 spellPos)
     {
-        this.spellPos = spellPos;
+        base.SpawnSpell(spellPos);
         Zapped();
-        ManageMoney.LoseMoney(cost);
         isZapping = true;
-        zapEffectLong = Instantiate(zapEffectStart);
-        zapEffectLong.transform.position = new Vector3(spellPos.x, zapEffectLong.transform.position.y, spellPos.z);
+        Instantiate(spellEffect).transform.position = new Vector3(spellPos.x, spellEffect.transform.position.y, spellPos.z);
     }
 
     private void Zapped()
     {
-        collisionsInSpell = Physics.OverlapSphere(spellPos, size);
         foreach (var obj in collisionsInSpell)
         {
             EnemyMovement enemy = obj.GetComponent<EnemyMovement>();
@@ -168,6 +161,8 @@ public class ZapSpell : SpellParent
 
     private void Update()
     {
+        if (!spellActive) return;
+
         if (orgTime > 0 && enemy != null)
         {
             orgTime -= Time.deltaTime;
@@ -175,7 +170,7 @@ public class ZapSpell : SpellParent
         }
         else if (orgTime < 0 && orgTime != -1)
             NewZap();
-        else if (enemy == null && isZapping)
+        if (enemy == null && isZapping)
             EnemyKilled();
     }
 
