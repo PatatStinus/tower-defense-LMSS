@@ -5,35 +5,20 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class Spells : MonoBehaviour
 {
-    #region Spells
-    private RainbowRainSpell rainbowSpell;
-    private GameObject rainbowGameObject;
-    private FreezeSpell freezeSpell;
-    private GameObject freezeGameObject;
-    private ConfusionSpell confuseSpell;
-    private GameObject confuseGameObject;
-    private PoisonLakeSpell poisonSpell;
-    private GameObject poisonGameObject;
-    private ZapSpell zapSpell;
-    private GameObject zapGameObject;
-    #endregion
+    private SpellParent[] spells;
 
-    [SerializeField] private GameObject allSpells;
-    [SerializeField] private DecalProjector rangeProjector;
-    [SerializeField] private LayerMask ignoreSpells;
+    [SerializeField] protected GameObject allSpells;
+    [SerializeField] protected DecalProjector rangeProjector;
+    [SerializeField] protected LayerMask ignoreSpells;
     private DecalProjector usedProjector;
     private Vector3 lastProjectorPos;
     private bool projecting;
     private float projectingRange;
     private int spawnSpellCode;
 
-    private void Start() //Get all spells
+    protected virtual void Start() //Get all spells
     {
-        rainbowSpell = allSpells.GetComponent<RainbowRainSpell>();
-        freezeSpell = allSpells.GetComponent<FreezeSpell>();
-        confuseSpell = allSpells.GetComponent<ConfusionSpell>();
-        poisonSpell = allSpells.GetComponent<PoisonLakeSpell>();
-        zapSpell = allSpells.GetComponent<ZapSpell>();
+        spells = allSpells.GetComponents<SpellParent>();
     }
 
     private void Update()
@@ -71,29 +56,11 @@ public class Spells : MonoBehaviour
         projecting = false;
         lastProjectorPos = usedProjector.transform.position;
         Destroy(usedProjector.gameObject);
-        switch (spawnSpellCode) //Index of spell
-        {
-            case 1:
-                rainbowGameObject = Instantiate(rainbowSpell.gameObject);
-                rainbowGameObject.GetComponent<RainbowRainSpell>().SpawnRainbow(lastProjectorPos);
-                break;
-            case 2:
-                freezeGameObject = Instantiate(freezeSpell.gameObject);
-                freezeGameObject.GetComponent<FreezeSpell>().SpawnFreeze(lastProjectorPos);
-                break;
-            case 3:
-                confuseGameObject = Instantiate(confuseSpell.gameObject);
-                confuseGameObject.GetComponent<ConfusionSpell>().SpawnConfuse(lastProjectorPos);
-                break;
-            case 4:
-                poisonGameObject = Instantiate(poisonSpell.gameObject);
-                poisonGameObject.GetComponent<PoisonLakeSpell>().SpawnLake(lastProjectorPos);
-                break;
-            case 5:
-                zapGameObject = Instantiate(zapSpell.gameObject);
-                zapGameObject.GetComponent<ZapSpell>().SpawnZap(lastProjectorPos);
-                break;
-        }
+        
+        GameObject spell = null;
+
+        spell = Instantiate(allSpells);
+        spell.GetComponents<SpellParent>()[spawnSpellCode].SpawnSpell(lastProjectorPos);
     }
 
     private void StopSpell()
@@ -102,38 +69,10 @@ public class Spells : MonoBehaviour
         Destroy(usedProjector.gameObject);
     }
 
-    public void RainbowRain()
-    {
-        SpawnProjector(); //Set size and index of spell
-        projectingRange = rainbowSpell.size;
-        spawnSpellCode = 1;
-    }
-
-    public void FreezeStop()
+    public void TypeSpell(int index)
     {
         SpawnProjector();
-        projectingRange = freezeSpell.size;
-        spawnSpellCode = 2;
-    }
-
-    public void ConfusionSpell()
-    {
-        SpawnProjector();
-        projectingRange = confuseSpell.size;
-        spawnSpellCode = 3;
-    }
-
-    public void PoisonSpell()
-    {
-        SpawnProjector();
-        projectingRange = poisonSpell.size;
-        spawnSpellCode = 4;
-    }
-
-    public void ZapSpell()
-    {
-        SpawnProjector();
-        projectingRange = zapSpell.size;
-        spawnSpellCode = 5;
+        spawnSpellCode = index;
+        projectingRange = spells[index].size;
     }
 }

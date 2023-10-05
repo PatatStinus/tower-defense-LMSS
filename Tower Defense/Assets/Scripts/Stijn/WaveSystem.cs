@@ -86,11 +86,10 @@ public class WaveSystem : MonoBehaviour
     {
         if(finishedSpawning) //Dit moet beter geoptimized kunnen worden
         {
+            waveDone = true;
             for (int i = 0; i < allEnemies.childCount; i++)
             {
-                if (allEnemies.GetChild(i).gameObject.GetComponent<EnemyMovement>().reachedEnd)
-                    waveDone = true;
-                else
+                if (!allEnemies.GetChild(i).gameObject.GetComponent<EnemyMovement>().reachedEnd)
                 {
                     waveDone = false;
                     break;

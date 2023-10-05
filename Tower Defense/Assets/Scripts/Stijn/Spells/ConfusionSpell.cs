@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConfusionSpell : MonoBehaviour
-{   
-    public float size;
-    [SerializeField] private int cost = 100;
-    [SerializeField] private float durationSpell = 3f;
+public class ConfusionSpell : SpellParent
+{
     [SerializeField] private GameObject spellEffect;
     [SerializeField] private GameObject particleEffect;
     private Collider[] collisionsInSpell;
@@ -16,7 +13,7 @@ public class ConfusionSpell : MonoBehaviour
     private Vector3 spellPos;
     private float orgTime = -1;
 
-    public void SpawnConfuse(Vector3 spellPos)
+    public override void SpawnSpell(Vector3 spellPos)
     {
         this.spellPos = spellPos;
         GameObject particleDuck = Instantiate(particleEffect);

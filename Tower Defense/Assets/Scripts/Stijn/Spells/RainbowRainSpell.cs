@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
-public class RainbowRainSpell : MonoBehaviour
+public class RainbowRainSpell : SpellParent
 {
-    public float size;
-    [SerializeField] private int damage = 3;
-    [SerializeField] private int cost = 100;
-    [SerializeField] private float durationSpell = 3f;
     [SerializeField] private ParticleSystem rainbowRain;
     private Collider[] collisionsInSpell;
     private List<EnemyHealth> enemies = new List<EnemyHealth>();
@@ -16,7 +13,7 @@ public class RainbowRainSpell : MonoBehaviour
     private bool spellActive;
     private float orgTime = -1;
 
-    public void SpawnRainbow(Vector3 spellPos)
+    public override void SpawnSpell(Vector3 spellPos)
     {
         this.spellPos = spellPos;
         spellActive = true;

@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonLakeSpell : MonoBehaviour
+public class PoisonLakeSpell : SpellParent
 {
-    public float size;
-    [SerializeField] private int damage = 3;
-    [SerializeField] private int cost = 100;
-    [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float slowness = 2;
     [SerializeField] private GameObject posionLakeEffect;
     private SphereCollider sc;
     private bool spellActive;
 
-    public void SpawnLake(Vector3 spellPos)
+    public override void SpawnSpell(Vector3 spellPos)
     {
         spellActive = true;
         ManageMoney.LoseMoney(cost);

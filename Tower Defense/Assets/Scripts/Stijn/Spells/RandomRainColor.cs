@@ -20,7 +20,7 @@ public class RandomRainColor : MonoBehaviour
                 GetNewColor();
         }
         else
-            Invoke("DestroyParticle", 3f);
+            Invoke(nameof(DestroyParticle), 3f);
     }
 
     private void GetNewColor()

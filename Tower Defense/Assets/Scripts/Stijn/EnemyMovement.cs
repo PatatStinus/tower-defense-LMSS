@@ -53,9 +53,9 @@ public class EnemyMovement : MonoBehaviour
         else
         {
             if(Random.Range(1, 3) == 1)
-                i_waypoitIndex = i_waypoitIndex != 0 ? i_waypoitIndex-- : i_waypoitIndex++;
+                i_waypoitIndex = i_waypoitIndex != 0 ? i_waypoitIndex-1 : i_waypoitIndex+1;
             else
-                i_waypoitIndex = i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2 ? i_waypoitIndex-- : i_waypoitIndex++;
+                i_waypoitIndex = i_waypoitIndex >= EnemyPathMaking.t_Points[pathIndex].Length - 2 ? i_waypoitIndex-1 : i_waypoitIndex+1;
         }
 
         t_Target = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex].position;

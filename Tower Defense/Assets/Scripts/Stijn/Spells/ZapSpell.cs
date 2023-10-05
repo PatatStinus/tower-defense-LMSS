@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZapSpell : MonoBehaviour
+public class ZapSpell : SpellParent
 {
-    public float size;
-    [SerializeField] private int damage = 3;
-    [SerializeField] private int cost = 100;
-    [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float distanceFromEnemy = 5;
     [SerializeField] private GameObject allEnemies;
     [SerializeField] private GameObject zapEffectStart;
@@ -21,7 +17,7 @@ public class ZapSpell : MonoBehaviour
     private Vector3 orgPosEnemy;
     private bool isZapping = false;
 
-    public void SpawnZap(Vector3 spellPos)
+    public override void SpawnSpell(Vector3 spellPos)
     {
         this.spellPos = spellPos;
         Zapped();

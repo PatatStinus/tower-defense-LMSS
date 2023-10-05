@@ -355,9 +355,9 @@ RectTransform:
   - {fileID: 1648418118}
   - {fileID: 1195827661}
   - {fileID: 1414735156}
-  - {fileID: 1868422876}
   - {fileID: 1254847995}
   - {fileID: 830245925}
+  - {fileID: 1868422876}
   - {fileID: 1601024522}
   - {fileID: 112303095}
   - {fileID: 22624689}
@@ -2507,7 +2507,7 @@ RectTransform:
   m_Children:
   - {fileID: 1369371990}
   m_Father: {fileID: 21008843}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2573,12 +2573,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506944749}
         m_TargetAssemblyTypeName: Spells, Assembly-CSharp
-        m_MethodName: PoisonSpell
-        m_Mode: 1
+        m_MethodName: TypeSpell
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2654,7 +2654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e4219cb5cbb254987034c1ee7d69b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 1
+  size: 5
   damage: 20
   cost: 50
   durationSpell: 0.5
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c4e3bc67f870f41b1e06994fc040e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 2.5
+  size: 5
   damage: 5
   cost: 50
   durationSpell: 5
@@ -2691,7 +2691,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5147dd64ee7644f918d55834cf600f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 4
+  size: 5
+  damage: 3
   cost: 30
   durationSpell: 7
   spellEffect: {fileID: 5281717798527747139, guid: eefecec2c556aff4d884b283eddc5fde, type: 3}
@@ -2708,7 +2709,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb75e65aac78a943a0f223365885f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 2
+  size: 5
+  damage: 3
   cost: 30
   durationSpell: 5
   smokeHeight: 2
@@ -2727,7 +2729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72b02125a451cf47ba85b9a939f62d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 3
+  size: 5
   damage: 10
   cost: 30
   durationSpell: 3
@@ -3840,8 +3842,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506944749}
         m_TargetAssemblyTypeName: Spells, Assembly-CSharp
-        m_MethodName: RainbowRain
-        m_Mode: 1
+        m_MethodName: TypeSpell
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4124,7 +4126,7 @@ RectTransform:
   m_Children:
   - {fileID: 349274458}
   m_Father: {fileID: 21008843}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4190,12 +4192,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506944749}
         m_TargetAssemblyTypeName: Spells, Assembly-CSharp
-        m_MethodName: ConfusionSpell
-        m_Mode: 1
+        m_MethodName: TypeSpell
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4828,12 +4830,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506944749}
         m_TargetAssemblyTypeName: Spells, Assembly-CSharp
-        m_MethodName: FreezeStop
-        m_Mode: 1
+        m_MethodName: TypeSpell
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6436,7 +6438,7 @@ RectTransform:
   m_Children:
   - {fileID: 2140567399}
   m_Father: {fileID: 21008843}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6502,12 +6504,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 506944749}
         m_TargetAssemblyTypeName: Spells, Assembly-CSharp
-        m_MethodName: ZapSpell
-        m_Mode: 1
+        m_MethodName: TypeSpell
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

@@ -4,11 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
-public class FreezeSpell : MonoBehaviour
+public class FreezeSpell : SpellParent
 {
-    public float size;
-    [SerializeField] private int cost = 100;
-    [SerializeField] private float durationSpell = 3f;
     [SerializeField] private float smokeHeight = 2f;
     [SerializeField] private Material freezeMat;
     [SerializeField] private GameObject iceSpellEffect;
@@ -22,7 +19,7 @@ public class FreezeSpell : MonoBehaviour
     private List<Renderer> rendererEnemy = new List<Renderer>();
     private List<Material> orgMatEnemy = new List<Material>();
 
-    public void SpawnFreeze(Vector3 spellPos)
+    public override void SpawnSpell(Vector3 spellPos)
     {
         this.spellPos = spellPos;
         Freezing();
