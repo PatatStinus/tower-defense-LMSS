@@ -57,7 +57,7 @@ public class PoisonLakeSpell : SpellParent
         if (other.gameObject.layer == 14)
         {
             if (other.gameObject.TryGetComponent(out EnemyHealth health))
-                health.hp -= damage * Time.fixedDeltaTime;
+                health.TakeDamage(damage * Time.fixedDeltaTime);
         }
     }
 }

@@ -21,7 +21,7 @@ public class ZapSpell : SpellParent
         Instantiate(spellEffect).transform.position = new Vector3(spellPos.x, spellEffect.transform.position.y, spellPos.z);
     }
 
-    private void Zapped()
+    private void Zapped() //Initial zap
     {
         foreach (var obj in collisionsInSpell)
         {
@@ -33,7 +33,7 @@ public class ZapSpell : SpellParent
         if (enemy != null)
         {
             orgPosEnemy = enemy.transform.position;
-            enemy.GetComponent<EnemyHealth>().hp -= damage;
+            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
             enemy.GetComponent<EnemyMovement>().isZapped = true;
             if (enemy.TryGetComponent(out JumpingAbility jump))
                 jump.canAbility = false;
@@ -44,7 +44,7 @@ public class ZapSpell : SpellParent
         orgTime = durationSpell;
     }
 
-    private void NewZap()
+    private void NewZap() //Find new target to zap after previous zap was finished
     {
         closestEnemy = null;
         enemies.Clear();
@@ -54,10 +54,10 @@ public class ZapSpell : SpellParent
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            if(enemies[i].GetComponent<EnemyMovement>().isZapped)
+            if(enemies[i].GetComponent<EnemyMovement>().isZapped) //Skip al gezapte enemies
                 continue;
 
-            if (Vector3.Distance(enemy.transform.position, enemies[i].transform.position) < distanceFromEnemy)
+            if (Vector3.Distance(enemy.transform.position, enemies[i].transform.position) < distanceFromEnemy) //Als enemy dicht genoeg bij de vorige gezapte enemy is
             {
                 if(closestEnemy == null)
                 {
@@ -65,7 +65,7 @@ public class ZapSpell : SpellParent
                     continue;
                 }
 
-                if(Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position))
+                if(Vector3.Distance(enemy.transform.position, closestEnemy.transform.position) > Vector3.Distance(enemy.transform.position, enemies[i].transform.position)) //Check of dit de dichtsbijzijnde enemy is
                     closestEnemy = enemies[i];
             }
         }
@@ -75,8 +75,8 @@ public class ZapSpell : SpellParent
         if (closestEnemy != null)
         {
             enemy = closestEnemy;
-            enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
+            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
             enemy.GetComponent<EnemyMovement>().isZapped = true;
             if (enemy.TryGetComponent(out JumpingAbility jump))
                 jump.canAbility = false;
@@ -95,7 +95,8 @@ public class ZapSpell : SpellParent
 
         orgTime = durationSpell;
     }
-    private void EnemyKilled()
+
+    private void EnemyKilled() //If previous zapped enemy got killed by zap, find new target
     {
         closestEnemy = null;
         enemies.Clear();
@@ -105,10 +106,10 @@ public class ZapSpell : SpellParent
 
         for (int i = 0; i < enemies.Count; i++)
         {
-            if (enemies[i].GetComponent<EnemyMovement>().isZapped)
+            if (enemies[i].GetComponent<EnemyMovement>().isZapped) //Skip al gezapte enemies
                 continue;
 
-            if (Vector3.Distance(orgPosEnemy, enemies[i].transform.position) < distanceFromEnemy)
+            if (Vector3.Distance(orgPosEnemy, enemies[i].transform.position) < distanceFromEnemy) //Als enemy dicht genoeg bij de vorige gezapte enemy is
             {
                 if (closestEnemy == null)
                 {
@@ -126,8 +127,8 @@ public class ZapSpell : SpellParent
         if (closestEnemy != null)
         {
             enemy = closestEnemy;
-            enemy.GetComponent<EnemyHealth>().hp -= damage;
             orgPosEnemy = enemy.transform.position;
+            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
             enemy.GetComponent<EnemyMovement>().isZapped = true;
             if (enemy.TryGetComponent(out JumpingAbility jump))
                 jump.canAbility = false;
@@ -168,9 +169,9 @@ public class ZapSpell : SpellParent
             orgTime -= Time.deltaTime;
             enemy.transform.position = orgPosEnemy;
         }
-        else if (orgTime < 0 && orgTime != -1)
+        else if (orgTime <= 0)
             NewZap();
-        if (enemy == null && isZapping)
+        if (enemy == null && isZapping) //Object would be destroyed if enemy was not hit, function is for if enemy got killed by zap damage.
             EnemyKilled();
     }
 

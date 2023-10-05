@@ -17,7 +17,11 @@ public class HealthAbility : EnemyMovement
             EnemyHealth enemy = obj.GetComponent<EnemyHealth>();
             if (enemy != null && enemy.gameObject != gameObject)
             {
-                enemy.hp = isRaining ? enemy.hp -= regen * Time.fixedDeltaTime : enemy.hp += regen * Time.fixedDeltaTime;
+                if (isRaining)
+                    enemy.TakeDamage(regen * Time.fixedDeltaTime);
+                else
+                    enemy.hp += regen * Time.fixedDeltaTime;
+
                 if (enemy.hp >= enemy.startHealth) //Should be done in enemyhealth //Extra health that slowly degrates after might be fun
                     enemy.hp = enemy.startHealth;
             }

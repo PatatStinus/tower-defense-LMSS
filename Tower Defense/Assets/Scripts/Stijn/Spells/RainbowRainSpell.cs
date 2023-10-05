@@ -31,7 +31,7 @@ public class RainbowRainSpell : SpellParent
         if (durationSpell > 0)
         {
             for (int i = 0; i < enemies.Count; i++)
-                enemies[i].hp -= damage;
+                enemies[i].TakeDamage(damage);
             Invoke(nameof(RainbowRaining), .5f);
         }
         else

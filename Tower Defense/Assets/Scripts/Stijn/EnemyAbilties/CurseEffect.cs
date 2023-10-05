@@ -47,7 +47,7 @@ public class CurseEffect : MonoBehaviour
                     break;
                 case 2: //Half health of all enemies on field
                     for (int i = 0; i < allEnemies.transform.childCount; i++)
-                        allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyHealth>().hp /= 2f;
+                        allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyHealth>().TakeDamage(allEnemies.transform.GetChild(i).gameObject.GetComponent<EnemyHealth>().hp/2);
                     break;
                 case 3: //All enemies on field become confused
                     ConfuseEnemies();
@@ -68,7 +68,7 @@ public class CurseEffect : MonoBehaviour
 
     private void SpawnAbnormals()
     {
-        gameManager.GetComponent<EnemySpawning>().SpawnEnemy(abnormals[Random.Range(0, abnormals.Count)], 999, Random.Range(0, EnemyPathMaking.t_Points.Count), 2);
+        gameManager.GetComponent<EnemySpawning>().SpawnEnemy(abnormals[Random.Range(0, abnormals.Count)], 999, Random.Range(0, EnemyPathMaking.t_Points.Count), 2); //Should still set difficulty
     }
 
     private void ConfuseEnemies()
