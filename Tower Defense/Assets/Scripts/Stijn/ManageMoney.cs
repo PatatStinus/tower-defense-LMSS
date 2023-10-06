@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEditor;
 
 public class ManageMoney : MonoBehaviour
 {
@@ -54,5 +55,19 @@ public class ManageMoney : MonoBehaviour
                 moneyText.GetComponent<Animator>().Play("MoneyBlink");
             }
         }
+    }
+}
+
+[CanEditMultipleObjects, CustomEditor(typeof(ManageMoney))]
+public class ManageMoneyEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        if (GUILayout.Button("Add Money"))
+            ManageMoney.GetMoney(100);
+        if (GUILayout.Button("Remove Money"))
+            ManageMoney.LoseMoney(100);
     }
 }

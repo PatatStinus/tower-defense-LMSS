@@ -29,7 +29,7 @@ public class WeatherManager : MonoBehaviour
 
         if(time >= maxTime)
         {
-            allWeathers.GetComponents<WeatherParent>()[Random.Range(0, 3)].StartWeather(allEnemies);
+            allWeathers.GetComponents<WeatherParent>()[Random.Range(0, allWeathers.GetComponents<WeatherParent>().Length)].StartWeather(allEnemies);
             time = 0;
             GetNewTime();
         }

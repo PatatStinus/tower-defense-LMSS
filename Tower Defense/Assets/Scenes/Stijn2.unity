@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allEnemies: {fileID: 930069742}
-  allWeathers: {fileID: 245313688}
+  allWeathers: {fileID: 245313692}
   mxTime: 100
   mnTime: 500
 --- !u!114 &506944754

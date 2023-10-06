@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class WeatherParent : MonoBehaviour
@@ -18,4 +19,17 @@ public class WeatherParent : MonoBehaviour
     }
 
     
+}
+
+[CanEditMultipleObjects, CustomEditor(typeof(WeatherParent), true)]
+public class WeatherParentEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        WeatherParent weather = (WeatherParent)target;
+        if (GUILayout.Button("Start Weather Event"))
+            weather.StartWeather(GameObject.FindGameObjectWithTag("Enemy").transform);
+    }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class ManaManager : MonoBehaviour
 {
@@ -67,5 +68,19 @@ public class ManaManager : MonoBehaviour
     public void MainMenuGame()
     {
         SceneManager.LoadScene(0);
+    }
+}
+
+[CanEditMultipleObjects, CustomEditor(typeof(ManaManager))]
+public class ManaManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        if (GUILayout.Button("Add Mana"))
+            ManaManager.GetMana(100);
+        if (GUILayout.Button("Remove Mana"))
+            ManaManager.LoseMana(100);
     }
 }
