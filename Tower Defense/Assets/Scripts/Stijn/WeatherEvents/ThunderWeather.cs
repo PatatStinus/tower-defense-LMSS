@@ -15,7 +15,7 @@ public class ThunderWeather : WeatherParent
     private Vector3 orgPos;
     private List<GameObject> allObjects = new List<GameObject>();
     private GameObject target;
-    private GameObject thunderEffect;
+    private List<GameObject> thunderEffect = new List<GameObject>();
     private bool stunned;
 
     private void Update()
@@ -69,9 +69,10 @@ public class ThunderWeather : WeatherParent
         if(eventGoing)
         {
             ChooseTarget();
-            thunderEffect = Instantiate(thunder);
-            if (target != null)
-                thunderEffect.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
+            thunderEffect.Add(Instantiate(thunder));
+            thunderEffect.Add(Instantiate(thunder));
+            thunderEffect.Add(Instantiate(thunder));
+
             Invoke(nameof(Stun), 1f);
             Invoke(nameof(DestroyObjects), 1.6f);
             Invoke(nameof(StopStun), 3f);
@@ -87,12 +88,19 @@ public class ThunderWeather : WeatherParent
     private void Stun()
     {
         if (target != null)
+        {
+            foreach (var thunder in thunderEffect)
+                thunder.transform.position = new Vector3(target.transform.position.x, thunderHeight, target.transform.position.z);
+
             orgPos = target.transform.position;
+        }
         stunned = true;
     }
 
     private void DestroyObjects()
     {
-        Destroy(thunderEffect);
+        foreach (var thunder in thunderEffect)
+            Destroy(thunder);
+        thunderEffect.Clear();
     }
 }
