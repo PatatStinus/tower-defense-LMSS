@@ -1524,10 +1524,10 @@ MonoBehaviour:
     - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
       timeTillNextSpawn: 3
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 3
       pathIndex: 0
-    - enemy: {fileID: 5613517771040092285, guid: f3ff44b3e29e93445ba7caffd7397715, type: 3}
+    - enemy: {fileID: 3935059792401641794, guid: efcc18dd60a61db45aa9eaf48acc9d3c, type: 3}
       timeTillNextSpawn: 3
       pathIndex: 0
   moneyFromWaves: 5000

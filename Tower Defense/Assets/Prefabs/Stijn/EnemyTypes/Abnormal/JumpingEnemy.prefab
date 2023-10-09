@@ -248,6 +248,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   cube: {fileID: 2918603575396049698, guid: 7fa26a28cfe2af341a76dff0528dc166, type: 3}
+  jumpDisInPercent: {x: 10, y: 20}
   canAbility: 1
 --- !u!1 &7314432650006256017
 GameObject:

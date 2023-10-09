@@ -108,12 +108,14 @@ public class EnemyMovement : MonoBehaviour
 
         CurseEffect.onConfuseCurse -= Confuse;
         CurseEffect.onDisableConfuseCurse -= StopConfuse;
+        TimeWarpEnemy.OnTimeSkip -= MoveTimeSkip;
     }
 
     protected virtual void OnEnable()
     {
         CurseEffect.onConfuseCurse += Confuse;
         CurseEffect.onDisableConfuseCurse += StopConfuse;
+        TimeWarpEnemy.OnTimeSkip += MoveTimeSkip;
     }
 
     private void Confuse()
@@ -130,5 +132,18 @@ public class EnemyMovement : MonoBehaviour
             isConfused = false;
             activeCurses = 0;
         }
+    }
+
+    protected virtual void MoveTimeSkip(float timeSkipValue)
+    {
+        float percentPath = isConfused ? Random.Range(0, 2) == 0 ? percentAllPaths + (f_Speed.Evaluate(0f) * timeSkipValue) : percentAllPaths - (f_Speed.Evaluate(0f) * timeSkipValue) : percentAllPaths + (f_Speed.Evaluate(0f) * timeSkipValue);
+        //Caculation to move enemy certain amount of % after timeskip ^
+        if (percentPath > 99)
+            percentPath = 99;
+
+        i_waypoitIndex = PercentToPoint.GetWayPointIndexFromPercent(percentPath, pathIndex); //Percent To Point script
+        transform.position = EnemyPathMaking.t_Points[pathIndex][i_waypoitIndex - 1].transform.position;
+        Target();
+        transform.position = PercentToPoint.PercentToPath(percentPath, pathIndex, transform.rotation);
     }
 }

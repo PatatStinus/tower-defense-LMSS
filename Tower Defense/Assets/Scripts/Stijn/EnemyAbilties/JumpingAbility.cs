@@ -8,6 +8,7 @@ public class JumpingAbility : EnemyMovement
     [SerializeField] private float jumpHeight;
     [SerializeField] private AnimationCurve curve;
     [SerializeField] private GameObject cube;
+    [SerializeField] private Vector2 jumpDisInPercent;
     
     [HideInInspector] public bool canAbility = true;
     private Vector3 jumpTarget;
@@ -47,9 +48,9 @@ public class JumpingAbility : EnemyMovement
 
     private void Jump()
     {
-        if (percentAllPaths < 88 && canAbility && !isConfused || isConfused && percentAllPaths > 12 && canAbility)
+        if (percentAllPaths <  100 - jumpDisInPercent.y - 2 && canAbility && !isConfused || isConfused && percentAllPaths > jumpDisInPercent.y + 2 && canAbility)
         {
-            newPercentage = isConfused ? Random.Range(percentAllPaths - 5, percentAllPaths - 10) : Random.Range(percentAllPaths + 5, percentAllPaths + 10);
+            newPercentage = isConfused ? Random.Range(percentAllPaths - jumpDisInPercent.x, percentAllPaths - jumpDisInPercent.y) : Random.Range(percentAllPaths + jumpDisInPercent.x, percentAllPaths + jumpDisInPercent.y);
 
             int nextWaypoint = PercentToPoint.GetWayPointIndexFromPercent(newPercentage, pathIndex);
             GameObject objectRot = Instantiate(cube);
@@ -139,5 +140,28 @@ public class JumpingAbility : EnemyMovement
         divideSpeed = 1f;
         usingAbility = false;
         timeA = 0f;
+    }
+
+    protected override void MoveTimeSkip(float timeSkipValue)
+    {
+        base.MoveTimeSkip(timeSkipValue);
+        canAbility = false;
+    }
+
+    private void SetAbilityTrue(float timeSkipValue)
+    {
+        canAbility = true;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        TimeWarpEnemy.OnStopTimeSkip += SetAbilityTrue;
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        TimeWarpEnemy.OnStopTimeSkip -= SetAbilityTrue;
     }
 }
