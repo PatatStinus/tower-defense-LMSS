@@ -11,11 +11,28 @@ public class WeatherParent : MonoBehaviour
     [SerializeField] protected GameObject weatherEffect;
     [SerializeField] protected float weatherTime;
 
+    protected virtual void Update()
+    {
+        if (!eventGoing) return;
+
+        if (!WaveSystem.finishedWave)
+            time += Time.deltaTime;
+    }
+
+
     public virtual void StartWeather(Transform allEnemies) 
     {
         time = 0;
         eventGoing = true;
         spawnedWeatherEffect = Instantiate(weatherEffect);
+    }
+
+    public virtual void StopWeather()
+    {
+        if (!WaveSystem.finishedWave)
+            time = weatherTime - 2f;
+        else
+            time = weatherTime;
     }
 
     
@@ -31,5 +48,7 @@ public class WeatherParentEditor : Editor
         WeatherParent weather = (WeatherParent)target;
         if (GUILayout.Button("Start Weather Event"))
             weather.StartWeather(GameObject.FindGameObjectWithTag("Enemy").transform);
+        if (GUILayout.Button("Stop Weather Event"))
+            weather.StopWeather();
     }
 }

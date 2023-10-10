@@ -18,7 +18,6 @@ public class WaveSystem : MonoBehaviour
     public static bool finishedWave = true;
     private bool finishedSpawning;
     private bool waveDone;
-    private bool moneyFromWave;
     private bool autoStart;
     private bool freePlay;
     private float floatedDifficulty;
@@ -84,32 +83,19 @@ public class WaveSystem : MonoBehaviour
 
     private void Update()
     {
-        if(finishedSpawning) //Dit moet beter geoptimized kunnen worden
-        {
-            waveDone = true;
-            for (int i = 0; i < allEnemies.childCount; i++)
-            {
-                if (!allEnemies.GetChild(i).gameObject.GetComponent<EnemyMovement>().reachedEnd)
-                {
-                    waveDone = false;
-                    break;
-                }
-            }
-        }
-        if(waveDone || allEnemies.childCount == 0 && finishedSpawning && !moneyFromWave)
+        if(finishedSpawning)
+            waveDone = allEnemies.childCount == 0;
+        if(waveDone && !finishedWave)
         {
             finishedWave = true;
-            if(!moneyFromWave)
+
+            if(freePlay)
             {
-                if(freePlay)
-                {
-                    ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * maxWave * .025f));
-                    floatedDifficulty += (currentWave - maxWave) * .001f;
-                }
-                else
-                    ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * (currentWave + 1) * .05f));
+                ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * maxWave * .025f));
+                floatedDifficulty += (currentWave - maxWave) * .001f;
             }
-            moneyFromWave = true;
+            else
+                ManageMoney.GetMoney(Mathf.RoundToInt(moneyFromWaves * (currentWave + 1) * .05f));
 
             saveFiles.gameData.wave = currentWave;
 
@@ -145,7 +131,6 @@ public class WaveSystem : MonoBehaviour
     {
         if(finishedWave && currentWave < totalWaves - 1) //Start Wave
         {
-            moneyFromWave = false;
             finishedSpawning = false;
             waveDone = false;
             finishedWave = false;

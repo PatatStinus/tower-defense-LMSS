@@ -18,12 +18,10 @@ public class ThunderWeather : WeatherParent
     private List<GameObject> thunderEffect = new List<GameObject>();
     private bool stunned;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if(!eventGoing) return;
-
-        if (!WaveSystem.finishedWave)
-            time += Time.deltaTime;
 
         if (time >= weatherTime)
         {

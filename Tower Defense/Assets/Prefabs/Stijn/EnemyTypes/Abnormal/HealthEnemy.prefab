@@ -213,11 +213,10 @@ MonoBehaviour:
   i_waypoitIndex: 0
   divideSpeed: 1
   percentAllPaths: 0
-  blackFlower: {fileID: 181737071472876463}
-  colorFlower: {fileID: 7851914566763539133, guid: 7c794de2152e8454f9729203d977e601, type: 3}
   radius: 3
   regen: 10
-  isRaining: 0
+  blackFlower: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
+  colorFlower: {fileID: 7851914566763539133, guid: 7c794de2152e8454f9729203d977e601, type: 3}
 --- !u!1 &6194850465512801224
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,11 +403,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
---- !u!1 &181737071472876463 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7851914566763539133, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}
-  m_PrefabInstance: {fileID: 7958478832926650642}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &298229425623205169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7661102628957975587, guid: 9c72f75bae9b9bd48aec066bc07c3267, type: 3}

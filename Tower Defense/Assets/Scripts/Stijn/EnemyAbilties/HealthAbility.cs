@@ -8,6 +8,7 @@ public class HealthAbility : EnemyMovement
     [SerializeField] private float regen;
     private bool isRaining = false;
     private Collider[] collisionsInRange;
+    private GameObject currentFlower;
 
     private void FixedUpdate()
     {
@@ -32,8 +33,10 @@ public class HealthAbility : EnemyMovement
     [SerializeField] private GameObject colorFlower;
     private Quaternion orgRot;
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        currentFlower = transform.GetChild(0).GetChild(1).gameObject;
         ColorRainWeather.onColorRaining += TurnColor;
         ColorRainWeather.onStopColorRaining += TurnDark;
         orgRot = transform.GetChild(0).GetChild(1).rotation;
@@ -56,17 +59,26 @@ public class HealthAbility : EnemyMovement
 
     private void TurnColor()
     {
-        Destroy(transform.GetChild(0).GetChild(1).gameObject);
+        Destroy(currentFlower, 5f);
+        currentFlower.GetComponent<ParticleSystem>().Stop(false);
+        currentFlower.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(false);
+        currentFlower.transform.GetChild(1).GetComponent<ParticleSystem>().Stop(false);
         isRaining = true;
-        Instantiate(colorFlower, transform.GetChild(0));
+        currentFlower = null;
+        currentFlower = Instantiate(colorFlower, transform.GetChild(0));
         ColorRainWeather.onColorRaining -= TurnColor;
     }
 
     private void TurnDark()
     {
-        Destroy(transform.GetChild(0).GetChild(1).gameObject);
+        Debug.Log("AAA");
+        Destroy(currentFlower, 5f);
+        currentFlower.GetComponent<ParticleSystem>().Stop(false);
+        currentFlower.transform.GetChild(0).GetComponent<ParticleSystem>().Stop(false);
+        currentFlower.transform.GetChild(1).GetComponent<ParticleSystem>().Stop(false);
         isRaining = true;
-        Instantiate(blackFlower, transform.GetChild(0));
+        currentFlower = null;
+        currentFlower = Instantiate(blackFlower, transform.GetChild(0));
         ColorRainWeather.onColorRaining += TurnColor;
     }
 }

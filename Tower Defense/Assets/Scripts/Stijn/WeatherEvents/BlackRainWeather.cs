@@ -10,12 +10,10 @@ public class BlackRainWeather : WeatherParent
     public delegate void StopBlackRain();
     public static event StopBlackRain onStopBlackRaining;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (!eventGoing) return;
-
-        if (!WaveSystem.finishedWave)
-            time += Time.deltaTime;
 
         if (time >= weatherTime - 2f && spawnedWeatherEffect != null)
             spawnedWeatherEffect.GetComponent<ParticleSystem>().Stop();
@@ -23,8 +21,8 @@ public class BlackRainWeather : WeatherParent
         if (time >= weatherTime)
         {
             Destroy(spawnedWeatherEffect);
-            onStopBlackRaining?.Invoke();
             eventGoing = false;
+            onStopBlackRaining?.Invoke();
         }
 
         //Will call event all the time because enemy health is only done once during each event call?????????????
